@@ -1,1 +1,25 @@
 @import 'utils';
+
+.button {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+
+  border: 1px solid black;
+  border-radius: 2px;
+
+  &.gray {
+    background: $oc-gray-7;
+    color: white;
+  }
+
+  & + & {
+    margin-left: 0.5rem;
+  }
+}

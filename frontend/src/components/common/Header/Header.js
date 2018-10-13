@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Header.scss'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
+import Button from 'components/common/Button'
 
 const cx = classNames.bind(styles)
 
@@ -13,7 +14,7 @@ const Header = () => (
         <Link to="/">virtual fitting</Link>
       </div>
       <div className={cx('right')}>
-        오른쪽
+        <Button to="/login">로그인</Button>
       </div>
     </div>
   </header>
