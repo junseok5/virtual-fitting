@@ -1,10 +1,11 @@
 import React from 'react'
+import PageTemplate from 'components/common/PageTemplate'
 
 const ProductListPage = () => {
   return (
-    <div>
-      ProductList
-    </div>
+    <PageTemplate>
+      List
+    </PageTemplate>
   )
 }
 
