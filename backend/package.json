@@ -1,0 +1,8 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Virtual fitting backend.",
+  "main": "index.js",
+  "author": "Junseok Oh",
+  "license": "MIT"
+}
