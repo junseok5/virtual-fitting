@@ -11,6 +11,12 @@
     display: flex;
     align-items: center;
 
+    // Menu icon
+    .menu-icon {
+      display: none;
+    }
+
+    // Logo
     .brand {
       font-size: 1.5rem;
       font-weight: 600;
@@ -33,6 +39,7 @@
       }
     }
 
+    // right buttons
     .right {
       margin-left: auto;
 
@@ -47,6 +54,10 @@
     @include media("<medium") {
       padding-left: 1rem;
       padding-right: 1rem;
+
+      .menu-icon {
+        display: inline-block;
+      }
 
       .search {
         display: none;

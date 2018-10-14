@@ -1,0 +1,36 @@
+@import 'utils';
+
+.category {
+  width: 280px;
+  border-right: 1px solid $oc-gray-4;
+  // background-color: #434343;
+
+  .category__nav {
+    padding: 1rem;
+
+    .item_menu {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      .item_menu_title {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      .item_sub_menu {
+        padding-left: 1rem;
+        font-size: 0.9rem;
+
+        li {
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  @include media("<medium") {
+    display: none;
+  }
+}

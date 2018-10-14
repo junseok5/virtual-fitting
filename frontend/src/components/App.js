@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
 ProductPage, RegPage, SelectAvatarPage, SellerPage, UserPage } from 'pages'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSearch)
+library.add(faSearch, faBars)
 
 const App = () => {
   return (

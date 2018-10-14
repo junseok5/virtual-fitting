@@ -11,6 +11,9 @@ const cx = classNames.bind(styles)
 const Header = () => (
   <header className={cx('header')}>
     <div className={cx('header-content')}>
+      <div className={cx('menu-icon')}>
+        <Icon icon="bars" />
+      </div>
       <div className={cx('brand')}>
         <Link to="/">virtual fitting</Link>
       </div>
