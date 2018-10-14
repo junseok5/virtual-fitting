@@ -1,0 +1,13 @@
+@import 'utils';
+
+.login-template {
+  height: calc(100vh - 11rem);
+  padding: 3rem;
+
+  display: flex;
+  justify-content: center;
+  
+  @include media("<medium") {
+    padding: 0;
+  }
+}

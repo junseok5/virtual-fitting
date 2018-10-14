@@ -1,0 +1,35 @@
+@import 'utils';
+
+.social-login-button {
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  .icon {
+    font-size: 1.7rem;
+    padding: 0;
+  }
+
+  .text {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  &.Facebook {
+    background-color: #1971C2;
+  }
+
+  &.Google {
+    background-color: #C92A2A;
+  }
+}

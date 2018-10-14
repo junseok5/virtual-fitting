@@ -1,15 +1,14 @@
 import React from 'react'
 import styles from './Icon.scss'
 import classNames from 'classnames/bind'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const cx = classNames.bind(styles)
 
 
-const Icon = ({icon}) => {
+const Icon = ({children, size}) => {
   return (
-    <div className={cx('icon')}>
-      <FontAwesomeIcon icon={icon} />
+    <div className={cx('icon', size)}>
+      { children }
     </div>
   )
 }

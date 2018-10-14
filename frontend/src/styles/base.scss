@@ -1,4 +1,5 @@
 @import url("//fonts.googleapis.com/earlyaccess/notosanskr.css");
+@import 'utils';
 
 body {
   margin: 0;
@@ -20,4 +21,14 @@ a {
 ul {
   list-style: none;
   padding: 0;
+}
+
+input {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border: 1px solid $oc-gray-6;
+
+  &:focus {
+    outline: none;
+  }
 }

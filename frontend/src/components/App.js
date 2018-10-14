@@ -1,18 +1,16 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
-ProductPage, RegPage, SelectAvatarPage, SellerPage, UserPage } from 'pages'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faSearch, faBars)
+import { LoginUserPage, LoginSellerPage, AdminPage, NotFoundPage,
+ProductEditPage, ProductListPage, ProductPage, RegPage, SelectAvatarPage,
+SellerPage, UserPage } from 'pages'
 
 const App = () => {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={ProductListPage} />
-        <Route path="/login" component={LoginPage} />
+        <Route path="/login/user" component={LoginUserPage} />
+        <Route path="/login/seller" component={LoginSellerPage} />
         <Route path="/register" component={RegPage} />
         <Route path="/product/:id" component={ProductPage} />
         <Route path="/avatar" component={SelectAvatarPage} />
