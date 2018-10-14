@@ -1,6 +1,7 @@
 @import 'utils';
 
 .header {
+  border-bottom: 1px solid $oc-gray-4;
   .header-content {
     height: 5rem;
     width: 1400px;

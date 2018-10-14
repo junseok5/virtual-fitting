@@ -1,0 +1,41 @@
+@import 'utils';
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .product {
+    width: 200px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    .product-photo {
+      height: 200px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .product-info {
+
+      .product-info-title {
+        // font-weight: bold;
+      }
+
+      .product-info-price {
+        font-weight: bold;
+      }
+    }
+  }
+
+  @include media("<medium") {
+    flex-direction: column;
+    align-items: center;
+  }
+}
