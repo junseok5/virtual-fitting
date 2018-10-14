@@ -1,6 +1,7 @@
 export { default as LoginUserPage } from './LoginUserPage'
-export { default as LoginSellerPage } from './LoginSellerPage'
 export { default as RegPage } from './RegPage'
+export { default as RegUserPage } from './RegUserPage'
+export { default as RegSellerPage } from './RegSellerPage'
 export { default as SellerPage } from './SellerPage'
 export { default as UserPage } from './UserPage'
 export { default as ProductPage } from './ProductPage'

@@ -1,16 +1,16 @@
 import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import LoginTemplate from 'components/login/LoginTemplate'
-import UserForm from 'components/login/UserForm'
+import LoginForm from 'components/login/LoginForm'
 
-const LoginPage = () => {
+const LoginUserPage = () => {
   return (
     <PageTemplate>
       <LoginTemplate>
-        <UserForm />
+        <LoginForm loginType="사용자" />
       </LoginTemplate>
     </PageTemplate>
   )
 }
 
-export default LoginPage
+export default LoginUserPage

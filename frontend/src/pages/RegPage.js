@@ -1,10 +1,12 @@
 import React from 'react'
+import PageTemplate from 'components/common/PageTemplate'
+import RegType from 'components/register/RegType'
 
 const RegPage = () => {
   return (
-    <div>
-      RegPage
-    </div>
+    <PageTemplate>
+      <RegType />
+    </PageTemplate>
   )
 }
 
