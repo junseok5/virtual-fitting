@@ -6,6 +6,7 @@
     margin-left: 2rem;
     margin-right: 2rem;
   }
+
   .profile-wrap {
     display: flex;
 
@@ -26,6 +27,21 @@
   
     .user-basic-info {
       margin: 2rem;
+    }
+  }
+
+  @include media("<medium") {
+    // display: flex;
+    // flex-flow: wrap;
+    // justify-content: flex-start;
+
+    .profile-wrap {
+      flex-flow: wrap;
+      justify-content: center;
+
+      .user-photo {
+        margin: 0;
+      }
     }
   }
 }
