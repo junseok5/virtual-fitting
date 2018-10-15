@@ -1,4 +1,4 @@
-export { default as LoginUserPage } from './LoginUserPage'
+export { default as LoginPage } from './LoginPage'
 export { default as RegPage } from './RegPage'
 export { default as RegUserPage } from './RegUserPage'
 export { default as RegSellerPage } from './RegSellerPage'

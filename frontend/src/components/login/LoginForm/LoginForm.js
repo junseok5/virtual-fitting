@@ -10,16 +10,16 @@ const cx = classNames.bind(styles)
 
 const UserForm = ({loginType}) => (
   <div className={cx('user-form')}>
-    <div className={cx('user-form-title')}>{ loginType } 로그인</div>
+    <div className={cx('_title')}>{ loginType } 로그인</div>
     <div className={cx('user-form-input')}>
-      <div className={cx('user-id')}>
-        <input type="text" placeholder="ID 입력" />
+      <div className={cx('user-email', '_input-space')}>
+        <input className={cx('_input-form')} type="email" placeholder="이메일 입력" />
       </div>
-      <div className={cx('user-password')}>
-        <input type="password" placeholder="비밀번호 입력" />
+      <div className={cx('user-password', '_input-space')}>
+        <input className={cx('_input-form')} type="password" placeholder="비밀번호 입력" />
       </div>
     </div>
-    <div className={cx('login-button')}>로그인</div>
+    <div className={cx('_button')}>로그인</div>
     <div className={cx('register-button')}>
       <Link to="/register">회원가입</Link>
     </div>

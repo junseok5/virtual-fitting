@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { LoginUserPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
+import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
 ProductPage, RegPage, RegUserPage, RegSellerPage, SelectAvatarPage, SellerPage,
 UserPage } from 'pages'
 
@@ -9,7 +9,7 @@ const App = () => {
     <div>
       <Switch>
         <Route exact path="/" component={ProductListPage} />
-        <Route path="/login" component={LoginUserPage} />
+        <Route path="/login" component={LoginPage} />
         <Route path="/register/user" component={RegUserPage} />
         <Route path="/register/seller" component={RegSellerPage} />
         <Route path="/register" component={RegPage} />

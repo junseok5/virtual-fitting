@@ -1,50 +1,9 @@
 @import 'utils';
+@import 'common/input';
+@import 'common/title';
+@import 'common/button';
 
 .user-form {
-  .user-form-title {
-    font-weight: bold;
-    font-size: 1.3rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .user-form-input {
-    .user-id {
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
-    }
-
-    .user-password {
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
-    }
-
-    input {
-      width: 300px;
-      height: 2.5rem;
-      border-radius: 4px;
-      border: 1px solid $oc-gray-3;
-    }
-  }
-
-  .login-button {
-    width: 300px;
-    height: 2.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    background: $oc-blue-5;
-
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .register-button {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
