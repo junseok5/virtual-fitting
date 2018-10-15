@@ -12,8 +12,10 @@ const Product = () => (
       <div className={cx('virtual-fitting-photo')}>
         <img src="https://image.musinsa.com/images/goods_img/20151008/260755/260755_2_500.jpg" draggable="false" />
       </div>
-      <div className={cx('change_button')}>
-      
+      <div className={cx('view-control')}>
+        <div className={cx('change-button')}>
+          원본 모델 보기
+        </div>
       </div>
     </div>
     {/* 상품정보 */}
