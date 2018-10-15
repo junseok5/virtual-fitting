@@ -1,0 +1,31 @@
+@import 'utils';
+@import 'common/padding';
+
+.user-info {
+  .page-title {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .profile-wrap {
+    display: flex;
+
+    .user-photo {
+      width: 150px;
+      margin: 2rem;
+  
+      img {
+        width: 100%;
+      }
+  
+      .user-photo-upload {
+        text-align: center;
+        color: $oc-blue-6;
+        cursor: pointer;
+      }
+    }
+  
+    .user-basic-info {
+      margin: 2rem;
+    }
+  }
+}

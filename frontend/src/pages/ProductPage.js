@@ -2,7 +2,7 @@ import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
-import ProductWrapper from 'components/product/ProductWrapper'
+import ContentWrapper from 'components/common/ContentWrapper'
 import Product from 'components/product/Product'
 
 const ProductPage = () => {
@@ -10,9 +10,9 @@ const ProductPage = () => {
     <PageTemplate>
       <MainWrapper>
         <Category />
-        <ProductWrapper>
+        <ContentWrapper>
           <Product />
-        </ProductWrapper>
+        </ContentWrapper>
       </MainWrapper>
     </PageTemplate>
   )
