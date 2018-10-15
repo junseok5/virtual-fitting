@@ -1,5 +1,65 @@
 @import 'utils';
 
 .product {
+  display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+
+  .virtual-fitting-view {
+    padding: 1rem;
+    .virtual-fitting-photo {
+      width: 300px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .product-view {
+    padding: 1rem;
+    max-width: 300px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    .product-photo {
+      width: 300px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .product-price {
+      color: $oc-red-8;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: right;
+    }
+
+    .product-free-shipping {
+
+      text-align: right;
+      color: $oc-gray-7;
+      font-size: 0.9rem;
+    }
+
+    .product-link-btn {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      display: flex;
+      justify-content: flex-end;
+
+      .product-link {
+        width: 200px;
+        padding: 0.7rem;
+        background: $oc-gray-6;
+        border-radius: 4px;
   
+        color: white;
+        text-align: center;
+      }
+    }
+  }
 }

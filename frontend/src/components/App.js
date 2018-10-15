@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
-ProductPage, RegPage, RegUserPage, RegSellerPage, SelectAvatarPage, SellerPage,
+ProductPage, RegPage, RegUserPage, RegSellerPage, SellerPage,
 UserPage } from 'pages'
 
 const App = () => {
@@ -14,7 +14,6 @@ const App = () => {
         <Route path="/register/seller" component={RegSellerPage} />
         <Route path="/register" component={RegPage} />
         <Route path="/product/:id" component={ProductPage} />
-        <Route path="/avatar" component={SelectAvatarPage} />
         <Route path="/user/:id" component={UserPage} />
         <Route path="/seller/:id" component={SellerPage} />
         <Route path="/edit/:id" component={ProductEditPage} />
