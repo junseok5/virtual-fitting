@@ -11,13 +11,14 @@ class ErrorMessageModalContainer extends Component {
   }
 
   render () {
-    const { visible } = this.props
+    const { visible, modalMessage } = this.props
     const { handleCancel } = this
 
     return (
       <ErrorMessageModal
         visible={visible}
         onCancel={handleCancel}
+        message={modalMessage}
       />
     )
   }
@@ -25,7 +26,8 @@ class ErrorMessageModalContainer extends Component {
 
 export default connect(
   (state) => ({
-    visible: state.base.getIn(['modal', 'error'])
+    visible: state.base.getIn(['modal', 'error']),
+    modalMessage: state.base.get('modalMessage')
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
