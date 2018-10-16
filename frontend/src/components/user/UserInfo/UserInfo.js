@@ -26,6 +26,8 @@ const UserInfo = () => (
         <div className={cx('email', '_text-padding')}>boyoung@gmail.com</div>
         <div className={cx('phoneNum', '_text-padding')}>010-5425-9244</div>
         <div className={cx('_text-padding')}>
+          {/* 비밀번호 변경 버튼은 소셜 로그인인 경우 나오지 않게 한다. */}
+          <Button>비밀번호 변경</Button>
           <Button>수정</Button>
         </div>
       </div>

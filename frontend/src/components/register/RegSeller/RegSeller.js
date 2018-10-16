@@ -13,6 +13,10 @@ const RegSeller = () => (
       <div className={cx('_input-space')}>
         <input className={cx('_input-form')} type="text" name="seller_crn" placeholder="사업자 등록번호" />
       </div>
+      <div className={cx('_subtitle')}>회사 이름</div>
+      <div className={cx('_input-space')}>
+        <input className={cx('_input-form')} type="text" name="seller_company" placeholder="회사이름 입력" />
+      </div>
       <div className={cx('_subtitle')}>이메일</div>
       <div className={cx('_input-space')}>
         <input className={cx('_input-form')} type="text" name="seller_email" placeholder="이메일 입력" />

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
-ProductPage, RegPage, RegUserPage, RegSellerPage, SellerPage,
-UserPage } from 'pages'
+ProductPage, RegPage, RegUserPage, RegSellerPage, ManagePage,
+UserPage, SellerPage } from 'pages'
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/user/:id" component={UserPage} />
         <Route path="/seller/:id" component={SellerPage} />
         <Route path="/edit/product/:id" component={ProductEditPage} />
+        <Route path="/manage/seller/:id" component={ManagePage} />
         <Route path="/admin" component={AdminPage} />
         <Route component={NotFoundPage} />
       </Switch>
