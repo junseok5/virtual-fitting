@@ -39,6 +39,13 @@ const SellerInfo = () => (
       <Button>수정</Button>
     </div>
     {/* 판매자 기본정보 끝 */}
+
+    <div className={cx('_title')}>기타</div>
+    <div className={cx('other-info')}>
+      <div className={cx('_text-padding')}>
+        <Button>회원 탈퇴</Button>
+      </div>
+    </div>
   </div>
 );
 
