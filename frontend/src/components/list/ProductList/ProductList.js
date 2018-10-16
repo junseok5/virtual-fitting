@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 const cx = classNames.bind(styles)
 
 
-const Product = () => {
+const ProductItem = () => {
   return (
-    <div className={cx('product')}>
+    <div className={cx('product-item')}>
       <div className={cx('product-photo')}>
         <img src="//image.musinsa.com/images/goods_img/20180906/850274/850274_1_180.jpg" draggable="false" />
       </div>
@@ -22,16 +22,16 @@ const Product = () => {
 
 const ProductList = () => (
   <div className={cx('product-list')}>
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
+    <ProductItem />
   </div>
 );
 

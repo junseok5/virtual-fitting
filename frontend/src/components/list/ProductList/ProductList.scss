@@ -5,7 +5,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  .product {
+  .product-item {
     width: 200px;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -24,7 +24,6 @@
     }
 
     .product-info {
-
       .product-info-title {
         cursor: pointer;
       }
