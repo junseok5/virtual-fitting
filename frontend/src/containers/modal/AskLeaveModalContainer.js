@@ -2,24 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from 'store/modules/base'
-import AskRemoveModal from 'components/modal/AskRemoveModal'
+import AskLeaveModal from 'components/modal/AskLeaveModal'
 
-class AskRemoveModalContainer extends Component {
+class AskLeaveModalContainer extends Component {
   handleCancel = () => {
     const { BaseActions } = this.props
-    BaseActions.hideModal('remove')
+    BaseActions.hideModal('leave')
   }
 
   handleConfirm = async () => {
-    // 서버로 삭제 요청 구현
+    // 서버로 회원 탈퇴 요청
   }
 
   render () {
     const { visible } = this.props
     const { handleCancel, handleConfirm } = this
-
     return (
-      <AskRemoveModal
+      <AskLeaveModal
         visible={visible}
         onCancel={handleCancel}
         onConfirm={handleConfirm}
@@ -30,9 +29,9 @@ class AskRemoveModalContainer extends Component {
 
 export default connect(
   (state) => ({
-    visible: state.base.getIn(['modal', 'remove'])
+    visible: state.base.getIn(['modal', 'leave'])
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
   })
-)(AskRemoveModalContainer)
+)(AskLeaveModalContainer)

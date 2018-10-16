@@ -4,6 +4,7 @@ import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
 import UserInfo from 'components/user/UserInfo'
+import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
 
 const UserPage = () => {
   return (
@@ -13,6 +14,7 @@ const UserPage = () => {
         <ContentWrapper>
           <UserInfo />
         </ContentWrapper>
+        <AskLeaveModalContainer />
       </MainWrapper>
     </PageTemplate>
   )
