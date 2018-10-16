@@ -8,3 +8,5 @@ products.get('/:id', productsCtrl.getProductInfo)
 products.post('/', productsCtrl.writeProduct)
 products.patch('/:id', productsCtrl.patchProduct)
 products.delete('/:id'.productsCtrl.deleteProduct)
+
+module.exports = products

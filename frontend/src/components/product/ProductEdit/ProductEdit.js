@@ -34,6 +34,15 @@ const ProductEdit = () => (
             <option value="하의">하의</option>
           </select>
         </div>
+        <div className={cx('_subtitle')}>하위 카테고리 선택</div>
+        <div className={cx('_input-space')}>
+          <select className={cx('_select')}>
+            <option value="상의">...</option>
+            <option value="하의">...</option>
+            <option value="하의">...</option>
+            <option value="하의">...</option>
+          </select>
+        </div>
         <div className={cx('_subtitle')}>성별</div>
         <div className={cx('_input-space')}>
           <input type="radio" name="user_gender" value="남" checked />남
