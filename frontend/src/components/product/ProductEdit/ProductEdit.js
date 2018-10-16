@@ -69,7 +69,7 @@ const ProductEdit = () => (
     
     <div className={cx('product-edit-btn')}>
       <div className={cx('_button')}>
-        등록하기
+        검토 요청 후 등록하기
       </div>
     </div>
   </div>
