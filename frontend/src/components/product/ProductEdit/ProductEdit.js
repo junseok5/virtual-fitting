@@ -47,7 +47,12 @@ const ProductEdit = () => (
         <div className={cx('photo-model')}>
           <div className={cx('_subtitle')}>모델 사진</div>
           <div className={cx('photo-model-upload')}>
-            <Button>모델 사진 업로드</Button>
+            <div className={cx('_input-file')}>
+              <label for="_file">
+                <Button>모델 사진 업로드</Button>
+              </label>
+              <input type="file" id="_file" />
+            </div>
           </div>
           <div className={cx('photo-model-view')}>
             <img src="https://image.musinsa.com/images/goods_img/20151008/260755/260755_2_500.jpg" draggable="false" />
@@ -56,7 +61,12 @@ const ProductEdit = () => (
         <div className={cx('photo-cloth')}>
           <div className={cx('_subtitle')}>상품 사진</div>
           <div className={cx('photo-cloth-upload')}>
-            <Button>상품 사진 업로드</Button>
+            <div className={cx('_input-file')}>
+              <label for="_file">
+                <Button>상품 사진 업로드</Button>
+              </label>
+              <input type="file" id="_file" />
+            </div>
           </div>
           <div className={cx('photo-cloth-view')}>
             <img src="http://ambient.diskn.com/detailimg/18FW/coat/01_solist_bk/D01.jpg" draggable="false" />
