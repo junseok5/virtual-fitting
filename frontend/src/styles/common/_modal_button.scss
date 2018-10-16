@@ -1,0 +1,15 @@
+._modal-button {
+  width: 100px;
+  padding: 0.5rem;
+  border: 1px solid $oc-gray-4;
+  border-radius: 4px;
+  
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+
+  & + ._modal-button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}

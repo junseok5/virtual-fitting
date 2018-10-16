@@ -16,7 +16,7 @@ const UserInfo = () => (
           <img src="https://pds.joins.com/news/component/htmlphoto_mmdata/201705/23/ec7a8507-b3f8-404d-a2b9-a2ecababd400.jpg" draggable="false" />
         </div>
         <div className={cx('user-photo-upload', '_input-file')}>
-          <label for="_file">얼굴 사진 바꾸기</label>
+          <label htmlFor="_file">얼굴 사진 바꾸기</label>
           <input type="file" id="_file" />
         </div>
       </div>

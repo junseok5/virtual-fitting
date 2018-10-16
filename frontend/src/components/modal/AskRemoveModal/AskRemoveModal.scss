@@ -1,0 +1,13 @@
+@import 'utils';
+@import 'common/modal_button';
+
+.ask-remove-modal {
+  padding: 0.8rem;
+
+  .modal-buttons {
+    margin-top: 0.5rem;
+  
+    display: flex;
+    justify-content: center;
+  }
+}
