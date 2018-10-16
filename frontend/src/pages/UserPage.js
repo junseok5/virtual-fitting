@@ -6,6 +6,7 @@ import ContentWrapper from 'components/common/ContentWrapper'
 import UserInfo from 'components/user/UserInfo'
 import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
 import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
+import PasswordEditModalContainer from 'containers/modal/PasswordEditModalContainer'
 
 const UserPage = () => {
   return (
@@ -17,6 +18,7 @@ const UserPage = () => {
         </ContentWrapper>
         <AskLeaveModalContainer />
         <ErrorMessageModalContainer />
+        <PasswordEditModalContainer />
       </MainWrapper>
     </PageTemplate>
   )
