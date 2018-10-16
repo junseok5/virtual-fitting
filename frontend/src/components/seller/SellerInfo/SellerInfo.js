@@ -43,6 +43,7 @@ const SellerInfo = () => (
     <div className={cx('_title')}>기타</div>
     <div className={cx('other-info')}>
       <div className={cx('_text-padding')}>
+        <Button>상품 관리</Button>
         <Button>회원 탈퇴</Button>
       </div>
     </div>
