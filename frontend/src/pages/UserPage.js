@@ -5,6 +5,7 @@ import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
 import UserInfo from 'components/user/UserInfo'
 import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
+import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
 
 const UserPage = () => {
   return (
@@ -15,6 +16,7 @@ const UserPage = () => {
           <UserInfo />
         </ContentWrapper>
         <AskLeaveModalContainer />
+        <ErrorMessageModalContainer />
       </MainWrapper>
     </PageTemplate>
   )
