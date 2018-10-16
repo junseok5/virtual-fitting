@@ -1,0 +1,52 @@
+@import 'utils';
+@import 'common/select';
+
+.product-edit {
+  .product-edit-main {
+    display: flex;
+
+    .product-edit-basic-info {
+      padding: 1rem;
+    }
+
+    .product-edit-photo {
+      padding: 1rem;
+
+      display: flex;
+
+      .photo-model {
+        width: 300px;
+
+        .photo-model-view {
+          padding: 1rem;
+        }
+      }
+
+      .photo-cloth {
+        width: 300px;
+        .photo-cloth-view {
+          padding: 1rem;
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    @include media("<large") {
+      flex-direction: column;
+  
+      .product-edit-photo {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .product-edit-btn {
+    margin: 1rem;
+
+    display: flex;
+    justify-content: center;
+  }
+}
