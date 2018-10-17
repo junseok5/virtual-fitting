@@ -3,11 +3,14 @@ const User = require('database/models/User')
 const Seller = require('database/models/Seller')
 const { getProfile } = require('lib/social')
 
+// Regex definition
+const displayNameRegex = /^[a-zA-Z0-9ㄱ-힣]{3,12}$/
+
 exports.localRegisterUser = async (ctx) => {
   const { body } = ctx.request
 
   const schema = Joi.object({
-    displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,12}$/).required(),
+    displayName: Joi.string().regex(displayNameRegex).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(6).max(30).required(),
     phoneNum: Joi.string(),
@@ -52,5 +55,81 @@ exports.localRegisterUser = async (ctx) => {
     })
   } catch (e) {
     ctx.throw(e, 500)
+  }
+}
+
+exports.socialRegister = async (ctx) => {
+  const { body } = ctx.request
+  const { provider } = ctx.params
+
+  const schema = Joi.object({
+    displayName: Joi.string().regex(displayNameRegex).required(),
+    accessToken: Joi.string().required()
+  })
+
+  const result = Joi.validate(body, schema)
+
+  if (result.error) {
+    ctx.status = 400
+    ctx.body = result.error
+    return
+  }
+
+  const {
+    displayName,
+    accessToken
+  } = body
+
+  // get social info
+  let profile = null
+  try {
+    profile = await getProfile(provider, accessToken)
+  } catch (e) {
+    ctx.status = 403
+    return
+  }
+  if (!profile) {
+    ctx.status = 403
+    return
+  }
+
+  const {
+    email,
+    id: socialId
+  } = profile
+
+  // check email
+  if (profile.email) {
+    // will check only email exists
+    try {
+      const exists = await User.findByEmail(profile.email)
+      if (exists) {
+        ctx.body = {
+          key: 'email'
+        }
+        ctx.status = 409
+        return
+      }
+    } catch (e) {
+      ctx.throw(e, 500)
+    }
+  }
+
+  let user = null
+  try {
+    user = await User.socialRegister({
+      email,
+      displayName,
+      provider,
+      accessToken,
+      socialId
+    })
+  } catch (e) {
+    ctx.throw(e, 500)
+  }
+
+  ctx.body = {
+    displayName,
+    _id: user._id
   }
 }
