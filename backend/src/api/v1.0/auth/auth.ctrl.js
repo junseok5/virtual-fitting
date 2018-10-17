@@ -283,6 +283,8 @@ exports.socialLogin = async (ctx) => {
     }
   }
 
+  // If user does first social login, response 204 status
+  // Client may receive 204 status. It will be moved to register page.
   if (!user) {
     ctx.status = 204
   }
