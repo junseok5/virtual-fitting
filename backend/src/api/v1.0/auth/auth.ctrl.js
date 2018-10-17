@@ -185,3 +185,105 @@ exports.localUserLogin = async (ctx) => {
     ctx.throw(e, 500)
   }
 }
+
+exports.socialLogin = async (ctx) => {
+  const schema = Joi.object().keys({
+    accessToken: Joi.string().required()
+  })
+
+  const result = Joi.validate(ctx.request.body, schema)
+
+  if (result.error) {
+    ctx.status = 400
+    return
+  }
+
+  const { provider } = ctx.params
+  const { accessToken } = ctx.request.body
+
+  // get social info
+  let profile = null
+  try {
+    profile = await getProfile(provider, accessToken)
+  } catch (e) {
+    ctx.status = 403
+    return
+  }
+
+  if (!profile) {
+    ctx.status = 403
+    return
+  }
+
+  const {
+    id, email
+  } = profile
+
+  // check acount existancy
+  let user = null
+  try {
+    user = await User.findSocialId({ provider, id })
+  } catch (e) {
+    ctx.throw(e, 500)
+  }
+
+  if (user) {
+    // set user status
+    try {
+      const vfToken = await user.generateToken()
+      ctx.cookies.set('access_token', vfToken, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+      })
+    } catch (e) {
+      ctx.throw(e, 500)
+    }
+    const { _id, displayName } = user
+    ctx.body = {
+      displayName,
+      _id
+    }
+    return
+  }
+
+  if (!user && profile.email) {
+    let duplicated = null
+    try {
+      duplicated = await User.findByEmail(email)
+    } catch (e) {
+      ctx.throw(e, 500)
+    }
+
+    // if there is a duplicated email, merges the user account
+    if (duplicated) {
+      duplicated.social[provider] = {
+        id,
+        accessToken
+      }
+      try {
+        await duplicated.save()
+      } catch (e) {
+        ctx.throw(e, 500)
+      }
+      try {
+        // set user status
+        const vfToken = await duplicated.generateToken()
+        ctx.cookies.set('access_token', vfToken, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 * 7
+        })
+      } catch (e) {
+        ctx.throw(e, 500)
+      }
+      const { _id, displayName } = duplicated
+      ctx.body = {
+        displayName,
+        _id
+      }
+    }
+  }
+
+  if (!user) {
+    ctx.status = 204
+  }
+}
