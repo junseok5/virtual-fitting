@@ -133,3 +133,55 @@ exports.socialRegister = async (ctx) => {
     _id: user._id
   }
 }
+
+exports.localUserLogin = async (ctx) => {
+  const { body } = ctx.request
+
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).max(30)
+  })
+
+  const result = Joi.validate(body, schema)
+
+  if (result.error) {
+    ctx.status = 400
+    return
+  }
+
+  const { email, password } = body
+
+  try {
+    // find user
+    const user = await User.findByEmail(email)
+
+    if (!user) {
+      // user does not exist
+      ctx.status = 403
+      return
+    }
+
+    const validated = user.validatePassword(password)
+    if (!validated) {
+      // wrong password
+      ctx.status = 403
+      return
+    }
+
+    const accessToken = await user.generateToken()
+
+    ctx.cookies.set('access_token', accessToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+    })
+
+    const { displayName, _id } = user
+
+    ctx.body = {
+      _id,
+      displayName
+    }
+  } catch (e) {
+    ctx.throw(e, 500)
+  }
+}
