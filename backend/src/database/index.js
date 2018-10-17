@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const log = require('lib/log')
 
 const {
   MONGO_URI: mongoURI
@@ -20,7 +21,7 @@ module.exports = (() => {
     connect () {
       return mongoose.connect(mongoURI, dbOptions).then(
         () => {
-          console.log('Connected to mongodb')
+          log.info('Connected to mongodb')
         }
       ).catch(e => {
         console.error(e)

@@ -6,12 +6,18 @@
   "author": "Junseok Oh",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.1",
     "cross-env": "^5.2.0",
+    "crypto": "^1.0.1",
     "dotenv": "^6.1.0",
+    "fb": "^2.0.0",
+    "googleapis": "^34.0.0",
+    "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.3",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "moment": "^2.22.2",
     "mongoose": "^5.3.4"
   },
   "devDependencies": {

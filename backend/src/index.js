@@ -6,7 +6,7 @@ const bodyParser = require('koa-bodyparser')
 // const serve = require('koa-static')
 
 const api = require('./api')
-const db = require('./database/db')
+const db = require('./database')
 
 db.connect()
 
