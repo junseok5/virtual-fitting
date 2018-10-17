@@ -11,7 +11,7 @@ const dbOptions = {
   reconnectInterval: 500,
   poolSize: 10,
   bufferMaxEntries: 0,
-  userNewUrlParser: true
+  useNewUrlParser: true
 }
 
 module.exports = (() => {

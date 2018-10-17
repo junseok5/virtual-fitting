@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose.Schema
-const crypto = require('crypto')
+const { Schema } = mongoose
 const token = require('lib/token')
 const hash = require('lib/common/hash')
 
