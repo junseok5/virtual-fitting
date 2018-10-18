@@ -289,3 +289,116 @@ exports.socialLogin = async (ctx) => {
     ctx.status = 204
   }
 }
+
+exports.localRegisterSeller = async (ctx) => {
+  const { body } = ctx.request
+
+  const schema = Joi.object({
+    crn: Joi.string().required(),
+    companyName: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).max(30),
+    managerName: Joi.string().regex(displayNameRegex).required(),
+    phoneNum: Joi.string().required(),
+    gender: Joi.string().required()
+  })
+
+  const result = Joi.validate(body, schema)
+
+  // Schema error
+  if (result.error) {
+    ctx.status = 400
+    ctx.body = result.error
+    return
+  }
+
+  const { crn, companyName, email, password, managerName, phoneNum, gender } = body
+
+  try {
+    // check email / crn
+    const exists = await Seller.findExistancy({
+      crn, email
+    })
+
+    if (exists) {
+      ctx.status - 409
+      const key = exists.crn === crn ? 'crn' : 'email'
+      ctx.body = {
+        key
+      }
+      return
+    }
+
+    // creates seller account
+    const seller = await Seller.localRegister({
+      crn, companyName, email, password, managerName, phoneNum, gender
+    })
+
+    ctx.body = {
+      _id: seller._id,
+      companyName
+    }
+
+    const accessToken = await seller.generateToken()
+
+    // configure accessToken to httpOnly cookie
+    ctx.cookies.set('access_token', accessToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+    })
+  } catch (e) {
+    ctx.throw(e, 500)
+  }
+}
+
+exports.localSellerLogin = async (ctx) => {
+  const { body } = ctx.request
+
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).max(20)
+  })
+
+  const result = Joi.validate(body, schema)
+
+  if (result.error) {
+    ctx.status = 400
+    return
+  }
+
+  const { email, password } = body
+
+  try {
+    // find seller
+    const seller = await Seller.findByEmail(email)
+
+    if (!seller) {
+      // seller does not exist
+      ctx.status = 403
+      return
+    }
+
+    const validated = seller.validatePassword(password)
+    if (!validated) {
+      // wrong password
+      ctx.status = 403
+      return
+    }
+
+    const accessToken = await seller.generateToken()
+
+    ctx.cookies.set('access_token', accessToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+    })
+
+    const { _id, managerName } = seller
+
+    ctx.body = {
+      _id,
+      managerName
+    }
+  } catch (e) {
+    ctx.throw(e, 500)
+  }
+}

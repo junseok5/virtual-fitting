@@ -3,36 +3,21 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const Product = new Schema({
-  productName: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    required: true
-  },
+  productName: String,
+  price: Number,
   freeShipping: Boolean,
   category: String,
   subCategory: String,
   targetGender: String,
   salesLink: String,
-  modelPhotoUri: {
-    type: String,
-    required: true
-  },
-  productPhotoUri: {
-    type: String,
-    required: true
-  },
+  modelPhotoUri: String,
+  productPhotoUri: String,
   virtualProductPhotoUri: String,
   reviewStatus: {
     type: Boolean,
     default: true
   },
-  writer: {
-    type: Schema.types.ObjectId,
-    required: true
-  },
+  writer: Schema.types.ObjectId,
   publishedDate: {
     type: Date,
     default: Date.now()

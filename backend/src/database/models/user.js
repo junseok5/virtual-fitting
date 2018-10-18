@@ -4,10 +4,7 @@ const token = require('lib/token')
 const hash = require('lib/common/hash')
 
 const User = new Schema({
-  email: {
-    type: String,
-    required: true
-  },
+  email: String,
   social: {
     facebook: {
       id: String,

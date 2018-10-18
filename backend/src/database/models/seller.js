@@ -5,19 +5,10 @@ const token = require('lib/token')
 const hash = require('lib/common/hash')
 
 const Seller = new Schema({
-  crn: {
-    type: String,
-    required: true
-  },
+  crn: String,
   companyName: String,
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
+  email: String,
+  password: String,
   managerName: String,
   contact: String,
   gender: String,
@@ -29,6 +20,15 @@ const Seller = new Schema({
 
 Seller.statics.findByEmail = function (email) {
   return this.findOne({ email }).exec()
+}
+
+Seller.statics.findExistancy = function ({ crn, email }) {
+  return this.findOne({
+    $or: [
+      { crn },
+      { email }
+    ]
+  }).exec()
 }
 
 Seller.statics.localRegister = function ({ crn, companyName, email, password, managerName, contact, gender }) {
