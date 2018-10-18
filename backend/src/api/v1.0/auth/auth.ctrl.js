@@ -299,8 +299,7 @@ exports.localRegisterSeller = async (ctx) => {
     email: Joi.string().email().required(),
     password: Joi.string().min(6).max(30),
     managerName: Joi.string().regex(displayNameRegex).required(),
-    phoneNum: Joi.string().required(),
-    gender: Joi.string().required()
+    phoneNum: Joi.string().required()
   })
 
   const result = Joi.validate(body, schema)
@@ -312,7 +311,7 @@ exports.localRegisterSeller = async (ctx) => {
     return
   }
 
-  const { crn, companyName, email, password, managerName, phoneNum, gender } = body
+  const { crn, companyName, email, password, managerName, phoneNum } = body
 
   try {
     // check email / crn
@@ -331,7 +330,7 @@ exports.localRegisterSeller = async (ctx) => {
 
     // creates seller account
     const seller = await Seller.localRegister({
-      crn, companyName, email, password, managerName, phoneNum, gender
+      crn, companyName, email, password, managerName, phoneNum
     })
 
     ctx.body = {

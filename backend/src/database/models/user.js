@@ -84,4 +84,12 @@ User.methods.generateToken = function () {
   }, 'user')
 }
 
-module.exports = mongoose.model('User', User)
+let UserSchema = null
+
+try {
+  UserSchema = mongoose.model('User', User)
+} catch (e) {
+  UserSchema = mongoose.model('User')
+}
+
+module.exports = UserSchema

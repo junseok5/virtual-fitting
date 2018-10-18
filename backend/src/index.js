@@ -5,20 +5,23 @@ const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 // const serve = require('koa-static')
 
-const api = require('./api')
 const db = require('./database')
+
+const api = require('./api')
+const jwtMiddleware = require('lib/middlewares/jwt')
 
 db.connect()
 
 const { Port: port } = process.env
 
 const app = new Koa()
+
+app.use(jwtMiddleware)
+app.use(bodyParser())
 const router = new Router()
 
 // 라우터 설정
 router.use('/api', api.routes())
-
-app.use(bodyParser())
 
 app.use(router.routes()).use(router.allowedMethods())
 

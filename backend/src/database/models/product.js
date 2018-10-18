@@ -54,4 +54,12 @@ Product.statics.findByKeyword = function (keyword, page) {
     .exec()
 }
 
-module.exports = mongoose.model('Product', Product)
+let ProductSchema = null
+
+try {
+  ProductSchema = mongoose.model('Product', Product)
+} catch (e) {
+  ProductSchema = mongoose.model('Product')
+}
+
+module.exports = ProductSchema

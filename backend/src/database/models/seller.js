@@ -11,7 +11,6 @@ const Seller = new Schema({
   password: String,
   managerName: String,
   contact: String,
-  gender: String,
   joinedDate: {
     type: Date,
     default: Date.now
@@ -38,11 +37,14 @@ Seller.statics.localRegister = function ({ crn, companyName, email, password, ma
     email,
     password: hash(password),
     managerName,
-    contact,
-    gender
+    contact
   })
 
   return seller.save()
+}
+
+Seller.statics.unregister = function (_id) {
+  return this.deleteOne({ _id }).exec()
 }
 
 Seller.methods.validatePassword = function (password) {
@@ -60,4 +62,12 @@ Seller.methods.generateToken = function () {
   }, 'seller')
 }
 
-module.exports = mongoose.model('Seller', Seller)
+let SellerSchema = null
+
+try {
+  SellerSchema = mongoose.model('Seller', Seller)
+} catch (e) {
+  SellerSchema = mongoose.model('Seller')
+}
+
+module.exports = SellerSchema

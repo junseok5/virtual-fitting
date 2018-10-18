@@ -28,4 +28,4 @@ function decodeToken (token) {
 }
 
 exports.generateToken = generateToken
-exports.decodedToken = decodeToken
+exports.decodeToken = decodeToken

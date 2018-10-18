@@ -2,9 +2,10 @@ const Router = require('koa-router')
 
 const sellers = new Router()
 const sellersCtrl = require('./sellers.ctrl')
+const checkSellerAuth = require('lib/middlewares/checkSellerAuth')
 
-sellers.get('/:id', sellersCtrl.getSellerInfo)
-sellers.patch('/:id', sellersCtrl.patchSellerInfo)
-sellers.delete('/:id', sellersCtrl.deleteSellerInfo)
+sellers.get('/', checkSellerAuth, sellersCtrl.getSellerInfo)
+sellers.patch('/', checkSellerAuth, sellersCtrl.patchSellerInfo)
+sellers.delete('/', checkSellerAuth, sellersCtrl.deleteSellerInfo)
 
 module.exports = sellers
