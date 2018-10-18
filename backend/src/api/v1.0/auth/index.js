@@ -13,7 +13,9 @@ auth.post('/users/login/:provider(facebook|google)', authCtrl.socialLogin)
 auth.post('/sellers/register/local', authCtrl.localRegisterSeller)
 auth.post('/sellers/login/local', authCtrl.localSellerLogin)
 
-// auth.get('/check', authCtrl.check)
-// auth.post('/logout', authCtrl.logout)
+auth.get('/users/check', authCtrl.checkUser)
+auth.get('/sellers/check', authCtrl.checkSeller)
+
+auth.post('/logout', authCtrl.logout)
 
 module.exports = auth

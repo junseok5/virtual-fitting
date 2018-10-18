@@ -321,7 +321,7 @@ exports.localRegisterSeller = async (ctx) => {
     })
 
     if (exists) {
-      ctx.status - 409
+      ctx.status = 409
       const key = exists.crn === crn ? 'crn' : 'email'
       ctx.body = {
         key
@@ -401,4 +401,68 @@ exports.localSellerLogin = async (ctx) => {
   } catch (e) {
     ctx.throw(e, 500)
   }
+}
+
+exports.checkUser = async (ctx) => {
+  const { user } = ctx.request
+
+  if (!user) {
+    ctx.status = 401
+    return
+  }
+
+  try {
+    const exists = await User.findById(user._id)
+    if (!exists) {
+      // invalid user
+      ctx.cookies.set('access_token', null, {
+        maxAge: 0,
+        httpOnly: true
+      })
+      ctx.status = 401
+      return
+    }
+  } catch (e) {
+    ctx.throw(500, e)
+  }
+
+  ctx.body = {
+    user
+  }
+}
+
+exports.checkSeller = async (ctx) => {
+  const { seller } = ctx.request
+
+  if (!seller) {
+    ctx.status = 401
+    return
+  }
+
+  try {
+    const exists = await Seller.findById(seller._id)
+    if (!exists) {
+      // invalid user
+      ctx.cookies.set('access_token', null, {
+        maxAge: 0,
+        httpOnly: true
+      })
+      ctx.status = 401
+      return
+    }
+  } catch (e) {
+    ctx.throw(500, e)
+  }
+
+  ctx.body = {
+    seller
+  }
+}
+
+exports.logout = (ctx) => {
+  ctx.cookies.set('access_token', null, {
+    maxAge: 0,
+    httpOnly: true
+  })
+  ctx.status = 204
 }
