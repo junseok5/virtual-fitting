@@ -69,6 +69,10 @@ User.statics.socialRegister = function ({ email, displayName, provider, accessTo
   return user.save()
 }
 
+User.statics.unregister = function (_id) {
+  return this.deleteOne({ _id }).exec()
+}
+
 User.methods.validatePassword = function (password) {
   const hashed = hash(password)
   return this.password === hashed

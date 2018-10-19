@@ -41,14 +41,14 @@ exports.patchSellerInfo = async (ctx) => {
   const result = Joi.validate(patchData, schema)
   if (result.error) {
     ctx.body = {
-      msg: 'failed to validate patchData'
+      msg: 'Failed to validate patchData'
     }
     ctx.status = 400
     return
   }
 
-  for (let filed in patchData) {
-    if (!availableFields[filed]) {
+  for (let fieled in patchData) {
+    if (!availableFields[fieled]) {
       ctx.status = 403
       ctx.body = {
         msg: 'unsupported field'
@@ -64,13 +64,11 @@ exports.patchSellerInfo = async (ctx) => {
       ctx.status = 403
       return
     }
-    // console.log(sellerData)
 
     const patchedData = {
       ...sellerData.toObject(),
       ...patchData
     }
-    console.log(sellerData)
 
     await sellerData.updateOne({ ...patchedData }).exec()
     ctx.body = sellerData
