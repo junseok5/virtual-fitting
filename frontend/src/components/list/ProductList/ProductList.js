@@ -10,7 +10,7 @@ const ProductItem = () => {
   return (
     <div className={cx('product-item')}>
       <div className={cx('product-photo')}>
-        <img src="//image.musinsa.com/images/goods_img/20180906/850274/850274_1_180.jpg" draggable="false" />
+        <img src="https://simage-kr.gu-global.com//goods/31/11/66/40/311447_COL_GCL05_300.jpg" draggable="false" />
       </div>
       <div className={cx('product-info')}>
         <div className={cx('product-info-title')}>타이틀</div>
