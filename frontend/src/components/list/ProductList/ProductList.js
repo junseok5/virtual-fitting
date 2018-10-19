@@ -14,6 +14,9 @@ const ProductItem = () => {
       </div>
       <div className={cx('product-info')}>
         <div className={cx('product-info-title')}>타이틀</div>
+        <div className={cx('product-ship')}>
+          <span>무료배송</span>
+        </div>
         <div className={cx('product-info-price')}>99000원</div>
       </div>
     </div>

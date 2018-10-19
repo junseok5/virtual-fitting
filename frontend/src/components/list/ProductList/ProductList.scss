@@ -34,6 +34,17 @@
         cursor: pointer;
       }
 
+      .product-ship span {
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+        border-radius: 4px;
+        
+        font-weight: bold;
+        font-size: 0.7rem;
+        color: white;
+        background: $oc-blue-5;
+      }
+
       .product-info-price {
         font-weight: bold;
         font-size: 1.2rem;
@@ -45,5 +56,13 @@
   @include media("<medium") {
     flex-direction: column;
     align-items: center;
+
+    .product-item {
+      width: 100%;
+
+      .product-photo {
+        height: 300px;
+      }
+    }
   }
 }
