@@ -54,7 +54,7 @@ exports.localRegisterUser = async (ctx) => {
       maxAge: 1000 * 60 * 60 * 24
     })
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -111,7 +111,7 @@ exports.socialRegister = async (ctx) => {
         return
       }
     } catch (e) {
-      ctx.throw(e, 500)
+      ctx.throw(500, e)
     }
   }
 
@@ -125,7 +125,7 @@ exports.socialRegister = async (ctx) => {
       socialId
     })
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 
   ctx.body = {
@@ -182,7 +182,7 @@ exports.localUserLogin = async (ctx) => {
       displayName
     }
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -224,7 +224,7 @@ exports.socialLogin = async (ctx) => {
   try {
     user = await User.findSocialId({ provider, id })
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 
   if (user) {
@@ -236,7 +236,7 @@ exports.socialLogin = async (ctx) => {
         maxAge: 1000 * 60 * 60 * 24 * 7
       })
     } catch (e) {
-      ctx.throw(e, 500)
+      ctx.throw(500, e)
     }
     const { _id, displayName } = user
     ctx.body = {
@@ -251,7 +251,7 @@ exports.socialLogin = async (ctx) => {
     try {
       duplicated = await User.findByEmail(email)
     } catch (e) {
-      ctx.throw(e, 500)
+      ctx.throw(500, e)
     }
 
     // if there is a duplicated email, merges the user account
@@ -263,7 +263,7 @@ exports.socialLogin = async (ctx) => {
       try {
         await duplicated.save()
       } catch (e) {
-        ctx.throw(e, 500)
+        ctx.throw(500, e)
       }
       try {
         // set user status
@@ -273,7 +273,7 @@ exports.socialLogin = async (ctx) => {
           maxAge: 1000 * 60 * 60 * 24 * 7
         })
       } catch (e) {
-        ctx.throw(e, 500)
+        ctx.throw(500, e)
       }
       const { _id, displayName } = duplicated
       ctx.body = {
@@ -346,7 +346,7 @@ exports.localRegisterSeller = async (ctx) => {
       maxAge: 1000 * 60 * 60 * 24 * 7
     })
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -398,7 +398,7 @@ exports.localSellerLogin = async (ctx) => {
       managerName
     }
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 

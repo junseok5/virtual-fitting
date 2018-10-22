@@ -16,7 +16,7 @@ exports.getUserInfo = async (ctx) => {
     }
     ctx.body = userData
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -73,7 +73,7 @@ exports.patchUserInfo = async (ctx) => {
     await userData.updateOne({ ...patchedData }).exec()
     ctx.body = userData
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -84,7 +84,7 @@ exports.deleteUserInfo = async (ctx) => {
   try {
     await User.unregister(_id)
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 
   ctx.cookies.set('access_token', null, {

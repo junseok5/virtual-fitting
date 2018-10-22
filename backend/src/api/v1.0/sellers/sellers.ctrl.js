@@ -16,7 +16,7 @@ exports.getSellerInfo = async (ctx) => {
     }
     ctx.body = sellerData
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -73,7 +73,7 @@ exports.patchSellerInfo = async (ctx) => {
     await sellerData.updateOne({ ...patchedData }).exec()
     ctx.body = sellerData
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 }
 
@@ -84,7 +84,7 @@ exports.deleteSellerInfo = async (ctx) => {
   try {
     await Seller.unregister(_id)
   } catch (e) {
-    ctx.throw(e, 500)
+    ctx.throw(500, e)
   }
 
   ctx.cookies.set('access_token', null, {
