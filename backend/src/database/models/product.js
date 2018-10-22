@@ -17,7 +17,7 @@ const Product = new Schema({
     type: Boolean,
     default: true
   },
-  writer: Schema.types.ObjectId,
+  writer: Schema.Types.ObjectId,
   publishedDate: {
     type: Date,
     default: Date.now()
@@ -27,26 +27,8 @@ const Product = new Schema({
 // 한 페이지에 보일 상품 개수
 const numOfProduct = 40
 
-Product.statics.findList = function (page) {
-  return this.find()
-    .sort({ _id: -1 })
-    .limit(numOfProduct)
-    .skip((page - 1) * numOfProduct)
-    .lean()
-    .exec()
-}
-
-Product.statics.findByCategory = function (category, page) {
-  return this.find({ category })
-    .sort({ _id: -1 })
-    .limit(numOfProduct)
-    .skip((page - 1) * numOfProduct)
-    .lean()
-    .exec()
-}
-
-Product.statics.findByKeyword = function (keyword, page) {
-  return this.find({ productName: keyword })
+Product.statics.findList = function (query, page) {
+  return this.find(query)
     .sort({ _id: -1 })
     .limit(numOfProduct)
     .skip((page - 1) * numOfProduct)
