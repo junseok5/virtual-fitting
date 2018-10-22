@@ -3,7 +3,6 @@ import Header from 'components/common/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from 'store/modules/base'
-import { stat } from 'fs';
 
 class HeaderContainer extends Component {
   handleOpenSide = () => {
@@ -16,19 +15,50 @@ class HeaderContainer extends Component {
     BaseActions.hideSidebar()
   }
 
-  handleToggle = () => {
-    const { visible } = this.props
+  handleToggleSide = () => {
+    const { visibleSidebar } = this.props
     const { handleOpenSide, handleCloseSide} = this
-    if (visible) return handleCloseSide()
+    if (visibleSidebar) return handleCloseSide()
     handleOpenSide()
   }
 
+  handleOpenSearch = () => {
+    const { BaseActions } = this.props
+    BaseActions.showSearchbar()
+  }
+
+  handleCloseSearch = () => {
+    const { BaseActions } = this.props
+    BaseActions.hideSearchbar()
+  }
+
+  handleToggleSearch = () => {
+    const { visibleSearchbar } = this.props
+    const { handleOpenSearch, handleCloseSearch } = this
+    if (visibleSearchbar) return handleCloseSearch()
+    handleOpenSearch()
+  }
+
+  handleChangeSearchInput = (value) => {
+    const { BaseActions } = this.props
+    BaseActions.setSearchInput(value)
+  }
+
   render () {
-    const { handleToggle } = this
+    const {
+      handleToggleSide,
+      handleToggleSearch,
+      handleChangeSearchInput
+    } = this
+    const { visibleSearchbar, searchbox } = this.props
 
     return (
       <Header
-        onToggle={handleToggle}
+        onToggleSide={handleToggleSide}
+        onToggleSearch={handleToggleSearch}
+        onChangeSearchInput={handleChangeSearchInput}
+        actionSearch={visibleSearchbar}
+        searchbox={searchbox}
       />
     )
   }
@@ -36,7 +66,9 @@ class HeaderContainer extends Component {
 
 export default connect(
   (state) => ({
-    visible: state.base.getIn(['sidebar', 'visible'])
+    visibleSidebar: state.base.getIn(['sidebar', 'visible']),
+    visibleSearchbar: state.base.getIn(['searchbar', 'visible']),
+    searchbox: state.base.get('searchbox')
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
