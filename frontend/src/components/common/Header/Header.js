@@ -9,10 +9,10 @@ import { FaSearch, FaBars } from 'react-icons/fa'
 const cx = classNames.bind(styles)
 
 
-const Header = () => (
+const Header = ({ onToggle }) => (
   <header className={cx('header')}>
     <div className={cx('header-content')}>
-      <div className={cx('menu-icon')}>
+      <div className={cx('menu-icon')} onClick={onToggle}>
         <Icon><FaBars /></Icon>
       </div>
       <div className={cx('brand')}>

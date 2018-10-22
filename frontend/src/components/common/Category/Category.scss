@@ -6,6 +6,7 @@
 
   border-right: 1px solid $oc-gray-4;
   background: $oc-gray-1;
+  transition: all .4s;
 
   .category__nav {
     padding: 1rem;
@@ -36,6 +37,7 @@
     // display: none;
     position: fixed;
     overflow: auto;
+    // left: -280px;
 
     &:after, &:before {
       overflow: hidden;
