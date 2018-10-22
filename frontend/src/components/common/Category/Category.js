@@ -9,7 +9,7 @@ const Category = () => (
   <div className={cx('category')}>
     <nav className={cx('category__nav')}>
       <div className={cx('item_menu')}>
-
+        {/* menu item */}
         <div className={cx('item_menu_title')}>상의</div>
         <div className={cx('item_sub_menu')}>
           <ul>

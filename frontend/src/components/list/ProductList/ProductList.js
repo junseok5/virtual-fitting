@@ -13,7 +13,7 @@ const ProductItem = () => {
         <img src="https://simage-kr.gu-global.com//goods/31/11/66/40/311447_COL_GCL05_300.jpg" draggable="false" />
       </div>
       <div className={cx('product-info')}>
-        <div className={cx('product-info-title')}>타이틀</div>
+        <div className={cx('product-info-title')}>타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀</div>
         <div className={cx('product-ship')}>
           <span>무료배송</span>
         </div>
