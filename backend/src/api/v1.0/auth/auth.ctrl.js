@@ -64,6 +64,8 @@ exports.socialRegister = async (ctx) => {
 
   const schema = Joi.object({
     displayName: Joi.string().regex(displayNameRegex).required(),
+    phoneNum: Joi.string(),
+    gender: Joi.string(),
     accessToken: Joi.string().required()
   })
 
@@ -77,6 +79,8 @@ exports.socialRegister = async (ctx) => {
 
   const {
     displayName,
+    phoneNum,
+    gender,
     accessToken
   } = body
 
@@ -120,6 +124,8 @@ exports.socialRegister = async (ctx) => {
     user = await User.socialRegister({
       email,
       displayName,
+      phoneNum,
+      gender,
       provider,
       accessToken,
       socialId
