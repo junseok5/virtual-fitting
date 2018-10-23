@@ -1,13 +1,13 @@
 import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainTemplate from 'components/common/MainTemplate'
-import LoginForm from 'components/login/LoginForm'
+import LoginFormContainer from 'containers/login/LoginFormContainer'
 
 const LoginUserPage = () => {
   return (
     <PageTemplate>
       <MainTemplate>
-        <LoginForm loginType="사용자" />
+        <LoginFormContainer />
       </MainTemplate>
     </PageTemplate>
   )

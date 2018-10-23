@@ -4,6 +4,30 @@
 @import 'common/button';
 
 .user-form {
+  .login-type {
+    display: flex;
+    ._typebox {
+      width: calc(150px - 1rem);
+      height: 40px;
+      margin: 0.5rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      &:hover {
+        color: $oc-gray-7;
+      }
+    }
+
+    ._selected {
+      border-bottom: 2px solid $oc-gray-7;
+      font-weight: bold;
+    }
+  }
+
   .register-button {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;

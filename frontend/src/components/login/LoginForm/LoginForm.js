@@ -8,29 +8,58 @@ import { FaFacebook, FaGoogle } from 'react-icons/fa'
 const cx = classNames.bind(styles)
 
 
-const UserForm = ({loginType}) => (
-  <div className={cx('user-form')}>
-    <div className={cx('_title')}>{ loginType } 로그인</div>
-    <div className={cx('user-form-input')}>
-      <div className={cx('user-email', '_input-space')}>
-        <input className={cx('_input-form')} type="email" placeholder="이메일 입력" />
+const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType }) => {
+  const {
+    email,
+    password
+  } = forms.toJS()
+
+  const selected = {
+    user: loginType === 'user' && '_selected',
+    seller: loginType === 'seller' && '_selected'
+  }
+
+  return (
+    <div className={cx('user-form')}>
+      <div className={cx('login-type')}>
+        <div className={cx('_typebox', selected.user)} onClick={() => onSelectLoginType('user')}>사용자 로그인</div>
+        <div className={cx('_typebox', selected.seller)} onClick={() => onSelectLoginType('seller')}>판매자 로그인</div>
       </div>
-      <div className={cx('user-password', '_input-space')}>
-        <input className={cx('_input-form')} type="password" placeholder="비밀번호 입력" />
+      <div className={cx('user-form-input')}>
+        <div className={cx('user-email', '_input-space')}>
+          <input
+            className={cx('_input-form')}
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChangeInput}
+            placeholder="이메일 입력"
+          />
+        </div>
+        <div className={cx('user-password', '_input-space')}>
+          <input
+            className={cx('_input-form')}
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChangeInput}
+            placeholder="비밀번호 입력"
+          />
+        </div>
       </div>
-    </div>
-    <div className={cx('_button')}>로그인</div>
-    <div className={cx('register-button')}>
-      <Link to="/register">회원가입</Link>
-    </div>
-    <SocialLoginButton type="Facebook">
+      <div className={cx('_button')}>로그인</div>
+      <div className={cx('register-button')}>
+        <Link to="/register">회원가입</Link>
+      </div>
+      <SocialLoginButton type="Facebook">
         <FaFacebook />
       </SocialLoginButton>
       <SocialLoginButton type="Google">
         <FaGoogle />
       </SocialLoginButton>
-  </div>
-)
+    </div>
+  )
+}
 
 
 export default UserForm
