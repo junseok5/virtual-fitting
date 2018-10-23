@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 
-const RegUser = ({ forms, onChangeInput }) => {
+const RegUser = ({ forms, onChangeInput, onRegister }) => {
   const {
     email,
     password,
@@ -79,7 +79,7 @@ const RegUser = ({ forms, onChangeInput }) => {
             onChange={onChangeInput}
           />여
         </div>
-        <div className={cx('_button')}>가입완료</div>
+        <div className={cx('_button')} onClick={onRegister}>가입완료</div>
       </div>
     </div>
   )

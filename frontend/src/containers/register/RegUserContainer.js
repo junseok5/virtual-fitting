@@ -3,7 +3,10 @@ import RegUser from 'components/register/RegUser'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as registerActions from 'store/modules/register'
-import * as UserActions from 'store/modules/user'
+import * as userActions from 'store/modules/user'
+import * as baseActions from 'store/modules/base'
+
+import { withRouter } from 'react-router'
 
 class RegUserContainer extends Component {
   handleChangeInput = (e) => {
@@ -14,7 +17,17 @@ class RegUserContainer extends Component {
   }
 
   handleRegister = async () => {
-    const { RegisterActions, UserActions, form } = this.props
+    const {
+      RegisterActions,
+      UserActions,
+      BaseActions,
+      form
+    } = this.props
+
+    RegisterActions.setResult(null)
+    RegisterActions.setError(null)
+    UserActions.setUser(null)
+
     const {
       crn,
       companyName,
@@ -33,8 +46,19 @@ class RegUserContainer extends Component {
         managerName,
         contact
       })
+
+      const { error } = this.props
+      if (error) {
+        BaseActions.setModalMessage(error)
+        BaseActions.showModal('error')
+        return
+      }
+
       const { result } = this.props
       UserActions.setUser(result)
+
+      const { history } = this.props
+      history.push('/')
     } catch (e) {
       console.log(e)
     }
@@ -42,11 +66,15 @@ class RegUserContainer extends Component {
 
   render () {
     const { form } = this.props
-    const { handleChangeInput } = this
+    const {
+      handleChangeInput,
+      handleRegister
+    } = this
     return (
       <RegUser
         forms={form}
         onChangeInput={handleChangeInput}
+        onRegister={handleRegister}
       />
     )
   }
@@ -60,6 +88,7 @@ export default connect(
   }),
   (dispatch) => ({
     RegisterActions: bindActionCreators(registerActions, dispatch),
-    UserActions: bindActionCreators(UserActions, dispatch)
+    UserActions: bindActionCreators(userActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch)
   })
-)(RegUserContainer)
+)(withRouter(RegUserContainer))
