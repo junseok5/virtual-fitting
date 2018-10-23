@@ -30,10 +30,6 @@ class RegUserContainer extends Component {
       form
     } = this.props
 
-    RegisterActions.setResult(null)
-    RegisterActions.setError(null)
-    // UserActions.setUser(null)
-
     const {
       email,
       password,
@@ -59,6 +55,7 @@ class RegUserContainer extends Component {
     } catch (e) {
       const { error } = this.props
       if (error) {
+        // 에러 모달
         BaseActions.setModalMessage(error)
         BaseActions.showModal('error')
         return
