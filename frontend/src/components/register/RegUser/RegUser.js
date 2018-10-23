@@ -45,7 +45,7 @@ const RegUser = ({ forms, onChangeInput, onRegister }) => {
           <input
             className={cx('_input-form')}
             type="text"
-            name="name"
+            name="displayName"
             value={name}
             onChange={onChangeInput}
             placeholder="이름 입력"

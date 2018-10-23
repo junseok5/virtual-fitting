@@ -11,6 +11,7 @@ const CHANGE_INPUT_SELLER = 'register/CHANGE_INPUT_SELLER'
 const LOCAL_REGISTER_USER = 'register/LOCAL_REGISTER_USER'
 const SET_RESULT = 'register/SET_RESULT'
 const SET_ERROR = 'register/SET_ERROR'
+const INITIALIZE = 'register/INITIALIZE'
 
 // action creators
 export const changeInputUser = createAction(CHANGE_INPUT_USER)
@@ -18,13 +19,14 @@ export const changeInputSeller = createAction(CHANGE_INPUT_SELLER)
 export const localRegisterUser = createAction(LOCAL_REGISTER_USER, AuthAPI.localRegisterUser)
 export const setResult = createAction(SET_RESULT)
 export const setError = createAction(SET_ERROR)
+export const initialize = createAction(INITIALIZE)
 
 // initial state
 const initialState = Map({
   userForm: Map({
     email: '',
     password: '',
-    name: '',
+    displayName: '',
     phoneNum: '',
     gender: ''
   }),
@@ -42,6 +44,7 @@ const initialState = Map({
 
 // reducer
 export default handleActions({
+  [INITIALIZE]: (state, action) => initialState,
   [CHANGE_INPUT_USER]: (state, action) => {
     const { name, value } = action.payload
     return state.setIn(['userForm', name], value)
@@ -57,10 +60,10 @@ export default handleActions({
       return state.set('result', user)
     },
     onFailure: (state, action) => {
-      const { status } = action.payload
+      const { status } = action.payload.response
       
       if (status === 400) return state.set('error', '잘못된 입력 값입니다.')
-      if (status === 403) return state.set('error', '이미 존재하는 계정입니다.')
+      if (status === 409) return state.set('error', '이미 존재하는 계정입니다.')
       if (status === 500) return state.set('error', '서버 에러! 다시 시도해주시기 바랍니다.')
     }
   }),

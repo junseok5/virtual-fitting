@@ -9,6 +9,12 @@ import * as baseActions from 'store/modules/base'
 import { withRouter } from 'react-router'
 
 class RegUserContainer extends Component {
+
+  componentDidMount () {
+    const { RegisterActions } = this.props
+    RegisterActions.initialize()
+  }
+
   handleChangeInput = (e) => {
     const { RegisterActions } = this.props
     const { name, value } = e.target
@@ -26,33 +32,24 @@ class RegUserContainer extends Component {
 
     RegisterActions.setResult(null)
     RegisterActions.setError(null)
-    UserActions.setUser(null)
+    // UserActions.setUser(null)
 
     const {
-      crn,
-      companyName,
       email,
       password,
-      managerName,
-      contact
+      displayName,
+      phoneNum,
+      gender
     } = form.toJS()
 
     try {
       await RegisterActions.localRegisterUser({
-        crn,
-        companyName,
         email,
         password,
-        managerName,
-        contact
+        displayName,
+        phoneNum,
+        gender
       })
-
-      const { error } = this.props
-      if (error) {
-        BaseActions.setModalMessage(error)
-        BaseActions.showModal('error')
-        return
-      }
 
       const { result } = this.props
       UserActions.setUser(result)
@@ -60,7 +57,12 @@ class RegUserContainer extends Component {
       const { history } = this.props
       history.push('/')
     } catch (e) {
-      console.log(e)
+      const { error } = this.props
+      if (error) {
+        BaseActions.setModalMessage(error)
+        BaseActions.showModal('error')
+        return
+      }
     }
   }
 
