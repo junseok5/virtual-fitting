@@ -44,7 +44,12 @@ class Header extends Component {
             <Link to="/">virtual fitting</Link>
           </div>
           <div className={cx('search')}>
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              onChange={handleChange}
+              value={searchbox}
+              placeholder="Search"
+            />
           </div>
           <div className={cx('right')}>
             <div className={cx('icons')} onClick={onToggleSearch}>
@@ -59,7 +64,13 @@ class Header extends Component {
               <FaSearch />
             </div>
             <div className={cx('ms-search-input')}>
-              <input type="text" ref={(ref) => this.searchInput = ref} placeholder="검색" onChange={handleChange} value={searchbox} />
+              <input
+                type="text"
+                ref={(ref) => this.searchInput = ref}
+                placeholder="검색"
+                onChange={handleChange}
+                value={searchbox}
+              />
             </div>
             <div className={cx('ms-search-cancel')} onClick={onToggleSearch}>
               <FaTimes />
