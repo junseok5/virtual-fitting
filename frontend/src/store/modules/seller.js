@@ -11,7 +11,7 @@ export const setSeller = createAction(SET_SELLER)
 
 // initial state
 const initialState = Map({
-  seller: null,
+  seller: null, // Map({ _id, managerName })
   logged: false
 })
 

@@ -86,8 +86,10 @@ class LoginFormContainer extends Component {
     } catch (e) {
       const { error } = this.props
       if (error) {
-        BaseActions.setModalMessage(error)
-        BaseActions.showModal('error')
+        BaseActions.setModalMessage({
+          modalName: 'error',
+          modalMessage: error
+        })
       }
     }
   }

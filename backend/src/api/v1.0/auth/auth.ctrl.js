@@ -344,7 +344,7 @@ exports.localRegisterSeller = async (ctx) => {
 
     ctx.body = {
       _id: seller._id,
-      companyName
+      managerName
     }
 
     const accessToken = await seller.generateToken()
