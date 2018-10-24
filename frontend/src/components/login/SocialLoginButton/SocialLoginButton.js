@@ -6,8 +6,8 @@ import Icon from 'components/common/Icon'
 const cx = classNames.bind(styles)
 
 
-const SocialLoginButton = ({children, type}) => (
-  <div className={cx('social-login-button', type)}>
+const SocialLoginButton = ({children, onSocialLogin, type}) => (
+  <div className={cx('social-login-button', type)} onClick={onSocialLogin}>
     <div className={cx('icon')}>
       {children}
     </div>

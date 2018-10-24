@@ -8,7 +8,15 @@ import { FaFacebook, FaGoogle } from 'react-icons/fa'
 const cx = classNames.bind(styles)
 
 
-const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType, onLogin }) => {
+const UserForm = ({
+  loginType,
+  forms,
+  onChangeInput,
+  onSelectLoginType,
+  onLogin,
+  onKeyPress,
+  onSocialLogin
+}) => {
   const {
     email,
     password
@@ -43,6 +51,7 @@ const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType, onLogin 
             name="password"
             value={password}
             onChange={onChangeInput}
+            onKeyDown={onKeyPress}
             placeholder="비밀번호 입력"
           />
         </div>
@@ -51,10 +60,10 @@ const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType, onLogin 
       <div className={cx('register-button')}>
         <Link to="/register">회원가입</Link>
       </div>
-      <SocialLoginButton type="Facebook">
+      <SocialLoginButton onSocialLogin={() => onSocialLogin('facebook')} type="Facebook">
         <FaFacebook />
       </SocialLoginButton>
-      <SocialLoginButton type="Google">
+      <SocialLoginButton onSocialLogin={() => onSocialLogin('google')} type="Google">
         <FaGoogle />
       </SocialLoginButton>
     </div>

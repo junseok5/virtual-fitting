@@ -29,6 +29,11 @@ class LoginFormContainer extends Component {
     AuthActions.selectLoginType(type)
   }
 
+  handleKeyPress = (e) => {
+    if (e.key !== 'Enter') return
+    this.handleLogin()
+  }
+
   handleLogin = async () => {
     const {
       AuthActions,
@@ -83,12 +88,44 @@ class LoginFormContainer extends Component {
     }
   }
 
+  handleSocialLogin = async (provider) => {
+    const { AuthActions, UserActions } = this.props
+
+    try {
+      await AuthActions.providerLogin(provider)
+
+      const { socialInfo } = this.props
+
+      await AuthActions.socialLogin({
+        provider,
+        accessToken: socialInfo.get('accessToken')
+      })
+
+      const { redirectToRegister } = this.props
+
+      if (redirectToRegister) {
+        const { history } = this.props
+        setTimeout(() => {
+          history.push('/register/added')
+        }, 400)
+        return
+      }
+
+      const { result } = this.props
+      UserActions.setUser(result)
+    } catch (e) {
+      return
+    }
+  }
+
   render () {
     const { form, loginType } = this.props
     const {
       handleChangeInput,
       handleSelectLoginType,
-      handleLogin
+      handleKeyPress,
+      handleLogin,
+      handleSocialLogin
     } = this
 
     return (
@@ -97,7 +134,9 @@ class LoginFormContainer extends Component {
         forms={form}
         onChangeInput={handleChangeInput}
         onSelectLoginType={handleSelectLoginType}
+        onKeyPress={handleKeyPress}
         onLogin={handleLogin}
+        onSocialLogin={handleSocialLogin}
       />
     )
   }
@@ -108,7 +147,9 @@ export default connect(
     form: state.auth.get('form'),
     loginType: state.auth.get('loginType'),
     result: state.auth.get('result'),
-    error: state.auth.get('error')
+    error: state.auth.get('error'),
+    socialInfo: state.auth.get('socialInfo'),
+    redirectToRegister: state.auth.get('redirectToRegister')
   }),
   (dispatch) => ({
     AuthActions: bindActionCreators(authActions, dispatch),
