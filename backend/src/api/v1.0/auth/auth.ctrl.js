@@ -213,11 +213,13 @@ exports.socialLogin = async (ctx) => {
   try {
     profile = await getProfile(provider, accessToken)
   } catch (e) {
+    console.log('here1')
     ctx.status = 403
     return
   }
 
   if (!profile) {
+    console.log('here2')
     ctx.status = 403
     return
   }

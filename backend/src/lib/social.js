@@ -22,9 +22,10 @@ function getGoogleProfile (accessToken) {
       access_token: accessToken
     }, (err, auth) => {
       if (err) reject(err)
+      const { data: profile } = auth
       resolve({
-        id: auth.id,
-        email: auth.emails[0].value
+        id: profile.id,
+        email: profile.emails[0].value
       })
     })
   })
