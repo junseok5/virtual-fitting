@@ -9,6 +9,7 @@ import * as AuthAPI from 'lib/api/auth'
 const CHANGE_INPUT_USER = 'register/CHANGE_INPUT_USER'
 const CHANGE_INPUT_SELLER = 'register/CHANGE_INPUT_SELLER'
 const LOCAL_REGISTER_USER = 'register/LOCAL_REGISTER_USER'
+const LOCAL_REGISTER_SELLER = 'register/LOCAL_REGISTER_SELLER'
 const SET_RESULT = 'register/SET_RESULT'
 const SET_ERROR = 'register/SET_ERROR'
 const INITIALIZE = 'register/INITIALIZE'
@@ -17,6 +18,7 @@ const INITIALIZE = 'register/INITIALIZE'
 export const changeInputUser = createAction(CHANGE_INPUT_USER)
 export const changeInputSeller = createAction(CHANGE_INPUT_SELLER)
 export const localRegisterUser = createAction(LOCAL_REGISTER_USER, AuthAPI.localRegisterUser)
+export const localRegisterSeller = createAction(LOCAL_REGISTER_SELLER, AuthAPI.localRegisterSeller)
 export const setResult = createAction(SET_RESULT)
 export const setError = createAction(SET_ERROR)
 export const initialize = createAction(INITIALIZE)
@@ -62,6 +64,20 @@ export default handleActions({
     onFailure: (state, action) => {
       const { status } = action.payload.response
       
+      if (status === 400) return state.set('error', '잘못된 입력 값입니다.')
+      if (status === 409) return state.set('error', '이미 존재하는 계정입니다.')
+      if (status === 500) return state.set('error', '서버 에러! 다시 시도해주시기 바랍니다.')
+    }
+  }),
+  ...pender({
+    type: LOCAL_REGISTER_SELLER,
+    onSuccess: (state, action) => {
+      const { data: seller } = action.payload
+      return state.set('result', seller)
+    },
+    onFailure: (state, action) => {
+      const { status } = action.payload.response
+
       if (status === 400) return state.set('error', '잘못된 입력 값입니다.')
       if (status === 409) return state.set('error', '이미 존재하는 계정입니다.')
       if (status === 500) return state.set('error', '서버 에러! 다시 시도해주시기 바랍니다.')

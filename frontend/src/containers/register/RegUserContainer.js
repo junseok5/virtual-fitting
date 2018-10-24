@@ -89,6 +89,7 @@ class RegUserContainer extends Component {
       handleChangeInput,
       handleRegister
     } = this
+    
     return (
       <RegUser
         forms={form}

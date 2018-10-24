@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 
-const RegSeller = ({ forms, onChangeInput }) => {
+const RegSeller = ({ forms, onChangeInput, onRegister }) => {
   const {
     crn,
     companyName,
@@ -85,7 +85,7 @@ const RegSeller = ({ forms, onChangeInput }) => {
             placeholder="연락처 입력"
           />
         </div>
-        <div className={cx('_button')}>가입 완료</div>
+        <div className={cx('_button')} onClick={onRegister}>가입 완료</div>
       </div>
     </div>
   )

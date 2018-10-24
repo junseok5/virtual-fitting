@@ -14,6 +14,22 @@ export const localRegisterUser = ({
   gender
 })
 
+export const localRegisterSeller = ({
+  crn,
+  companyName,
+  email,
+  password,
+  managerName,
+  contact
+}) => axios.post('/api/v1.0/auth/sellers/register/local', {
+  crn,
+  companyName,
+  email,
+  password,
+  managerName,
+  contact
+})
+
 export const localLoginUser = ({ email, password }) => axios.post('/api/v1.0/auth/users/login/local', {
   email, password
 })

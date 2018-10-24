@@ -4,13 +4,22 @@ import { Map } from 'immutable'
 import { pender } from 'redux-pender'
 
 // action types
+const SET_SELLER = 'seller/SET_SELLER'
 
 // action creators
+export const setSeller = createAction(SET_SELLER)
 
 // initial state
-const initialState = Map({})
+const initialState = Map({
+  seller: null,
+  logged: false
+})
 
 // reducer
 export default handleActions({
-
+  [SET_SELLER]: (state, action) => {
+    const { payload: seller } = action
+    return state.set('seller', Map(seller))
+                .set('logged', true)
+  }
 }, initialState)

@@ -2,7 +2,7 @@ virtual-fitting
 ===============
 The project is virtual fitting open market relevant graduation project.
 
-### Stack
+# Stack
 ## Frontend
 * React
 * React Router
