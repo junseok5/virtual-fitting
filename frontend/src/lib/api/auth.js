@@ -48,11 +48,10 @@ export const socialRegister = ({
   gender,
   provider,
   accessToken
-}) => axios.post('/api/v1.0/auth/register/' + provider, {
+}) => axios.post('/api/v1.0/auth/users/register/' + provider, {
   displayName,
   phoneNum,
   gender,
-  provider,
   accessToken
 })
 

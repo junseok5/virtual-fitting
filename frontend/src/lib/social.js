@@ -6,7 +6,6 @@ hello.init({
 }, { redirect_uri: '/register/added' })
 
 export default(function () {
-  console.log('hi')
   return {
     facebook: () => {
       return new Promise((resolve, reject) => {

@@ -41,20 +41,28 @@ class RegUserContainer extends Component {
 
     // validation
     if (!regex.email.test(email)) {
-      BaseActions.setModalMessage('잘못된 이메일 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 이메일 형식입니다.'
+      })
       return
     } else if (!regex.password.test(password)) {
-      BaseActions.setModalMessage('비밀번호는 6자 이상 30자 이하입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '비밀번호는 6자 이상 30자 이하입니다.'
+      })
       return
     } else if (!regex.displayName.test(displayName)) {
-      BaseActions.setModalMessage('잘못된 이름 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 이름 형식입니다.'
+      })
       return
     } else if (!regex.phoneNum.test(phoneNum)) {
-      BaseActions.setModalMessage('잘못된 폰 번호 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 폰 번호 형식입니다.'
+      })
       return
     }
 
@@ -76,8 +84,10 @@ class RegUserContainer extends Component {
       const { error } = this.props
       if (error) {
         // 에러 모달
-        BaseActions.setModalMessage(error)
-        BaseActions.showModal('error')
+        BaseActions.setModalMessage({
+          modalName: 'error',
+          modalMessage: error
+        })
       }
     }
   }

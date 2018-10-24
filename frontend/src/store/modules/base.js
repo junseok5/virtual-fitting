@@ -52,8 +52,9 @@ export default handleActions({
     return state.setIn(['modal', modalName], false)
   },
   [SET_MODAL_MESSAGE]: (state, action) => {
-    const { payload: modalMessage } = action
+    const { modalName, modalMessage } = action.payload
     return state.set('modalMessage', modalMessage)
+                .setIn(['modal', modalName], true)
   },
   [SHOW_SIDEBAR]: (state, action) => state.setIn(['sidebar', 'visible'], true),
   [HIDE_SIDEBAR]: (state, action) => state.setIn(['sidebar', 'visible'], false),

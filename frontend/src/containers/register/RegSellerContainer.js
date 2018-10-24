@@ -42,28 +42,40 @@ class RegSellerContainer extends Component {
 
     // validation
     if (!regex.crn.test(crn)) {
-      BaseActions.setModalMessage('잘못된 사업자등록번호 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 사업자등록번호 형식입니다.'
+      })
       return
     } else if (!regex.companyName.test(companyName)) {
-      BaseActions.setModalMessage('잘못된 회사이름 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 회사이름 형식입니다.'
+      })
       return
     } else if (!regex.email.test(email)) {
-      BaseActions.setModalMessage('잘못된 이메일 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 이메일 형식입니다.'
+      })
       return
     } else if (!regex.password.test(password)) {
-      BaseActions.setModalMessage('비밀번호는 6자 이상 30자 이하입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '비밀번호는 6자 이상 30자 이하입니다.'
+      })
       return
     } else if (!regex.managerName.test(managerName)) {
-      BaseActions.setModalMessage('잘못된 매니저 이름 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 매니저 이름 형식입니다.'
+      })
       return
     } else if (!regex.contact.test(contact)) {
-      BaseActions.setModalMessage('잘못된 연락처 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 연락처 형식입니다.'
+      })
       return
     }
 
@@ -85,8 +97,10 @@ class RegSellerContainer extends Component {
     } catch (e) {
       const { error } = this.props
       if (error) {
-        BaseActions.setModalMessage(error)
-        BaseActions.showModal('error')
+        BaseActions.setModalMessage({
+          modalName: 'error',
+          modalMessage: error
+        })
       }
     }
   }

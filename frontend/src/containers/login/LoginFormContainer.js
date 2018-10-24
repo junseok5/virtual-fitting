@@ -51,12 +51,16 @@ class LoginFormContainer extends Component {
 
     // validation
     if (!regex.email.test(email)) {
-      BaseActions.setModalMessage('잘못된 이메일 형식입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 이메일 형식입니다.'
+      })
       return
     } else if (!regex.password.test(password)) {
-      BaseActions.setModalMessage('비밀번호는 6자 이상 30자 이하입니다.')
-      BaseActions.showModal('error')
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '비밀번호는 6자 이상 30자 이하입니다.'
+      })
       return
     }
 
@@ -101,10 +105,9 @@ class LoginFormContainer extends Component {
         accessToken: socialInfo.get('accessToken')
       })
 
-      const { redirectToRegister } = this.props
+      const { redirectToRegister, history } = this.props
 
       if (redirectToRegister) {
-        const { history } = this.props
         setTimeout(() => {
           history.push('/register/added')
         }, 400)
@@ -113,6 +116,7 @@ class LoginFormContainer extends Component {
 
       const { loginResult } = this.props
       UserActions.setUser(loginResult)
+      history.push('/')
     } catch (e) {
       return
     }
