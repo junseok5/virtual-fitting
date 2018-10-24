@@ -111,8 +111,8 @@ class LoginFormContainer extends Component {
         return
       }
 
-      const { result } = this.props
-      UserActions.setUser(result)
+      const { loginResult } = this.props
+      UserActions.setUser(loginResult)
     } catch (e) {
       return
     }
@@ -149,6 +149,7 @@ export default connect(
     result: state.auth.get('result'),
     error: state.auth.get('error'),
     socialInfo: state.auth.get('socialInfo'),
+    loginResult: state.auth.get('loginResult'),
     redirectToRegister: state.auth.get('redirectToRegister')
   }),
   (dispatch) => ({

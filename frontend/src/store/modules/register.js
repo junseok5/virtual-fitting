@@ -8,6 +8,7 @@ import * as AuthAPI from 'lib/api/auth'
 // action types
 const CHANGE_INPUT_USER = 'register/CHANGE_INPUT_USER'
 const CHANGE_INPUT_SELLER = 'register/CHANGE_INPUT_SELLER'
+const CHANGE_INPUT_SOCIAL_ADDED = 'register/CHANGE_INPUT_SOCIAL_ADDED'
 const LOCAL_REGISTER_USER = 'register/LOCAL_REGISTER_USER'
 const LOCAL_REGISTER_SELLER = 'register/LOCAL_REGISTER_SELLER'
 const SET_RESULT = 'register/SET_RESULT'
@@ -17,6 +18,7 @@ const INITIALIZE = 'register/INITIALIZE'
 // action creators
 export const changeInputUser = createAction(CHANGE_INPUT_USER)
 export const changeInputSeller = createAction(CHANGE_INPUT_SELLER)
+export const changeInputSocialAdded = createAction(CHANGE_INPUT_SOCIAL_ADDED)
 export const localRegisterUser = createAction(LOCAL_REGISTER_USER, AuthAPI.localRegisterUser)
 export const localRegisterSeller = createAction(LOCAL_REGISTER_SELLER, AuthAPI.localRegisterSeller)
 export const setResult = createAction(SET_RESULT)
@@ -28,6 +30,11 @@ const initialState = Map({
   userForm: Map({
     email: '',
     password: '',
+    displayName: '',
+    phoneNum: '',
+    gender: ''
+  }),
+  socialAddedForm: Map({
     displayName: '',
     phoneNum: '',
     gender: ''
@@ -54,6 +61,10 @@ export default handleActions({
   [CHANGE_INPUT_SELLER]: (state, action) => {
     const { name, value } = action.payload
     return state.setIn(['sellerForm', name], value)
+  },
+  [CHANGE_INPUT_SOCIAL_ADDED]: (state, action) => {
+    const { name, value } = action.payload
+    return state.setIn(['socialAddedForm', name], value)
   },
   ...pender({
     type: LOCAL_REGISTER_USER,

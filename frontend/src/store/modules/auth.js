@@ -33,6 +33,7 @@ const initialState = Map({
   socialInfo: null,
   result: null,
   error: null,
+  loginResult: null,
   redirectToRegister: false
 })
 
@@ -96,7 +97,7 @@ export default handleActions({
       if (action.payload.status === 204) {
         return state.set('redirectToRegister', true)
       }
-      return state.set('result', loginResult)
+      return state.set('loginResult', loginResult)
     }
   })
 }, initialState)

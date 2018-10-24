@@ -1,13 +1,13 @@
 import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainTemplate from 'components/common/MainTemplate'
-import RegAdded from 'components/register/RegAdded'
+import RegAddedContainer from 'containers/register/RegAddedContainer'
 
 const RegAddedPage = () => {
   return (
     <PageTemplate>
       <MainTemplate>
-        <RegAdded />
+        <RegAddedContainer />
       </MainTemplate>
     </PageTemplate>
   )
