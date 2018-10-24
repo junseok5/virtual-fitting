@@ -8,7 +8,7 @@ import { FaFacebook, FaGoogle } from 'react-icons/fa'
 const cx = classNames.bind(styles)
 
 
-const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType }) => {
+const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType, onLogin }) => {
   const {
     email,
     password
@@ -47,7 +47,7 @@ const UserForm = ({ loginType, forms, onChangeInput, onSelectLoginType }) => {
           />
         </div>
       </div>
-      <div className={cx('_button')}>로그인</div>
+      <div className={cx('_button')} onClick={onLogin}>로그인</div>
       <div className={cx('register-button')}>
         <Link to="/register">회원가입</Link>
       </div>

@@ -87,7 +87,6 @@ class RegSellerContainer extends Component {
       if (error) {
         BaseActions.setModalMessage(error)
         BaseActions.showModal('error')
-        return
       }
     }
   }

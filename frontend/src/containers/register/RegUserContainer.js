@@ -78,7 +78,6 @@ class RegUserContainer extends Component {
         // 에러 모달
         BaseActions.setModalMessage(error)
         BaseActions.showModal('error')
-        return
       }
     }
   }
@@ -89,7 +88,7 @@ class RegUserContainer extends Component {
       handleChangeInput,
       handleRegister
     } = this
-    
+
     return (
       <RegUser
         forms={form}

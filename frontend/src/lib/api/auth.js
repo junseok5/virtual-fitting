@@ -34,6 +34,10 @@ export const localLoginUser = ({ email, password }) => axios.post('/api/v1.0/aut
   email, password
 })
 
+export const localLoginSeller = ({ email, password }) => axios.post('/api/v1.0/auth/sellers/login/local', {
+  email, password
+})
+
 export const socialLogin = ({ provider, accessToken }) => axios.post('/api/v1.0/auth/users/login/' + provider, {
   accessToken
 })
