@@ -12,6 +12,8 @@ const LOCAL_LOGIN_USER = 'auth/LOCAL_LOGIN_USER'
 const LOCAL_LOGIN_SELLER = 'auth/LOCAL_LOGIN_SELLER'
 const PROVIDER_LOGIN = 'auth/PROVIDER_LOGIN'
 const SOCIAL_LOGIN = 'auth/SOCIAL_LOGIN'
+const LOGIN_CHECK_USER = 'auth/LOGIN_CHECK_USER'
+const LOGIN_CHECK_SELLER = 'auth/LOGIN_CHECK_SELLER'
 const INITIALIZE = 'auth/INITIALIZE'
 
 // action creators
@@ -21,6 +23,8 @@ export const localLoginUser = createAction(LOCAL_LOGIN_USER, AuthAPI.localLoginU
 export const localLoginSeller = createAction(LOCAL_LOGIN_SELLER, AuthAPI.localLoginSeller)
 export const providerLogin = createAction(PROVIDER_LOGIN, (provider) => social[provider](), provider => provider)
 export const socialLogin = createAction(SOCIAL_LOGIN, AuthAPI.socialLogin)
+export const loginCheckUser = createAction(LOGIN_CHECK_USER, AuthAPI.checkUserLoginStatus)
+export const loginCheckSeller = createAction(LOGIN_CHECK_SELLER, AuthAPI.checkSellerLoginStatus)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -98,6 +102,22 @@ export default handleActions({
         return state.set('redirectToRegister', true)
       }
       return state.set('loginResult', loginResult)
+    }
+  }),
+  ...pender({
+    type: LOGIN_CHECK_USER,
+    onSuccess: (state, action) => {
+      const { data } = action.payload
+      const { user } = data
+      return state.set('loginResult', user)
+    }
+  }),
+  ...pender({
+    type: LOGIN_CHECK_SELLER,
+    onSuccess: (state, action) => {
+      const { data } = action.payload
+      const { seller } = data
+      return state.set('loginResult', seller)
     }
   })
 }, initialState)

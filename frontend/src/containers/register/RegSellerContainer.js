@@ -91,6 +91,7 @@ class RegSellerContainer extends Component {
 
       const { result } = this.props
       SellerActions.setSeller(result)
+      localStorage.logged = 'seller'
 
       const { history } = this.props
       history.push('/')

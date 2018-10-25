@@ -66,6 +66,7 @@ class RegAddedContainer extends Component {
 
       const { result } = this.props
       UserActions.setUser(result)
+      localStorage.logged = 'user'
 
       const { history } = this.props
       history.push('/')

@@ -73,12 +73,14 @@ class LoginFormContainer extends Component {
 
         const { result } = this.props
         UserActions.setUser(result)
+        localStorage.logged = 'user'
       } else if (loginType === 'seller') {
         await AuthActions.localLoginSeller({
           email, password
         })
         const { result } = this.props
         SellerActions.setSeller(result)
+        localStorage.logged = 'seller'
       }
 
       const { history } = this.props
@@ -118,6 +120,8 @@ class LoginFormContainer extends Component {
 
       const { loginResult } = this.props
       UserActions.setUser(loginResult)
+      localStorage.logged = 'user'
+
       history.push('/')
     } catch (e) {
       return

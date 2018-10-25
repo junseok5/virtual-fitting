@@ -5,10 +5,12 @@ import CategoryContainer from 'containers/common/CategoryContainer'
 import ProductListWrapper from 'components/list/ProductListWrapper'
 import ProductList from 'components/list/ProductList'
 import Pagination from 'components/list/Pagination'
+import Base from 'containers/common/Base'
 
 const ProductListPage = () => {
   return (
     <PageTemplate>
+      <Base />
       <MainWrapper>
         <CategoryContainer />
         <ProductListWrapper>
