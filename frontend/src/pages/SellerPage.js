@@ -3,7 +3,7 @@ import PageTemplate from 'components/common/PageTemplate'
 import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
-import SellerInfo from 'components/seller/SellerInfo'
+import SellerInfoContainer from 'containers/seller/SellerInfoContainer'
 import Base from 'containers/common/Base'
 
 const SellerPage = () => {
@@ -13,7 +13,7 @@ const SellerPage = () => {
       <MainWrapper>
         <Category />
         <ContentWrapper>
-          <SellerInfo />
+          <SellerInfoContainer />
         </ContentWrapper>
       </MainWrapper>
     </PageTemplate>
