@@ -16,8 +16,19 @@ class Header extends Component {
   }
 
   render () {
-    const { onToggleSide, onToggleSearch, actionSearch, searchbox } = this.props
+    const {
+      onToggleSide,
+      onToggleSearch,
+      actionSearch,
+      searchbox,
+      user,
+      seller,
+      loginType
+    } = this.props
     const { handleChange } = this
+
+    const { displayName } = user ? user.toJS() : { displayName: null }
+    const { managerName } = seller ? seller.toJS() : { managerName: null }
 
     // 검색바 보이기 / 숨기기
     let searchbarStyle = null
@@ -55,7 +66,19 @@ class Header extends Component {
             <div className={cx('icons')} onClick={onToggleSearch}>
               <Icon><FaSearch /></Icon>
             </div>
-            <Button to="/login/user">로그인</Button>
+            {
+              loginType === 'user' && <div className={cx('login-info')}>
+              { displayName }<span>님</span>
+              </div>
+            }
+            {
+              loginType === 'seller' && <div className={cx('login-info')}>
+              { managerName }<span>님</span>
+              </div>
+            }
+            {
+              !loginType && <Button to="/login/user">로그인</Button>
+            }
           </div>
         </div>
         <div className={cx('header-mobile-search')}>

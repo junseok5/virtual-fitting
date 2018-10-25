@@ -48,6 +48,20 @@
     .right {
       margin-left: auto;
 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .login-info {
+        color: $oc-blue-6;
+        cursor: pointer;
+        
+        span {
+          color: black;
+          cursor: default;
+        }
+      }
+
       .icons {
         display: none;
       }

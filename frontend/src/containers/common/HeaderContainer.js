@@ -50,7 +50,16 @@ class HeaderContainer extends Component {
       handleToggleSearch,
       handleChangeSearchInput
     } = this
-    const { visibleSearchbar, searchbox } = this.props
+    const {
+      visibleSearchbar,
+      searchbox,
+      user,
+      seller
+    } = this.props
+
+    let loginType = null
+    if (user) loginType = 'user'
+    else if (seller) loginType = 'seller'
 
     return (
       <Header
@@ -59,6 +68,9 @@ class HeaderContainer extends Component {
         onChangeSearchInput={handleChangeSearchInput}
         actionSearch={visibleSearchbar}
         searchbox={searchbox}
+        loginType={loginType}
+        user={user}
+        seller={seller}
       />
     )
   }
@@ -68,7 +80,9 @@ export default connect(
   (state) => ({
     visibleSidebar: state.base.getIn(['sidebar', 'visible']),
     visibleSearchbar: state.base.getIn(['searchbar', 'visible']),
-    searchbox: state.base.get('searchbox')
+    searchbox: state.base.get('searchbox'),
+    user: state.user.get('user'),
+    seller: state.seller.get('seller')
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
