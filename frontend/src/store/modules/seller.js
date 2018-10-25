@@ -7,10 +7,12 @@ import * as SellerAPI from 'lib/api/seller'
 // action types
 const SET_SELLER = 'seller/SET_SELLER'
 const GET_SELLER_INFO = 'seller/GET_SELLER_INFO'
+const INITIALIZE = 'seller/INITIALIZE'
 
 // action creators
 export const setSeller = createAction(SET_SELLER)
 export const getSellerInfo = createAction(GET_SELLER_INFO, SellerAPI.getSellerInfo)
+export const initialize = createAction(INITIALIZE)
 
 // initial state
 const initialState = Map({
@@ -21,6 +23,7 @@ const initialState = Map({
 
 // reducer
 export default handleActions({
+  [INITIALIZE]: (state, action) => initialState,
   [SET_SELLER]: (state, action) => {
     const { payload: seller } = action
     return state.set('seller', Map(seller))

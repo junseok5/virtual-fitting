@@ -53,6 +53,8 @@
       align-items: center;
 
       .login-info {
+        margin: 0.5rem;
+
         color: $oc-blue-6;
         cursor: pointer;
         
@@ -80,6 +82,10 @@
 
       .search {
         display: none;
+      }
+
+      .brand {
+        font-size: 1.4rem;
       }
 
       .right {

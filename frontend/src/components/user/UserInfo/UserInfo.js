@@ -6,7 +6,7 @@ import Button from 'components/common/Button'
 const cx = classNames.bind(styles)
 
 
-const UserInfo = ({ meta }) => {
+const UserInfo = ({ meta, onLogout }) => {
   if (!meta) return (<></>)
   const {
     displayName,
@@ -35,6 +35,7 @@ const UserInfo = ({ meta }) => {
           <div className={cx('phoneNum', '_text-padding')}>{ phoneNum }</div>
           <div className={cx('_text-padding')}>
             {/* 비밀번호 변경 버튼은 소셜 로그인인 경우 나오지 않게 한다. */}
+            <Button onClick={onLogout}>로그아웃</Button>
             <Button>비밀번호 변경</Button>
             <Button>수정</Button>
           </div>

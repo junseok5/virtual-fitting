@@ -6,7 +6,7 @@ import Button from 'components/common/Button'
 const cx = classNames.bind(styles)
 
 
-const SellerInfo = ({ meta }) => {
+const SellerInfo = ({ meta, onLogout }) => {
   if (!meta) return (<></>)
   const {
     crn,
@@ -41,6 +41,7 @@ const SellerInfo = ({ meta }) => {
           <div className={cx('_subtitle')}>연락처</div>
           <div className={cx('info-text', '_text-padding')}>{ contact }</div>
         </div>
+        <Button onClick={onLogout}>로그아웃</Button>
         <Button>비밀번호 변경</Button>
         <Button>수정</Button>
       </div>

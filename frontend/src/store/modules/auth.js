@@ -14,6 +14,7 @@ const PROVIDER_LOGIN = 'auth/PROVIDER_LOGIN'
 const SOCIAL_LOGIN = 'auth/SOCIAL_LOGIN'
 const LOGIN_CHECK_USER = 'auth/LOGIN_CHECK_USER'
 const LOGIN_CHECK_SELLER = 'auth/LOGIN_CHECK_SELLER'
+const LOGOUT = 'auth/LOGOUT'
 const INITIALIZE = 'auth/INITIALIZE'
 
 // action creators
@@ -25,6 +26,7 @@ export const providerLogin = createAction(PROVIDER_LOGIN, (provider) => social[p
 export const socialLogin = createAction(SOCIAL_LOGIN, AuthAPI.socialLogin)
 export const loginCheckUser = createAction(LOGIN_CHECK_USER, AuthAPI.checkUserLoginStatus)
 export const loginCheckSeller = createAction(LOGIN_CHECK_SELLER, AuthAPI.checkSellerLoginStatus)
+export const logout = createAction(LOGOUT, AuthAPI.logout)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -33,11 +35,11 @@ const initialState = Map({
     email: '',
     password: ''
   }),
-  loginType: 'user',
-  socialInfo: null,
+  loginType: 'user',  // 로그인창에서의 로그인 타입
+  socialInfo: null, // 소셜 로그인 시 정보가 임시 저장되는 곳
   result: null,
   error: null,
-  loginResult: null,
+  loginResult: null,  // 로그인데이터가 임시로 담김
   redirectToRegister: false
 })
 

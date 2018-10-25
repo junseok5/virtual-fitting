@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SellerInfo from 'components/seller/SellerInfo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as authActions from 'store/modules/auth'
 import * as sellerActions from 'store/modules/seller'
 
 import { withRouter } from 'react-router'
@@ -20,12 +21,23 @@ class SellerInfoContainer extends Component {
     this.handleSellerInfo()
   }
 
+  handleLogout = async () => {
+    const { AuthActions, SellerActions, history } = this.props
+    await AuthActions.logout()
+
+    localStorage.logged = null
+    SellerActions.initialize()
+    history.push('/')
+  }
+
   render () {
     const { meta } = this.props
-    
+    const { handleLogout } = this
+
     return (
       <SellerInfo
         meta={meta}
+        onLogout={handleLogout}
       />
     )
   }
@@ -36,6 +48,7 @@ export default connect(
     meta: state.seller.get('meta')
   }),
   (dispatch) => ({
-    SellerActions: bindActionCreators(sellerActions, dispatch)
+    SellerActions: bindActionCreators(sellerActions, dispatch),
+    AuthActions: bindActionCreators(authActions, dispatch)
   })
 )(withRouter(SellerInfoContainer))
