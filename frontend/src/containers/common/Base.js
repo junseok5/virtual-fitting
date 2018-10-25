@@ -18,11 +18,9 @@ class Base extends Component {
    AuthActions.initialize()
 
     if (localStorage.logged === 'user') {
-      console.log('hi')
       await AuthActions.loginCheckUser()
 
       const { loginResult, UserActions } = this.props
-      console.log(loginResult)
       loginResult && UserActions.setUser(loginResult)
     } else if (localStorage.logged === 'seller') {
       await AuthActions.loginCheckSeller()

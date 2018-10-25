@@ -15,8 +15,8 @@ const App = () => {
         <Route path="/register/added" component={RegAddedPage} />
         <Route path="/register" component={RegPage} />
         <Route path="/product/:id" component={ProductPage} />
-        <Route path="/user/:id" component={UserPage} />
-        <Route path="/seller/:id" component={SellerPage} />
+        <Route path="/user" component={UserPage} />
+        <Route path="/seller" component={SellerPage} />
         <Route path="/edit/product/:id" component={ProductEditPage} />
         <Route path="/manage/seller/:id" component={ManagePage} />
         <Route path="/admin" component={AdminPage} />

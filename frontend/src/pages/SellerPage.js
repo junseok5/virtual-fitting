@@ -4,10 +4,12 @@ import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
 import SellerInfo from 'components/seller/SellerInfo'
+import Base from 'containers/common/Base'
 
 const SellerPage = () => {
   return (
     <PageTemplate>
+      <Base />
       <MainWrapper>
         <Category />
         <ContentWrapper>

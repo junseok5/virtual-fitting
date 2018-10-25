@@ -68,12 +68,14 @@ class Header extends Component {
             </div>
             {
               loginType === 'user' && <div className={cx('login-info')}>
-              { displayName }<span>님</span>
+                <Link to='/user'>{ displayName }</Link>
+                <span>님</span>
               </div>
             }
             {
               loginType === 'seller' && <div className={cx('login-info')}>
-              { managerName }<span>님</span>
+                <Link to='seller'>{ managerName }</Link>
+                <span>님</span>
               </div>
             }
             {
