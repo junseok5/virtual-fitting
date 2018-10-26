@@ -1,5 +1,7 @@
 const Joi = require('joi')
 const User = require('database/models/user')
+const fs = require('fs')
+const uploadFile = require('lib/uploadFile')
 
 // Regex definition
 const displayNameRegx = /^[a-zA-Z0-9ㄱ-힣]{3,12}$/
@@ -21,8 +23,24 @@ exports.getUserInfo = async (ctx) => {
 }
 
 exports.uploadPhoto = async (ctx) => {
-  const { photo, file } = ctx.request
-  console.log(photo, file, ctx.req.photo, ctx.req.file, ctx.req)
+  const { photo } = ctx.request.files
+  console.log(ctx.request.files)
+  if (!photo) {
+    ctx.status = 412 // 사전조건 실패
+    return
+  }
+
+  try {
+    const result = await uploadFile(photo, 'user')
+    if (!result) {
+      ctx.status = 500
+      return
+    }
+    ctx.status = 204
+    return
+  } catch (e) {
+    ctx.throw(500, e)
+  }
 }
 
 exports.patchUserInfo = async (ctx) => {

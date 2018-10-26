@@ -3,6 +3,8 @@ require('dotenv').config()
 const Koa = require('koa')
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
+const koaBody = require('koa-body')
+// const multer = require('koa-multer')
 // const serve = require('koa-static')
 
 const db = require('./database')
@@ -18,6 +20,7 @@ const app = new Koa()
 
 app.use(jwtMiddleware)
 app.use(bodyParser())
+app.use(koaBody({ multipart: true }))
 
 const router = new Router()
 
