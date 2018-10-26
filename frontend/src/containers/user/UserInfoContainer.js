@@ -42,17 +42,17 @@ class UserInfoContainer extends Component {
       console.log(file)
       await UserActions.uploadPhoto({ file })
 
-      // const { result, BaseActions } = this.props
-      // BaseActions.setModalMessage({
-      //   modalName: 'error',
-      //   modalMessage: result
-      // })
+      const { result, BaseActions } = this.props
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: result
+      })
     } catch (e) {
-      // const { result, BaseActions } = this.props
-      // BaseActions.setModalMessage({
-      //   modalName: 'error',
-      //   modalMessage: result
-      // })
+      const { result, BaseActions } = this.props
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: result
+      })
     }
   }
 

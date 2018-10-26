@@ -53,5 +53,18 @@ export default handleActions({
       else if (status === 403) state.set('result', '업로드에 실패하였습니다.')
       else if (status === 500) state.set('result', '서버 오류!')
     }
+  }),
+  ...pender({
+    type: UPLOAD_PHOTO,
+    onSuccess: (state, action) => {
+      return state.set('result', '업로드에 성공하였습니다.')
+    },
+    onFailure: (state, action) => {
+      const { status } = action.payload
+
+      if (status === 403) state.set('result', '잘못된 계정 정보입니다.')
+      else if (status === 412) state.set('result', '업로드 할 사진이 존재하지 않습니다.')
+      else if (status === 500) state.set('result', '서버 오류!')
+    }
   })
 }, initialState)
