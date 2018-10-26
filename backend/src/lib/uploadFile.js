@@ -20,5 +20,7 @@ module.exports = (file, type) => {
 
   const stream = fs.createWriteStream(filePath)
   reader.pipe(stream)
-  return true
+  return {
+    filePath
+  }
 }
