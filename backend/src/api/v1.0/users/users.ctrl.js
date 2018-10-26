@@ -20,6 +20,11 @@ exports.getUserInfo = async (ctx) => {
   }
 }
 
+exports.uploadPhoto = async (ctx) => {
+  const { photo, file } = ctx.request
+  console.log(photo, file, ctx.req.photo, ctx.req.file, ctx.req)
+}
+
 exports.patchUserInfo = async (ctx) => {
   const { user } = ctx.request
   const { _id } = user

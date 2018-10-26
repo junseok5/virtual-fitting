@@ -20,7 +20,6 @@ const User = new Schema({
   phoneNum: String,
   gender: String,
   photoUri: String,
-  fittingPhotoUri: String,
   joinedDate: {
     type: Date,
     default: Date.now()

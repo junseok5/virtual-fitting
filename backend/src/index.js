@@ -18,6 +18,7 @@ const app = new Koa()
 
 app.use(jwtMiddleware)
 app.use(bodyParser())
+
 const router = new Router()
 
 // 라우터 설정
