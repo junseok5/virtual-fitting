@@ -6,7 +6,7 @@ import Button from 'components/common/Button'
 const cx = classNames.bind(styles)
 
 
-const UserInfo = ({ meta, onLogout }) => {
+const UserInfo = ({ meta, onLogout, onUploadPhoto }) => {
   if (!meta) return (<></>)
   const {
     displayName,
@@ -25,7 +25,12 @@ const UserInfo = ({ meta, onLogout }) => {
           </div>
           <div className={cx('user-photo-upload', '_input-file')}>
             <label htmlFor="_file">얼굴 사진 바꾸기</label>
-            <input type="file" id="_file" />
+            <input
+              type="file"
+              id="_file"
+              accept="image/*"
+              onChange={onUploadPhoto}
+            />
           </div>
         </div>
         {/* 유저 기본 정보 */}

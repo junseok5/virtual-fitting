@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import UserInfo from 'components/user/UserInfo'
 import * as authActions from 'store/modules/auth'
 import * as userActions from 'store/modules/user'
+import * as baseActions from 'store/modules/base'
 
 import { withRouter } from 'react-router'
 
@@ -31,14 +32,42 @@ class UserInfoContainer extends Component {
     history.push('/')
   }
 
+  handleUploadPhoto = async (e) => {
+    e.preventDefault()
+    const file = e.target.files[0]
+    if (!file) return
+
+    const { UserActions } = this.props
+    try {
+      console.log(file)
+      await UserActions.uploadPhoto({ file })
+
+      // const { result, BaseActions } = this.props
+      // BaseActions.setModalMessage({
+      //   modalName: 'error',
+      //   modalMessage: result
+      // })
+    } catch (e) {
+      // const { result, BaseActions } = this.props
+      // BaseActions.setModalMessage({
+      //   modalName: 'error',
+      //   modalMessage: result
+      // })
+    }
+  }
+
   render () {
     const { meta } = this.props
-    const { handleLogout } = this
+    const {
+      handleLogout,
+      handleUploadPhoto
+    } = this
 
     return (
       <UserInfo
         meta={meta}
         onLogout={handleLogout}
+        onUploadPhoto={handleUploadPhoto}
       />
     )
   }
@@ -46,10 +75,12 @@ class UserInfoContainer extends Component {
 
 export default connect(
   (state) => ({
-    meta: state.user.get('meta')
+    meta: state.user.get('meta'),
+    result: state.user.get('result')
   }),
   (dispatch) => ({
     UserActions: bindActionCreators(userActions, dispatch),
-    AuthActions: bindActionCreators(authActions, dispatch)
+    AuthActions: bindActionCreators(authActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch)
   })
 )(withRouter(UserInfoContainer))
