@@ -12,7 +12,8 @@ const UserInfo = ({ meta, onLogout, onUploadPhoto, onShowModal }) => {
     displayName,
     email,
     phoneNum,
-    photoUri
+    photoUri,
+    social
   } = meta.toJS()
 
   return (
@@ -22,10 +23,15 @@ const UserInfo = ({ meta, onLogout, onUploadPhoto, onShowModal }) => {
         {/* 유저 얼굴 사진 */}
         <div className={cx('user-photo')}>
           <div className={cx('user-photo-view')}>
-            <img src={photoUri} draggable="false" />
+            {
+              !photoUri && <img src="/images/users/default.jpg" draggable="false" />
+            }
+            {
+              photoUri && <img src={photoUri} draggable="false" />
+            }
           </div>
           <div className={cx('user-photo-upload', '_input-file')}>
-            <label htmlFor="_file">얼굴 사진 바꾸기</label>
+            <label htmlFor="_file">얼굴 사진 업로드</label>
             <input
               type="file"
               id="_file"
@@ -42,7 +48,9 @@ const UserInfo = ({ meta, onLogout, onUploadPhoto, onShowModal }) => {
           <div className={cx('_text-padding')}>
             {/* 비밀번호 변경 버튼은 소셜 로그인인 경우 나오지 않게 한다. */}
             <Button onClick={onLogout}>로그아웃</Button>
-            <Button onClick={() => onShowModal('password')}>비밀번호 변경</Button>
+            {
+              !social && <Button onClick={() => onShowModal('password')}>비밀번호 변경</Button>
+            }
             <Button>수정</Button>
           </div>
         </div>
