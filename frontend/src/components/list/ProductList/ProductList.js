@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 
 const ProductItem = () => {
   return (
-    <div className={cx('product-item')}>
+    <div className={cx('product-item', 'animated', 'fadeIn')}>
       <div className={cx('product-photo')}>
         <img src="https://simage-kr.gu-global.com//goods/31/11/66/40/311447_COL_GCL05_300.jpg" draggable="false" />
       </div>
