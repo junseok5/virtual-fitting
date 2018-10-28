@@ -39,7 +39,7 @@ $ yarn
 </pre>
 
 ### Rename .env.bak file
-You have to rename **.env.bak** file to **.env** in backend and frontend directory. This file contains environment variable for the server.
+You have to rename **.env.bak** file to **.env** in backend directory. This file contains environment variable for the server.
 
 ### Running Backend Development Server
 To run the development server, execute following command inside backend directory:
