@@ -47,6 +47,7 @@ class UserInfoContainer extends Component {
         modalName: 'error',
         modalMessage: result
       })
+      await UserActions.getUserInfo()
     } catch (e) {
       const { result, BaseActions } = this.props
       BaseActions.setModalMessage({

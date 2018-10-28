@@ -2,9 +2,10 @@ require('dotenv').config()
 
 const Koa = require('koa')
 const Router = require('koa-router')
-const bodyParser = require('koa-bodyparser')
+// const bodyParser = require('koa-bodyparser')
 const koaBody = require('koa-body')
-// const serve = require('koa-static')
+const serve = require('koa-static')
+const path = require('path')
 
 const db = require('./database')
 
@@ -17,8 +18,9 @@ const { Port: port } = process.env
 
 const app = new Koa()
 
+app.use(serve('public'))
 app.use(jwtMiddleware)
-app.use(bodyParser())
+// app.use(bodyParser())
 app.use(koaBody({ multipart: true }))
 
 const router = new Router()

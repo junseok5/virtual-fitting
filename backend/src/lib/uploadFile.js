@@ -9,17 +9,18 @@ module.exports = (file, type) => {
   const reader = fs.createReadStream(file.path)
   let filePath = null
   if (type === 'products-main') {
-    filePath = `images/products-main/${randomizeFileName()}.jpg`
+    filePath = `public/images/products-main/${randomizeFileName()}.jpg`
   } else if (type === 'products-model') {
-    filePath = `images/products-model/${randomizeFileName()}.jpg`
+    filePath = `public/images/products-model/${randomizeFileName()}.jpg`
   } else if (type === 'user') {
-    filePath = `images/users/${randomizeFileName()}.jpg`
+    filePath = `public/images/users/${randomizeFileName()}.jpg`
   } else {
     return false
   }
 
   const stream = fs.createWriteStream(filePath)
   reader.pipe(stream)
+  filePath = filePath.split('public').pop()
   return {
     filePath
   }

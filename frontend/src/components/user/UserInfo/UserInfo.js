@@ -11,7 +11,8 @@ const UserInfo = ({ meta, onLogout, onUploadPhoto }) => {
   const {
     displayName,
     email,
-    phoneNum
+    phoneNum,
+    photoUri
   } = meta.toJS()
 
   return (
@@ -21,7 +22,7 @@ const UserInfo = ({ meta, onLogout, onUploadPhoto }) => {
         {/* 유저 얼굴 사진 */}
         <div className={cx('user-photo')}>
           <div className={cx('user-photo-view')}>
-            <img src="https://pds.joins.com/news/component/htmlphoto_mmdata/201705/23/ec7a8507-b3f8-404d-a2b9-a2ecababd400.jpg" draggable="false" />
+            <img src={photoUri} draggable="false" />
           </div>
           <div className={cx('user-photo-upload', '_input-file')}>
             <label htmlFor="_file">얼굴 사진 바꾸기</label>
