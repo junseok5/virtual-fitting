@@ -1,7 +1,6 @@
 const Joi = require('joi')
 const User = require('database/models/user')
-const fs = require('fs')
-const uploadFile = require('lib/uploadFile')
+const hash = require('lib/common/hash')
 
 // Regex definition
 const displayNameRegx = /^[a-zA-Z0-9ㄱ-힣]{3,12}$/
@@ -27,13 +26,11 @@ exports.patchUserInfo = async (ctx) => {
   const { _id } = user
 
   const availableFields = {
-    password: true,
     displayName: true,
     phoneNum: true
   }
 
   const schema = Joi.object({
-    password: Joi.string(),
     displayName: Joi.string().regex(displayNameRegx),
     phoneNum: Joi.string()
   })
@@ -42,9 +39,6 @@ exports.patchUserInfo = async (ctx) => {
 
   const result = Joi.validate(patchData, schema)
   if (result.error) {
-    ctx.body = {
-      msg: 'Failed to vaildate patch data'
-    }
     ctx.status = 400
     return
   }
@@ -52,9 +46,6 @@ exports.patchUserInfo = async (ctx) => {
   for (let field in patchData) {
     if (!availableFields[field]) {
       ctx.status = 403
-      ctx.body = {
-        msg: 'unsupported field'
-      }
       return
     }
   }
@@ -74,6 +65,62 @@ exports.patchUserInfo = async (ctx) => {
 
     await userData.updateOne({ ...patchedData }).exec()
     ctx.body = userData
+  } catch (e) {
+    ctx.throw(500, e)
+  }
+}
+
+exports.patchUserPassword = async (ctx) => {
+  const { user } = ctx.request
+  const { _id } = user
+
+  const schema = Joi.object({
+    passwordBefore: Joi.string().min(6).max(30),
+    passwordNew1: Joi.string().min(6).max(30),
+    passwordNew2: Joi.string().min(6).max(30)
+  })
+
+  const { body: patchData } = ctx.request
+
+  const result = Joi.validate(patchData, schema)
+  if (result.error) {
+    ctx.status = 400
+    return
+  }
+
+  const {
+    passwordBefore,
+    passwordNew1,
+    passwordNew2
+  } = patchData
+
+  if (passwordNew1 !== passwordNew2) {
+    ctx.status = 412
+    return
+  }
+
+  try {
+    let userData = await User.findById(_id).exec()
+
+    if (!userData) {
+      ctx.status = 403
+      return
+    }
+
+    const validated = userData.validatePassword(passwordBefore)
+    if (!validated) {
+      // wrong password
+      ctx.status = 403
+      return
+    }
+
+    const patchedData = {
+      ...userData.toObject(),
+      password: hash(passwordNew1)
+    }
+
+    await userData.updateOne({ ...patchedData }).exec()
+    ctx.status = 204
   } catch (e) {
     ctx.throw(500, e)
   }

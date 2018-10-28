@@ -5,6 +5,7 @@ const usersCtrl = require('./users.ctrl')
 const checkUserAuth = require('lib/middlewares/checkUserAuth')
 
 users.get('/', checkUserAuth, usersCtrl.getUserInfo)
+users.patch('/password', checkUserAuth, usersCtrl.patchUserPassword)
 users.patch('/', checkUserAuth, usersCtrl.patchUserInfo)
 users.delete('/', checkUserAuth, usersCtrl.deleteUserInfo)
 

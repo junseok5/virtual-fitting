@@ -47,21 +47,28 @@ class UserInfoContainer extends Component {
         modalName: 'error',
         modalMessage: result
       })
+      // 클라이언트 수정된 유저 정보 업데이트
       await UserActions.getUserInfo()
     } catch (e) {
-      const { result, BaseActions } = this.props
+      const { error, BaseActions } = this.props
       BaseActions.setModalMessage({
         modalName: 'error',
-        modalMessage: result
+        modalMessage: error
       })
     }
+  }
+
+  handleShowModal = (modalName) => {
+    const { BaseActions } = this.props
+    BaseActions.showModal(modalName)
   }
 
   render () {
     const { meta } = this.props
     const {
       handleLogout,
-      handleUploadPhoto
+      handleUploadPhoto,
+      handleShowModal
     } = this
 
     return (
@@ -69,6 +76,7 @@ class UserInfoContainer extends Component {
         meta={meta}
         onLogout={handleLogout}
         onUploadPhoto={handleUploadPhoto}
+        onShowModal={handleShowModal}
       />
     )
   }
@@ -77,7 +85,8 @@ class UserInfoContainer extends Component {
 export default connect(
   (state) => ({
     meta: state.user.get('meta'),
-    result: state.user.get('result')
+    result: state.user.get('result'),
+    error: state.user.get('error')
   }),
   (dispatch) => ({
     UserActions: bindActionCreators(userActions, dispatch),

@@ -8,6 +8,7 @@ import * as UserAPI from 'lib/api/user'
 const SET_USER = 'user/SER_USER'
 const GET_USER_INFO = 'user/GET_USER_INFO'
 const PATCH_USER_INFO = 'user/PATCH_USER_INFO'
+const PATCH_USER_PASSWORD = 'user/PATCH_USER_PASSWORD'
 const UPLOAD_PHOTO = 'user/UPLOAD_PHOTO'
 const INITIALIZE = 'user/INITIALIZE'
 
@@ -15,6 +16,7 @@ const INITIALIZE = 'user/INITIALIZE'
 export const setUser = createAction(SET_USER)
 export const getUserInfo = createAction(GET_USER_INFO, UserAPI.getUserInfo)
 export const patchUserInfo = createAction(PATCH_USER_INFO, UserAPI.patchUserInfo)
+export const patchUserPassword = createAction(PATCH_USER_PASSWORD, UserAPI.patchUserPassword)
 export const uploadPhoto = createAction(UPLOAD_PHOTO, UserAPI.uploadPhoto)
 export const initialize = createAction(INITIALIZE)
 
@@ -23,7 +25,8 @@ const initialState = Map({
   user: null,  // Map({ _id, displayName })
   logged: false,
   meta: null,
-  result: null
+  result: null,
+  error: null
 })
 
 // reducer
@@ -49,9 +52,18 @@ export default handleActions({
     onFailure: (state, action) => {
       const { status } = action.payload
 
-      if (status === 400) state.set('result', '유효하지 않은 수정 값입니다.')
-      else if (status === 403) state.set('result', '업로드에 실패하였습니다.')
-      else if (status === 500) state.set('result', '서버 오류!')
+      if (status === 400) state.set('error', '유효하지 않은 수정 값입니다.')
+      else if (status === 403) state.set('error', '업로드에 실패하였습니다.')
+      else if (status === 500) state.set('error', '서버 오류!')
+    }
+  }),
+  ...pender({
+    type: PATCH_USER_PASSWORD,
+    onSuccess: (state, action) => {
+      return state.set('result', '비밀번호 수정에 성공하였습니다.')
+    },
+    onFailure: (state, action) => {
+      return state.set('error', '비밀번호 수정에 실패하였습니다.')
     }
   }),
   ...pender({
