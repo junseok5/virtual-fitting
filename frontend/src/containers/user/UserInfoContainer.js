@@ -99,6 +99,7 @@ class UserInfoContainer extends Component {
       })
 
       const { result } = this.props
+
       BaseActions.setModalMessage({
         modalName: 'error',
         modalMessage: result
@@ -108,16 +109,12 @@ class UserInfoContainer extends Component {
       this.handleShowEdit()
     } catch (e) {
       const { error } = this.props
+      
       BaseActions.setModalMessage({
         modalName: 'error',
         modalMessage: error
       })
     }
-  }
-
-  handleClickLeave = () => {
-    const { BaseActions } = this.props
-    BaseActions.showModal('leave')
   }
 
   render () {
@@ -130,7 +127,6 @@ class UserInfoContainer extends Component {
       handleShowEdit,
       handleChangeInput,
       handlePatchUserInfo,
-      handleClickLeave
     } = this
 
     return (
@@ -144,7 +140,6 @@ class UserInfoContainer extends Component {
         onShowEdit={handleShowEdit}
         onChangeInput={handleChangeInput}
         onPatchUserInfo={handlePatchUserInfo}
-        onClickLeave={handleClickLeave}
       />
     )
   }

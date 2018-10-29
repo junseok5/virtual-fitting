@@ -23,7 +23,7 @@ const PasswordEditModal = ({visible, forms, onConfirm, onCancel, onChangeInput})
             <div className={cx('_subtitle')}>현재 비밀번호</div>
             <div className={cx('_input-space')}>
               <input
-                className={cx('_input-form')}
+                className={cx('_input-form-small')}
                 type="password"
                 name="passwordBefore"
                 value={passwordBefore}
@@ -34,7 +34,7 @@ const PasswordEditModal = ({visible, forms, onConfirm, onCancel, onChangeInput})
             <div className={cx('_subtitle')}>변경할 비밀번호</div>
             <div className={cx('_input-space')}>
               <input
-                className={cx('_input-form')}
+                className={cx('_input-form-small')}
                 type="password"
                 name="passwordNew1"
                 value={passwordNew1}
@@ -44,7 +44,7 @@ const PasswordEditModal = ({visible, forms, onConfirm, onCancel, onChangeInput})
             </div>
             <div className={cx('_input-space')}>
               <input
-                className={cx('_input-form')}
+                className={cx('_input-form-small')}
                 type="password"
                 name="passwordNew2"
                 value={passwordNew2}

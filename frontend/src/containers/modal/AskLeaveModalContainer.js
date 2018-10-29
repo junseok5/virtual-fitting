@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from 'store/modules/base'
 import * as userActions from 'store/modules/user'
+import * as authActions from 'store/modules/auth'
 import AskLeaveModal from 'components/modal/AskLeaveModal'
 
 import { withRouter } from 'react-router'
@@ -14,7 +15,49 @@ class AskLeaveModalContainer extends Component {
   }
 
   handleConfirm = async () => {
-    // 회원 탈퇴
+    const logged = localStorage.logged
+    const { BaseActions } = this.props
+
+    if (!logged) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '오류 발생!'
+      })
+
+      const { AuthActions, UserActions, history } = this.props
+      await AuthActions.logout()
+  
+      localStorage.logged = null
+      UserActions.initialize()
+      history.push('/')
+      return
+    }
+
+    if (logged === 'user') {
+      this.leaveUser()
+      return
+    } else if (logged === 'seller') {
+      this.leaveSeller()
+      return
+    } else {
+      // localStorage 값이 임의로 조작되었을 시
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '오류 발생!'
+      })
+
+      const { AuthActions, UserActions, history } = this.props
+      await AuthActions.logout()
+  
+      localStorage.logged = null
+      UserActions.initialize()
+      history.push('/')
+      return
+    }
+  }
+
+  leaveUser = async () => {
+    // 사용자 탈퇴
     const { BaseActions, UserActions } = this.props
 
     try {
@@ -28,7 +71,7 @@ class AskLeaveModalContainer extends Component {
       await UserActions.initialize()
 
       history.push('/')
-      
+
       BaseActions.setModalMessage({
         modalName: 'error',
         modalMessage: result
@@ -42,6 +85,10 @@ class AskLeaveModalContainer extends Component {
         modalMessage: error
       })
     }
+  }
+
+  leaveSeller = async () => {
+
   }
 
   render () {
@@ -65,6 +112,7 @@ export default connect(
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),
-    UserActions: bindActionCreators(userActions, dispatch)
+    UserActions: bindActionCreators(userActions, dispatch),
+    AuthActions: bindActionCreators(authActions, dispatch)
   })
 )(withRouter(AskLeaveModalContainer))

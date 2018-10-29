@@ -5,6 +5,7 @@ const sellersCtrl = require('./sellers.ctrl')
 const checkSellerAuth = require('lib/middlewares/checkSellerAuth')
 
 sellers.get('/', checkSellerAuth, sellersCtrl.getSellerInfo)
+sellers.patch('/password', checkSellerAuth, sellersCtrl.patchSellerPassword)
 sellers.patch('/', checkSellerAuth, sellersCtrl.patchSellerInfo)
 sellers.delete('/', checkSellerAuth, sellersCtrl.deleteSellerInfo)
 

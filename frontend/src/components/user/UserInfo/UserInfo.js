@@ -15,8 +15,7 @@ const UserInfo = ({
   onShowModal,
   onShowEdit,
   onChangeInput,
-  onPatchUserInfo,
-  onClickLeave
+  onPatchUserInfo
 }) => {
   if (!meta) return (<></>)
   const {
@@ -32,13 +31,8 @@ const UserInfo = ({
     phoneNum: editedPhoneNum
   } = editForm.toJS()
 
-  // 수정 input 초기 값 설정
-  if (!editedDisplayName) {
-    editedDisplayName = displayName
-  }
-  if (!editedPhoneNum) {
-    editedPhoneNum = phoneNum
-  }
+  // Edit input 초기 값 설정
+  
 
   let phoneNumView = null
   if (showEdit && !social) {
@@ -122,7 +116,7 @@ const UserInfo = ({
       <div className={cx('_title')}>기타</div>
       <div className={cx('other-info')}>
         <div className={cx('_text-padding')}>
-          <Button onClick={onClickLeave}>회원 탈퇴</Button>
+          <Button onClick={() => onShowModal('leave')}>회원 탈퇴</Button>
         </div>
       </div>
     </div>
