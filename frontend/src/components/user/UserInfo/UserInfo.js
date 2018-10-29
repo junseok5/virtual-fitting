@@ -14,7 +14,8 @@ const UserInfo = ({
   onUploadPhoto,
   onShowModal,
   onShowEdit,
-  onChangeInput
+  onChangeInput,
+  onPatchUserInfo
 }) => {
   if (!meta) return (<></>)
   const {
@@ -30,6 +31,7 @@ const UserInfo = ({
     phoneNum: editedPhoneNum
   } = editForm.toJS()
 
+  // 수정 input 초기 값 설정
   if (!editedDisplayName) {
     editedDisplayName = displayName
   }
@@ -101,7 +103,12 @@ const UserInfo = ({
             {
               !social && <Button onClick={() => onShowModal('password')}>비밀번호 변경</Button>
             }
-            <Button onClick={onShowEdit}>수정</Button>
+            {
+              !showEdit && <Button onClick={onShowEdit}>수정</Button>
+            }
+            {
+              showEdit && <Button onClick={onPatchUserInfo}>완료</Button>
+            }
             {
               showEdit && <Button onClick={onShowEdit}>취소</Button>
             }

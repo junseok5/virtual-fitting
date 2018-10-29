@@ -79,6 +79,42 @@ class UserInfoContainer extends Component {
     UserActions.changeInputEdit({ name, value })
   }
 
+  handlePatchUserInfo = async () => {
+    const { UserActions, BaseActions, editForm } = this.props
+
+    const {
+      displayName,
+      phoneNum
+    } = editForm.toJS()
+
+    const patchData = phoneNum ? {
+      displayName, phoneNum
+    } : {
+      displayName
+    }
+
+    try {
+      await UserActions.patchUserInfo({
+        ...patchData
+      })
+
+      const { result } = this.props
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: result
+      })
+
+      await UserActions.getUserInfo()
+      this.handleShowEdit()
+    } catch (e) {
+      const { error } = this.props
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: error
+      })
+    }
+  }
+
   render () {
     const { meta, editForm } = this.props
     const { showEdit } = this.state
@@ -87,7 +123,8 @@ class UserInfoContainer extends Component {
       handleUploadPhoto,
       handleShowModal,
       handleShowEdit,
-      handleChangeInput
+      handleChangeInput,
+      handlePatchUserInfo
     } = this
 
     return (
@@ -100,6 +137,7 @@ class UserInfoContainer extends Component {
         onShowModal={handleShowModal}
         onShowEdit={handleShowEdit}
         onChangeInput={handleChangeInput}
+        onPatchUserInfo={handlePatchUserInfo}
       />
     )
   }

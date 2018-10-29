@@ -56,11 +56,7 @@ export default handleActions({
       return state.set('result', '업로드에 성공하였습니다.')
     },
     onFailure: (state, action) => {
-      const { status } = action.payload
-
-      if (status === 400) state.set('error', '유효하지 않은 수정 값입니다.')
-      else if (status === 403) state.set('error', '업로드에 실패하였습니다.')
-      else if (status === 500) state.set('error', '서버 오류!')
+      return state.set('error', '업로드에 실패하였습니다.')
     }
   }),
   ...pender({
