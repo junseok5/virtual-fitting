@@ -3,7 +3,7 @@ const Seller = require('database/models/seller')
 const hash = require('lib/common/hash')
 
 // Regex definition
-const displayNameRegex = /^[a-zA-Z0-9ㄱ-힣]{3,12}$/
+const displayNameRegex = /^[a-zA-Z0-9ㄱ-힣]{2,12}$/
 
 exports.getSellerInfo = async (ctx) => {
   const { seller } = ctx.request

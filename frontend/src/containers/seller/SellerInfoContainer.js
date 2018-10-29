@@ -10,7 +10,8 @@ import { withRouter } from 'react-router'
 
 class SellerInfoContainer extends Component {
   state = {
-    showEdit: false
+    showEdit: false,
+    initEdit: true
   }
 
   handleSellerInfo = async () => {
@@ -52,9 +53,14 @@ class SellerInfoContainer extends Component {
     SellerActions.changeInputEdit({ name, value })
   }
 
-  handleInitialInput = (data) => {
+  handleInitEdit = (patch) => {
     const { SellerActions } = this.props
-    SellerActions.changeInputEdit({ ...data })
+    const { name, value } = patch
+    this.setState({
+      initEdit: false
+    })
+
+    SellerActions.changeInputEdit({ name, value })
   }
 
   handlePatchSellerInfo = async () => {
@@ -65,8 +71,6 @@ class SellerInfoContainer extends Component {
       managerName,
       contact
     } = editForm.toJS()
-
-    console.log(companyName, managerName, contact)
 
     if (!companyName || !managerName || !contact) {
       BaseActions.setModalMessage({
@@ -106,14 +110,14 @@ class SellerInfoContainer extends Component {
 
   render () {
     const { meta, editForm } = this.props
-    const { showEdit } = this.state
+    const { showEdit, initEdit } = this.state
     const {
       handleLogout,
       handleShowModal,
       handleShowEdit,
       handleChangeInput,
-      handleInitialInput,
-      handlePatchSellerInfo
+      handlePatchSellerInfo,
+      handleInitEdit
     } = this
 
     return (
@@ -121,12 +125,13 @@ class SellerInfoContainer extends Component {
         meta={meta}
         showEdit={showEdit}
         editForm={editForm}
+        initEdit={initEdit}
         onLogout={handleLogout}
         onShowModal={handleShowModal}
         onShowEdit={handleShowEdit}
         onChangeInput={handleChangeInput}
-        onInitialInput={handleInitialInput}
         onPatchSellerInfo={handlePatchSellerInfo}
+        onInitEdit={handleInitEdit}
       />
     )
   }

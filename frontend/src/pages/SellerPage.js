@@ -9,7 +9,6 @@ import Base from 'containers/common/Base'
 const SellerPage = () => {
   return (
     <PageTemplate>
-      <Base />
       <MainWrapper>
         <Category />
         <ContentWrapper>

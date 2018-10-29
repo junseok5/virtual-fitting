@@ -10,7 +10,8 @@ import { withRouter } from 'react-router'
 
 class UserInfoContainer extends Component {
   state = {
-    showEdit: false
+    showEdit: false,
+    initEdit: true
   }
 
   handleUserInfo = async () => {
@@ -42,7 +43,6 @@ class UserInfoContainer extends Component {
 
     const { UserActions } = this.props
     try {
-      console.log(file)
       await UserActions.uploadPhoto({ file })
 
       const { result, BaseActions } = this.props
@@ -79,6 +79,16 @@ class UserInfoContainer extends Component {
     UserActions.changeInputEdit({ name, value })
   }
 
+  handleInitEdit = (patch) => {
+    const { UserActions } = this.props
+    const { name, value  } = patch
+    this.setState({
+      initEdit: false
+    })
+
+    UserActions.changeInputEdit({ name, value })
+  }
+
   handlePatchUserInfo = async () => {
     const { UserActions, BaseActions, editForm } = this.props
 
@@ -109,7 +119,7 @@ class UserInfoContainer extends Component {
       this.handleShowEdit()
     } catch (e) {
       const { error } = this.props
-      
+
       BaseActions.setModalMessage({
         modalName: 'error',
         modalMessage: error
@@ -119,7 +129,10 @@ class UserInfoContainer extends Component {
 
   render () {
     const { meta, editForm } = this.props
-    const { showEdit } = this.state
+    const {
+      showEdit,
+      initEdit,
+    } = this.state
     const {
       handleLogout,
       handleUploadPhoto,
@@ -127,6 +140,7 @@ class UserInfoContainer extends Component {
       handleShowEdit,
       handleChangeInput,
       handlePatchUserInfo,
+      handleInitEdit
     } = this
 
     return (
@@ -134,12 +148,14 @@ class UserInfoContainer extends Component {
         meta={meta}
         showEdit={showEdit}
         editForm={editForm}
+        initEdit={initEdit}
         onLogout={handleLogout}
         onUploadPhoto={handleUploadPhoto}
         onShowModal={handleShowModal}
         onShowEdit={handleShowEdit}
         onChangeInput={handleChangeInput}
         onPatchUserInfo={handlePatchUserInfo}
+        onInitEdit={handleInitEdit}
       />
     )
   }

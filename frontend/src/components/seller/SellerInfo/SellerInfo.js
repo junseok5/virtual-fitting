@@ -10,12 +10,13 @@ const SellerInfo = ({
   meta,
   showEdit,
   editForm,
+  initEdit,
   onLogout,
   onShowModal,
   onShowEdit,
   onChangeInput,
-  onInitialInput,
-  onPatchSellerInfo
+  onPatchSellerInfo,
+  onInitEdit
 }) => {
   if (!meta) return (<></>)
   const {
@@ -33,7 +34,20 @@ const SellerInfo = ({
   } = editForm.toJS()
 
   // Edit input 초기 값 설정
-  
+  if (initEdit) {
+    onInitEdit({
+      name: 'companyName',
+      value: companyName
+    })
+    onInitEdit({
+      name: 'managerName',
+      value: managerName
+    })
+    onInitEdit({
+      name: 'contact',
+      value: contact
+    })
+  }
 
   return (
     <div className={cx('seller-info')}>

@@ -10,12 +10,14 @@ const UserInfo = ({
   meta,
   showEdit,
   editForm,
+  initEdit,
   onLogout,
   onUploadPhoto,
   onShowModal,
   onShowEdit,
   onChangeInput,
-  onPatchUserInfo
+  onPatchUserInfo,
+  onInitEdit
 }) => {
   if (!meta) return (<></>)
   const {
@@ -32,7 +34,16 @@ const UserInfo = ({
   } = editForm.toJS()
 
   // Edit input 초기 값 설정
-  
+  if (initEdit) {
+    onInitEdit({
+      name: 'displayName',
+      value: displayName
+    })
+    onInitEdit({
+      name: 'phoneNum',
+      value: phoneNum
+    })
+  }
 
   let phoneNumView = null
   if (showEdit && !social) {

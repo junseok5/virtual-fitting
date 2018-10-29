@@ -3,7 +3,7 @@ const User = require('database/models/user')
 const hash = require('lib/common/hash')
 
 // Regex definition
-const displayNameRegx = /^[a-zA-Z0-9ㄱ-힣]{3,12}$/
+const displayNameRegx = /^[a-zA-Z0-9ㄱ-힣]{2,12}$/
 
 exports.getUserInfo = async (ctx) => {
   const { user } = ctx.request

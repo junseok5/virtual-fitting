@@ -6,14 +6,25 @@
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   margin: 0.2rem;
+
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;
   user-select: none;
+  
   display: inline-flex;
 
-  border: 1px solid black;
+  border: 1px solid $oc-gray-4;
   border-radius: 2px;
+
+  transition: all .2s;
+
+  &.default {
+    background: $oc-gray-4;
+    &:hover {
+      @include material-shadow(2, 0.5);
+    }
+  }
 
   &.gray {
     background: $oc-gray-7;

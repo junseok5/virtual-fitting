@@ -7,7 +7,6 @@ import Base from 'containers/common/Base'
 const ProductEditPage = () => {
   return (
     <PageTemplate>
-      <Base />
       <MainTemplate>
         <ProductEdit />
         <Base />

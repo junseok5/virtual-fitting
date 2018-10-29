@@ -12,7 +12,6 @@ import Base from 'containers/common/Base'
 const UserPage = () => {
   return (
     <PageTemplate>
-      <Base />
       <MainWrapper>
         <Category />
         <ContentWrapper>

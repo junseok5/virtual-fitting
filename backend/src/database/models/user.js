@@ -19,7 +19,10 @@ const User = new Schema({
   displayName: String,
   phoneNum: String,
   gender: String,
-  photoUri: String,
+  photoUri: {
+    type: String,
+    default: '/images/users/default.jpg'
+  },
   joinedDate: {
     type: Date,
     default: Date.now()

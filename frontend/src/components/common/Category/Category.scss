@@ -3,6 +3,7 @@
 .category {
   width: 280px;
   height: calc(100% - 5rem);
+  z-index: 5;
 
   border-right: 1px solid $oc-gray-4;
   background: $oc-gray-1;

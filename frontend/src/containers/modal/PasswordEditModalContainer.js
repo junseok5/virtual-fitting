@@ -41,14 +41,16 @@ class PasswordEditModalContainer extends Component {
 
     if (logged === 'user') {
       this.editPasswordUser()
+      BaseActions.initialize()
     } else if (logged === 'seller') {
       this.editPasswordSeller()
+      BaseActions.initialize()
     } else {
       BaseActions.setModalMessage({
         modalName: 'error',
         modalMessage: '오류 발생!'
       })
-
+      
       this.handleLogout()
     }
   }

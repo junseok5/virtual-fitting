@@ -10,7 +10,6 @@ import Base from 'containers/common/Base'
 const ProductListPage = () => {
   return (
     <PageTemplate>
-      <Base />
       <MainWrapper>
         <CategoryContainer />
         <ProductListWrapper>

@@ -7,7 +7,6 @@ import Base from 'containers/common/Base'
 const NotFoundPage = () => {
   return (
     <PageTemplate>
-      <Base />
       <MainTemplate>
         <NotFound />
         <Base />
