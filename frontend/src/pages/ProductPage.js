@@ -15,6 +15,7 @@ const ProductPage = () => {
         <ContentWrapper>
           <Product />
         </ContentWrapper>
+        <Base />
       </MainWrapper>
     </PageTemplate>
   )

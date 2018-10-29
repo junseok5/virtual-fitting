@@ -10,10 +10,6 @@ class AskRemoveModalContainer extends Component {
     BaseActions.hideModal('remove')
   }
 
-  handleConfirm = async () => {
-    // 서버로 삭제 요청 구현
-  }
-
   render () {
     const { visible } = this.props
     const { handleCancel, handleConfirm } = this

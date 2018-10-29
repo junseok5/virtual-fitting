@@ -140,5 +140,5 @@ exports.deleteUserInfo = async (ctx) => {
     maxAge: 0,
     httpOnly: true
   })
-  ctx.status = 403
+  ctx.status = 204
 }

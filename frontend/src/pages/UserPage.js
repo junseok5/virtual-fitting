@@ -4,9 +4,9 @@ import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
 import UserInfoContainer from 'containers/user/UserInfoContainer'
-import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
-import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
-import PasswordEditModalContainer from 'containers/modal/PasswordEditModalContainer'
+// import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
+// import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
+// import PasswordEditModalContainer from 'containers/modal/PasswordEditModalContainer'
 import Base from 'containers/common/Base'
 
 const UserPage = () => {
@@ -18,9 +18,7 @@ const UserPage = () => {
         <ContentWrapper>
           <UserInfoContainer />
         </ContentWrapper>
-        <AskLeaveModalContainer />
-        <ErrorMessageModalContainer />
-        <PasswordEditModalContainer />
+        <Base />
       </MainWrapper>
     </PageTemplate>
   )

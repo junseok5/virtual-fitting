@@ -11,6 +11,7 @@ const PATCH_USER_INFO = 'user/PATCH_USER_INFO'
 const PATCH_USER_PASSWORD = 'user/PATCH_USER_PASSWORD'
 const UPLOAD_PHOTO = 'user/UPLOAD_PHOTO'
 const CHANGE_INPPUT_EDIT = 'user/CHANGE_INPUT_EDIT'
+const DELETE_USER_INFO = 'user/DELETE_USER_INFO'
 const INITIALIZE = 'user/INITIALIZE'
 
 // action creators
@@ -20,6 +21,7 @@ export const patchUserInfo = createAction(PATCH_USER_INFO, UserAPI.patchUserInfo
 export const patchUserPassword = createAction(PATCH_USER_PASSWORD, UserAPI.patchUserPassword)
 export const uploadPhoto = createAction(UPLOAD_PHOTO, UserAPI.uploadPhoto)
 export const changeInputEdit = createAction(CHANGE_INPPUT_EDIT)
+export const deleteUserInfo = createAction(DELETE_USER_INFO, UserAPI.deleteUserInfo)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -84,5 +86,14 @@ export default handleActions({
   [CHANGE_INPPUT_EDIT]: (state, action) => {
     const { name, value } = action.payload
     return state.setIn(['editForm', name], value)
-  }
+  },
+  ...pender({
+    type: DELETE_USER_INFO,
+    onSuccess: (state, action) => {
+      return state.set('result', '회원 탈퇴에 성공하였습니다.')
+    },
+    onFailure: (state, action) => {
+      return state.set('error', '회원 탈퇴에 실패하였습니다.')
+    }
+  })
 }, initialState)

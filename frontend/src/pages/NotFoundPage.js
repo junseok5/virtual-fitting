@@ -10,6 +10,7 @@ const NotFoundPage = () => {
       <Base />
       <MainTemplate>
         <NotFound />
+        <Base />
       </MainTemplate>
     </PageTemplate>
   )

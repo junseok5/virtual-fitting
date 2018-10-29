@@ -15,6 +15,7 @@ const SellerPage = () => {
         <ContentWrapper>
           <SellerInfoContainer />
         </ContentWrapper>
+        <Base />
       </MainWrapper>
     </PageTemplate>
   )

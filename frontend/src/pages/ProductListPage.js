@@ -17,6 +17,7 @@ const ProductListPage = () => {
           <ProductList />
           <Pagination />
         </ProductListWrapper>
+        <Base />
       </MainWrapper>
     </PageTemplate>
   )

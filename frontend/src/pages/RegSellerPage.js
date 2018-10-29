@@ -2,14 +2,15 @@ import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainTemplate from 'components/common/MainTemplate'
 import RegSellerContainer from 'containers/register/RegSellerContainer'
-import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
+import Base from 'containers/common/Base'
+// import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
 
 const RegSellerPage = () => {
   return (
     <PageTemplate>
       <MainTemplate>
         <RegSellerContainer />
-        <ErrorMessageModalContainer />
+        <Base />
       </MainTemplate>
     </PageTemplate>
   )

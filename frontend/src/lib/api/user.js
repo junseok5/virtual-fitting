@@ -11,3 +11,5 @@ export const uploadPhoto = ({ file }) => {
   data.append('photo', file)
   return axios.post('/api/v1.0/files/users-photo', data)
 }
+
+export const deleteUserInfo = () => axios.delete('/api/v1.0/users')

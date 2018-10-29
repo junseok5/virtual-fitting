@@ -5,6 +5,11 @@ import * as authActions from 'store/modules/auth'
 import * as userActions from 'store/modules/user'
 import * as sellerActions from 'store/modules/seller'
 
+import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
+import AskRemoveModalContainer from 'containers/modal/AskRemoveModalContainer'
+import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
+import PasswordEditModalContainer from 'containers/modal/PasswordEditModalContainer'
+
 class Base extends Component {
 
   initialize = async () => {
@@ -36,8 +41,12 @@ class Base extends Component {
 
   render () {
     return (
-      <>
-      </>
+      <div>
+        <AskLeaveModalContainer />
+        <AskRemoveModalContainer />
+        <ErrorMessageModalContainer />
+        <PasswordEditModalContainer />
+      </div>
     )
   }
 }

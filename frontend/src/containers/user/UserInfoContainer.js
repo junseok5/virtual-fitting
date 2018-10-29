@@ -115,6 +115,11 @@ class UserInfoContainer extends Component {
     }
   }
 
+  handleClickLeave = () => {
+    const { BaseActions } = this.props
+    BaseActions.showModal('leave')
+  }
+
   render () {
     const { meta, editForm } = this.props
     const { showEdit } = this.state
@@ -124,7 +129,8 @@ class UserInfoContainer extends Component {
       handleShowModal,
       handleShowEdit,
       handleChangeInput,
-      handlePatchUserInfo
+      handlePatchUserInfo,
+      handleClickLeave
     } = this
 
     return (
@@ -138,6 +144,7 @@ class UserInfoContainer extends Component {
         onShowEdit={handleShowEdit}
         onChangeInput={handleChangeInput}
         onPatchUserInfo={handlePatchUserInfo}
+        onClickLeave={handleClickLeave}
       />
     )
   }

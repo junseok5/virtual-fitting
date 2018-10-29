@@ -10,6 +10,7 @@ const ProductEditPage = () => {
       <Base />
       <MainTemplate>
         <ProductEdit />
+        <Base />
       </MainTemplate>
     </PageTemplate>
   )
