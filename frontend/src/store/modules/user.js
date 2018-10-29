@@ -10,6 +10,7 @@ const GET_USER_INFO = 'user/GET_USER_INFO'
 const PATCH_USER_INFO = 'user/PATCH_USER_INFO'
 const PATCH_USER_PASSWORD = 'user/PATCH_USER_PASSWORD'
 const UPLOAD_PHOTO = 'user/UPLOAD_PHOTO'
+const CHANGE_INPPUT_EDIT = 'user/CHANGE_INPUT_EDIT'
 const INITIALIZE = 'user/INITIALIZE'
 
 // action creators
@@ -18,6 +19,7 @@ export const getUserInfo = createAction(GET_USER_INFO, UserAPI.getUserInfo)
 export const patchUserInfo = createAction(PATCH_USER_INFO, UserAPI.patchUserInfo)
 export const patchUserPassword = createAction(PATCH_USER_PASSWORD, UserAPI.patchUserPassword)
 export const uploadPhoto = createAction(UPLOAD_PHOTO, UserAPI.uploadPhoto)
+export const changeInputEdit = createAction(CHANGE_INPPUT_EDIT)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -26,7 +28,11 @@ const initialState = Map({
   logged: false,
   meta: null,
   result: null,
-  error: null
+  error: null,
+  editForm: Map({
+    displayName: '',
+    phoneNum: ''
+  })
 })
 
 // reducer
@@ -78,5 +84,9 @@ export default handleActions({
       else if (status === 412) state.set('result', '업로드 할 사진이 존재하지 않습니다.')
       else if (status === 500) state.set('result', '서버 오류!')
     }
-  })
+  }),
+  [CHANGE_INPPUT_EDIT]: (state, action) => {
+    const { name, value } = action.payload
+    return state.setIn(['editForm', name], value)
+  }
 }, initialState)

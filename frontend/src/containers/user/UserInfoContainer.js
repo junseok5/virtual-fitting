@@ -9,6 +9,9 @@ import * as baseActions from 'store/modules/base'
 import { withRouter } from 'react-router'
 
 class UserInfoContainer extends Component {
+  state = {
+    showEdit: false
+  }
 
   handleUserInfo = async () => {
     const { UserActions } = this.props
@@ -63,20 +66,40 @@ class UserInfoContainer extends Component {
     BaseActions.showModal(modalName)
   }
 
+  handleShowEdit = () => {
+    this.setState({
+      showEdit: !this.state.showEdit
+    })
+  }
+
+  handleChangeInput = (e) => {
+    const { UserActions } = this.props
+    const { name, value } = e.target
+    
+    UserActions.changeInputEdit({ name, value })
+  }
+
   render () {
-    const { meta } = this.props
+    const { meta, editForm } = this.props
+    const { showEdit } = this.state
     const {
       handleLogout,
       handleUploadPhoto,
-      handleShowModal
+      handleShowModal,
+      handleShowEdit,
+      handleChangeInput
     } = this
 
     return (
       <UserInfo
         meta={meta}
+        showEdit={showEdit}
+        editForm={editForm}
         onLogout={handleLogout}
         onUploadPhoto={handleUploadPhoto}
         onShowModal={handleShowModal}
+        onShowEdit={handleShowEdit}
+        onChangeInput={handleChangeInput}
       />
     )
   }
@@ -86,7 +109,8 @@ export default connect(
   (state) => ({
     meta: state.user.get('meta'),
     result: state.user.get('result'),
-    error: state.user.get('error')
+    error: state.user.get('error'),
+    editForm: state.user.get('editForm')
   }),
   (dispatch) => ({
     UserActions: bindActionCreators(userActions, dispatch),

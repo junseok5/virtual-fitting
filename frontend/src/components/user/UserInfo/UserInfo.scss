@@ -1,6 +1,7 @@
 @import 'utils';
 @import 'common/padding';
 @import 'common/file';
+@import 'common/input';
 
 .user-info {
   .page-title {
@@ -28,6 +29,10 @@
   
     .user-basic-info {
       margin: 2rem;
+
+      .edit-displayName {
+        font-weight: bold;
+      }
     }
   }
 
