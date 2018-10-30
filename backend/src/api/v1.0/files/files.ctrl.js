@@ -37,11 +37,3 @@ exports.uploadUserPhoto = async (ctx) => {
     ctx.throw(500, e)
   }
 }
-
-exports.uploadProductsMainPhoto = (ctx) => {
-
-}
-
-exports.uploadProductsModelPhoto = (ctx) => {
-  
-}

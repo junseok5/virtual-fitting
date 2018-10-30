@@ -74,7 +74,7 @@ class Header extends Component {
             }
             {
               loginType === 'seller' && <div className={cx('login-info')}>
-                <Link to='seller'>{ managerName }</Link>
+                <Link to='/seller'>{ managerName }</Link>
                 <span>님</span>
               </div>
             }

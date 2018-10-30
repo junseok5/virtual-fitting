@@ -1,6 +1,7 @@
 // product 정보를 클라이언트에게 보낼 때, 글자 수 잘라서 보내기
 const Joi = require('joi')
 const Product = require('database/models/product')
+const uploadFile = require('lib/uploadFile')
 
 /*
   [GET] /:id
@@ -25,18 +26,24 @@ exports.getProductInfo = async (ctx) => {
 */
 exports.getList = async (ctx) => {
   const page = parseInt(ctx.query.page || 1, 10)
-  const { category, keyword } = ctx.query
+  const { category, keyword, sellerId } = ctx.query
 
   // 카테고리 검색
-  let query = category ? {
+  let query = category && {
     category
-  } : {}
+  }
 
   // 키워드 검색
-  query = keyword ? {
+  query = keyword && {
     ...query,
     $text: { $search: keyword }
-  } : { ...query }
+  }
+
+  // 판매자의 상품 조회
+  query = sellerId && {
+    ...query,
+    writer: sellerId
+  }
 
   if (page < 1) {
     ctx.status = 400
@@ -62,14 +69,20 @@ exports.getList = async (ctx) => {
   [POST] /
 */
 exports.writeProduct = async (ctx) => {
-  const { seller, body } = ctx.request
+  const { seller, body, files } = ctx.request
   const { _id } = seller
+  const { modelPhoto, productPhoto } = files
+
+  if (!modelPhoto || !productPhoto) {
+    ctx.status = 412
+    return
+  }
 
   const schema = Joi.object({
     productName: Joi.string().required(),
-    price: Joi.number().integer().min(0),
-    freeShipping: Joi.boolean(),
-    salesLink: Joi.string(),
+    price: Joi.number().integer().min(0).required(),
+    freeShipping: Joi.string(),
+    salesLink: Joi.string().required(),
     category: Joi.string(),
     subCategory: Joi.string(),
     targetGender: Joi.string()
@@ -77,19 +90,47 @@ exports.writeProduct = async (ctx) => {
 
   const result = Joi.validate(body, schema)
   if (result.error) {
+    console.log(result.error)
     ctx.status = 400
     ctx.body = result.error
     return
   }
 
-  const writer = _id
-  const { productName, price, freeShipping, salesLink, category, subCategory, targetGender } = body
-
-  const product = new Product({
-    productName, price, freeShipping, salesLink, category, subCategory, targetGender, writer
-  })
-
   try {
+    const resultMain = await uploadFile(productPhoto, 'products-main')
+    const resultModel = await uploadFile(modelPhoto, 'products-model')
+
+    if (!resultMain || !resultModel) {
+      ctx.status = 500
+      return
+    }
+
+    const { filePath: productPhotoUri } = resultMain
+    const { filePath: modelPhotoUri } = resultModel
+
+    const writer = _id
+    const {
+      productName,
+      price,
+      freeShipping,
+      salesLink,
+      category,
+      subCategory,
+      targetGender
+    } = body
+    const product = new Product({
+      productName,
+      price,
+      freeShipping,
+      salesLink,
+      category,
+      subCategory,
+      targetGender,
+      writer,
+      productPhotoUri,
+      modelPhotoUri
+    })
+
     await product.save()
     ctx.body = product
   } catch (e) {

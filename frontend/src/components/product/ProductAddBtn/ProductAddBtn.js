@@ -8,9 +8,11 @@ const cx = classNames.bind(styles)
 
 const ProductAdd = () => (
   <div className={cx('product-add')}>
-    <div className={cx('product-add-btn')}>
-      + N E W
-    </div>
+    <Link to="/write/product">
+      <div className={cx('product-add-btn')}>
+        + N E W
+      </div>
+    </Link>
   </div>
 );
 

@@ -3,6 +3,8 @@ import styles from './SellerInfo.scss'
 import classNames from 'classnames/bind'
 import Button from 'components/common/Button'
 
+import { Link } from 'react-router-dom'
+
 const cx = classNames.bind(styles)
 
 
@@ -130,7 +132,9 @@ const SellerInfo = ({
       <div className={cx('_title')}>기타</div>
       <div className={cx('other-info')}>
         <div className={cx('_text-padding')}>
-          <Button>상품 관리</Button>
+          <Link to="/manage/seller">
+            <Button>상품 관리</Button>
+          </Link>
           <Button onClick={() => onShowModal('leave')}>회원 탈퇴</Button>
         </div>
       </div>
