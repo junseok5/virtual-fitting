@@ -29,21 +29,54 @@ exports.getList = async (ctx) => {
   const { category, keyword, sellerId } = ctx.query
 
   // 카테고리 검색
-  let query = category && {
-    category
-  }
+  let query = null
+  query = category ? {
+    subCategory: category
+  } : {}
 
-  // 키워드 검색
-  query = keyword && {
-    ...query,
-    $text: { $search: keyword }
-  }
-
-  // 판매자의 상품 조회
-  query = sellerId && {
+  query = sellerId ? {
     ...query,
     writer: sellerId
-  }
+  } : { ...query }
+
+  query = keyword ? {
+    ...query,
+    $text: { $search: keyword }
+  } : { ...query }
+  // if (category) {
+  //   query = {
+  //     category
+  //   }
+  // }
+  // if (keyword) {
+  //   query = {
+  //     ...query,
+  //     $text: { $search: keyword }
+  //   }
+  // }
+  // if (sellerId) {
+  //   query = {
+  //     ...query,
+  //     writer: sellerId
+  //   }
+  // }
+  console.log(query)
+
+  // let query = category && {
+  //   category
+  // }
+
+  // // 키워드 검색
+  // query = keyword && {
+  //   ...query,
+  //   $text: { $search: keyword }
+  // }
+
+  // // 판매자의 상품 조회
+  // query = sellerId && {
+  //   ...query,
+  //   writer: sellerId
+  // }
 
   if (page < 1) {
     ctx.status = 400
