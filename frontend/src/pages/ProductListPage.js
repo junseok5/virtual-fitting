@@ -4,7 +4,6 @@ import MainWrapper from 'components/common/MainWrapper'
 import CategoryContainer from 'containers/common/CategoryContainer'
 import ProductListWrapper from 'components/list/ProductListWrapper'
 import ProductListContainer from 'containers/list/ProductListContainer'
-import Pagination from 'components/list/Pagination'
 import Base from 'containers/common/Base'
 
 const ProductListPage = ({ match }) => {
@@ -21,7 +20,6 @@ const ProductListPage = ({ match }) => {
             category={category}
             keyword={keyword}
           />
-          <Pagination />
         </ProductListWrapper>
         <Base />
       </MainWrapper>

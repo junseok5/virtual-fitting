@@ -6,37 +6,57 @@ import { Link } from 'react-router-dom'
 const cx = classNames.bind(styles)
 
 
-const ProductItem = () => {
+const ProductItem = ({
+  modelPhotoUri,
+  productName,
+  freeShipping,
+  price
+}) => {
   return (
     <div className={cx('product-item', 'animated', 'fadeIn')}>
       <div className={cx('product-photo')}>
-        <img src="https://simage-kr.gu-global.com//goods/31/11/66/40/311447_COL_GCL05_300.jpg" draggable="false" />
+        <img src={modelPhotoUri} draggable="false" />
       </div>
       <div className={cx('product-info')}>
-        <div className={cx('product-info-title')}>타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀</div>
+        <div className={cx('product-info-title')}>{ productName }</div>
         <div className={cx('product-ship')}>
-          <span>무료배송</span>
+          {
+            freeShipping === 'true' && <span>무료배송</span>
+          }
         </div>
-        <div className={cx('product-info-price')}>99000원</div>
+        <div className={cx('product-info-price')}>{ price }원</div>
       </div>
     </div>
   )
 }
 
-const ProductList = () => (
-  <div className={cx('product-list')}>
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-    <ProductItem />
-  </div>
-);
+const ProductList = ({ products }) => {
+  const productList = products.map(
+    (product) => {
+      const {
+        modelPhotoUri,
+        productName,
+        freeShipping,
+        price
+      } = product.toJS()
+
+      return (
+        <ProductItem
+          modelPhotoUri={modelPhotoUri}
+          productName={productName}
+          freeShipping={freeShipping}
+          price={price}
+        />
+      )
+    }
+  )
+
+  return (
+    <div className={cx('product-list')}>
+      { productList }
+    </div>
+  )
+}
 
 
 export default ProductList

@@ -3,7 +3,6 @@ import PageTemplate from 'components/common/PageTemplate'
 import ProductListWrapper from 'components/list/ProductListWrapper'
 import ProductAddBtn from 'components/product/ProductAddBtn'
 import ProductListContainer from 'containers/list/ProductListContainer'
-import Pagination from 'components/list/Pagination'
 import Base from 'containers/common/Base'
 
 const ManagePage = ({ match }) => {
@@ -19,7 +18,6 @@ const ManagePage = ({ match }) => {
           page={parseInt(page, 10)}
           sellerId={sellerId}
         />
-        <Pagination />
       </ProductListWrapper>
     </PageTemplate>
   )
