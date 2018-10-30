@@ -32,7 +32,7 @@ const ProductItem = ({
 
 const ProductList = ({ products }) => {
   const productList = products.map(
-    (product) => {
+    (product, key) => {
       const {
         modelPhotoUri,
         productName,
@@ -46,6 +46,7 @@ const ProductList = ({ products }) => {
           productName={productName}
           freeShipping={freeShipping}
           price={price}
+          key={key}
         />
       )
     }

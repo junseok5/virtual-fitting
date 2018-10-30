@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/seller" component={SellerPage} />
         <Route path="/edit/product/:id" component={ProductEditPage} />
         <Route path="/write/product" component={ProductWritePage} />
-        <Route path="/manage/:sellerId" component={ManagePage} />
+        <Route path="/manage/:sellerId/:page" component={ManagePage} />
         <Route path="/admin" component={AdminPage} />
         <Route component={NotFoundPage} />
       </Switch>
