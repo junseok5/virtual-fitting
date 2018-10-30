@@ -114,13 +114,10 @@ class ProductEditContainer extends Component {
         productPhotoFile
       })
 
-      const { result, history } = this.props
-      BaseActions.setModalMessage({
-        modalName: 'error',
-        modalMessage: result
-      })
+      const { history, seller } = this.props
+      const { _id } = seller.toJS()
 
-      history.push('/manage/seller')
+      history.push(`/manage/${_id}`)
     } catch (e) {
       const { error } = this.props
       BaseActions.setModalMessage({
@@ -158,7 +155,8 @@ export default connect(
     form: state.product.get('form'),
     previewImage: state.product.get('previewImage'),
     result: state.product.get('result'),
-    error: state.product.get('error')
+    error: state.product.get('error'),
+    seller: state.seller.get('seller')
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

@@ -3,17 +3,24 @@ import PageTemplate from 'components/common/PageTemplate'
 import MainWrapper from 'components/common/MainWrapper'
 import CategoryContainer from 'containers/common/CategoryContainer'
 import ProductListWrapper from 'components/list/ProductListWrapper'
-import ProductList from 'components/list/ProductList'
+import ProductListContainer from 'containers/list/ProductListContainer'
 import Pagination from 'components/list/Pagination'
 import Base from 'containers/common/Base'
 
-const ProductListPage = () => {
+const ProductListPage = ({ match }) => {
+  // page의 기본 값 1로 설정
+  const { page = 1, category, keyword } = match.params
+
   return (
     <PageTemplate>
       <MainWrapper>
         <CategoryContainer />
         <ProductListWrapper>
-          <ProductList />
+          <ProductListContainer
+            page={parseInt(page, 10)}
+            category={category}
+            keyword={keyword}
+          />
           <Pagination />
         </ProductListWrapper>
         <Base />

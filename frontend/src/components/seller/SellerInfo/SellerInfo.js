@@ -22,6 +22,7 @@ const SellerInfo = ({
 }) => {
   if (!meta) return (<></>)
   const {
+    _id,
     crn,
     companyName,
     email,
@@ -132,7 +133,7 @@ const SellerInfo = ({
       <div className={cx('_title')}>기타</div>
       <div className={cx('other-info')}>
         <div className={cx('_text-padding')}>
-          <Link to="/manage/seller">
+          <Link to={`/manage/${_id}`}>
             <Button>상품 관리</Button>
           </Link>
           <Button onClick={() => onShowModal('leave')}>회원 탈퇴</Button>

@@ -55,7 +55,7 @@ exports.getList = async (ctx) => {
     const productsCount = await Product.countDocuments().exec()
     const limitTitleLength = product => ({
       ...product,
-      productName: product.productName.length < 42 ? product.productName : `${product.productName.slice(0, 200)}...`
+      productName: product.productName.length < 42 ? product.productName : `${product.productName.slice(0, 41)}...`
     })
     ctx.body = products.map(limitTitleLength)
     // 마지막 페이지 알려주기
