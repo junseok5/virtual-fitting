@@ -6,8 +6,20 @@ import * as listActions from 'store/modules/list'
 
 import Pagination from 'components/list/Pagination'
 
+import Progress from 'react-progressbar'
+
 class ProductListContainer extends Component {
+
+  state = {
+    completed: 0
+  }
+
+  setCompleted = (completed) => {
+    this.setState({ completed })
+  }
+
   getProductList = () => {
+    this.setCompleted(100)
     const { page, category, keyword, sellerId, ListActions } = this.props
     console.log(page, category, keyword, sellerId)
     ListActions.getProductList({ page, category, keyword, sellerId })
@@ -38,11 +50,17 @@ class ProductListContainer extends Component {
       keyword,
       sellerId
     } = this.props
+    const { completed } = this.state
 
     if (loading) return null
 
     return (
       <div>
+        <Progress
+          completed={completed}
+          color="#9253EB"
+          height="7px"
+        />
         <ProductList products={products} />
         <Pagination
           page={page}

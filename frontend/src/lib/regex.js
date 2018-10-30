@@ -9,8 +9,8 @@ const companyName = /^[a-zA-Z0-9ㄱ-힣]{1,30}$/
 const contact = /^\d{3}-\d{3,4}-\d{4}$/
 
 const productName = /^[a-zA-Zㄱ-힣 _]{1,20}$/
-const category = /^[a-zA-Zㄱ-힣]{1,20}$/
-const subCategory = /^[a-zA-Zㄱ-힣]{1,20}$/
+const category = /^[a-zA-Zㄱ-힣 _]{1,20}$/
+const subCategory = /^[a-zA-Zㄱ-힣 _]{1,20}$/
 const gender = /^남$|^여$/
 
 export default {

@@ -5,9 +5,12 @@
   height: calc(100% - 5rem);
   z-index: 5;
 
-  border-right: 1px solid $oc-gray-4;
-  background: $oc-gray-1;
+  // border-right: 1px solid $oc-gray-4;
+  // background: #343A40;
+  background: $oc-gray-8;
   transition: all .4s;
+
+  color: white;
 
   .category__nav {
     padding: 1rem;
@@ -17,13 +20,13 @@
       padding-bottom: 0.5rem;
 
       .item_menu_title {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: bold;
       }
 
       .item_sub_menu {
         padding-left: 1rem;
-        font-size: 0.9rem;
+        font-size: 1rem;
 
         li {
           padding-top: 0.25rem;

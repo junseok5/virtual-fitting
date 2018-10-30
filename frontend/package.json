@@ -51,6 +51,7 @@
     "react-dev-utils": "^6.0.4",
     "react-dom": "^16.5.2",
     "react-icons": "^3.2.0",
+    "react-progressbar": "^15.4.1",
     "react-redux": "^5.0.7",
     "react-responsive-modal": "^3.4.0",
     "react-router-dom": "^4.3.1",

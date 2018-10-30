@@ -117,7 +117,7 @@ class ProductEditContainer extends Component {
       const { history, seller } = this.props
       const { _id } = seller.toJS()
 
-      history.push(`/manage/${_id}`)
+      history.push(`/manage/${_id}/1`)
     } catch (e) {
       const { error } = this.props
       BaseActions.setModalMessage({
