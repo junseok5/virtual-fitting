@@ -97,7 +97,7 @@ const ProductEdit = ({
               <option value="베스트">베스트</option>
               <option value="피케">피케</option>
               <option value="카라티셔츠">카라티셔츠</option>
-              <option value="기타">기타</option>
+              <option value="기타">상의 기타</option>
             </select>
           }
           {
@@ -115,7 +115,7 @@ const ProductEdit = ({
               <option value="블레이저 재킷">블레이저 재킷</option>
               <option value="쇼트 헤비 아우터">쇼트 헤비 아우터</option>
               <option value="패딩 베스트">패딩 베스트</option>
-              <option value="기타"></option>
+              <option value="기타">아우터 기타</option>
             </select>
           }
           {
@@ -137,7 +137,7 @@ const ProductEdit = ({
               <option value="레깅스">레깅스</option>
               <option value="트레이닝">트레이닝</option>
               <option value="조거 펜츠">조거 펜츠</option>
-              <option value="기타">기타</option>
+              <option value="기타">하의 기타</option>
             </select>
           }
           </div>

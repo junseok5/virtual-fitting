@@ -19,6 +19,7 @@ class Header extends Component {
     const {
       onToggleSide,
       onToggleSearch,
+      onKeyPress,
       actionSearch,
       searchbox,
       user,
@@ -52,7 +53,7 @@ class Header extends Component {
             <Icon><FaBars /></Icon>
           </div>
           <div className={cx('brand')}>
-            <Link to="/">virtual fitting</Link>
+            <Link to="/">onNoff</Link>
           </div>
           <div className={cx('search')}>
             <input
@@ -60,6 +61,7 @@ class Header extends Component {
               onChange={handleChange}
               value={searchbox}
               placeholder="Search"
+              onKeyPress={onKeyPress}
             />
           </div>
           <div className={cx('right')}>
@@ -95,6 +97,7 @@ class Header extends Component {
                 placeholder="검색"
                 onChange={handleChange}
                 value={searchbox}
+                onKeyPress={onKeyPress}
               />
             </div>
             <div className={cx('ms-search-cancel')} onClick={onToggleSearch}>

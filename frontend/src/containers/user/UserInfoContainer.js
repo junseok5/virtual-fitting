@@ -70,11 +70,15 @@ class UserInfoContainer extends Component {
 
   handleUserInfo = async () => {
     const { UserActions } = this.props
-    await UserActions.getUserInfo()
+    try {
+      await UserActions.getUserInfo()
 
-    const { meta, history } = this.props
-    // 로그인되어 있지 않으면 메인화면으로 이동
-    if (!meta) history.push('/')
+      const { meta, history } = this.props
+      // 로그인되어 있지 않으면 메인화면으로 이동
+      if (!meta) history.push('/')
+    } catch (e) {
+
+    }
   }
 
   handleLogout = async () => {

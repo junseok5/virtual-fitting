@@ -3,16 +3,20 @@ import PageTemplate from 'components/common/PageTemplate'
 import MainWrapper from 'components/common/MainWrapper'
 import Category from 'components/common/Category'
 import ContentWrapper from 'components/common/ContentWrapper'
-import Product from 'components/product/Product'
+import ProductContainer from 'containers/product/ProductContainer'
 import Base from 'containers/common/Base'
 
-const ProductPage = () => {
+const ProductPage = ({ match }) => {
+  const { id } = match.params
+
   return (
     <PageTemplate>
       <MainWrapper>
         <Category />
         <ContentWrapper>
-          <Product />
+          <ProductContainer
+            id={id}
+          />
         </ContentWrapper>
         <Base />
       </MainWrapper>

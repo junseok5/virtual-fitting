@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from 'store/modules/base'
 
+import { withRouter } from 'react-router'
+
 class HeaderContainer extends Component {
   handleOpenSide = () => {
     const { BaseActions } = this.props
@@ -44,11 +46,25 @@ class HeaderContainer extends Component {
     BaseActions.setSearchInput(value)
   }
 
+  handleSearch = () => {
+    const { searchbox, history } = this.props
+    if (!searchbox) return
+
+    history.push(`/keyword/${searchbox}`)
+  }
+
+  handleKeyPress = (e) => {
+    if (e.which === 13 || e.keyCode === 13) {
+      this.handleSearch()
+    }
+  }
+
   render () {
     const {
       handleToggleSide,
       handleToggleSearch,
-      handleChangeSearchInput
+      handleChangeSearchInput,
+      handleKeyPress
     } = this
     const {
       visibleSearchbar,
@@ -66,6 +82,7 @@ class HeaderContainer extends Component {
         onToggleSide={handleToggleSide}
         onToggleSearch={handleToggleSearch}
         onChangeSearchInput={handleChangeSearchInput}
+        onKeyPress={handleKeyPress}
         actionSearch={visibleSearchbar}
         searchbox={searchbox}
         loginType={loginType}
@@ -87,4 +104,4 @@ export default connect(
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
   })
-)(HeaderContainer)
+)(withRouter(HeaderContainer))

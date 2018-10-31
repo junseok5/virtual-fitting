@@ -7,6 +7,8 @@ import * as baseActions from 'store/modules/base'
 
 import Pagination from 'components/list/Pagination'
 
+import { withRouter } from 'react-router-dom'
+
 
 class ProductListContainer extends Component {
 
@@ -26,16 +28,18 @@ class ProductListContainer extends Component {
     this.getProductList()
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps (nextProps) {
     const { BaseActions } = this.props
+    // BaseActions.initialize()
     BaseActions.setProgress({
       name: 'completed',
       value: 30
     })
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate (nextProps) {
     const { BaseActions } = this.props
+    
     BaseActions.setProgress({
       name: 'completed',
       value: 50
@@ -43,7 +47,7 @@ class ProductListContainer extends Component {
     return true
   }
 
-  componentWillUpdate () {
+  componentWillUpdate (nextProps, nextState) {
     const { BaseActions } = this.props
     BaseActions.setProgress({
       name: 'completed',
@@ -77,6 +81,11 @@ class ProductListContainer extends Component {
     }, 200)
   }
 
+  handleMoveToProduct = (id) => {
+    const { history } = this.props
+    history.push(`/product/${id}`)
+  }
+
   render () {
     const {
       loading,
@@ -86,22 +95,22 @@ class ProductListContainer extends Component {
       category,
       keyword,
       sellerId,
-      BaseActions
     } = this.props
-
+    
+    const {
+      handleMoveToProduct
+    } = this
 
     if (loading) {
-      // console.log('render loading')
-      // BaseActions.setProgress({
-      //   name: 'completed',
-      //   value: 70
-      // })
       return null
     }
 
     return (
       <div>
-        <ProductList products={products} />
+        <ProductList
+          products={products}
+          onMoveToProduct={handleMoveToProduct}
+        />
         <Pagination
           page={page}
           lastPage={lastPage}
@@ -124,4 +133,4 @@ export default connect(
     ListActions: bindActionCreators(listActions, dispatch),
     BaseActions: bindActionCreators(baseActions, dispatch)
   })
-)(ProductListContainer)
+)(withRouter(ProductListContainer))

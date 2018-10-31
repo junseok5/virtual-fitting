@@ -22,7 +22,7 @@ class SellerInfoContainer extends Component {
       name: 'completed',
       value: 20
     })
-    this.handleUserInfo()
+    this.handleSellerInfo()
   }
 
   componentWillReceiveProps () {

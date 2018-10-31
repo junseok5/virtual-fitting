@@ -41,8 +41,6 @@ class Base extends Component {
   }
 
   render () {
-    const { completed } = this.props
-
     return (
       <div>
         <ProgressbarContainer />

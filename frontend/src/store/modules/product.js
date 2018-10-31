@@ -9,6 +9,7 @@ const CHANGE_INPUT = 'product/CHANGE_INPUT'
 const CHANGE_INPUT_PHOTO = 'product/CHANGE_INPUT_PHOTO'
 const SET_PREVIEW_IMAGE = 'product/SET_PREVIEW_IMAGE'
 const WRITE_PRODUCT = 'product/WRITE_PRODUCT'
+const GET_PRODUCT = 'product/GET_PRODUCT'
 const INITIALIZE = 'product/INITIALIZE'
 
 // action creators
@@ -16,6 +17,7 @@ export const changeInput = createAction(CHANGE_INPUT)
 export const changeInputPhoto = createAction(CHANGE_INPUT_PHOTO)
 export const setPreviewImage = createAction(SET_PREVIEW_IMAGE)
 export const writeProduct = createAction(WRITE_PRODUCT, ProductAPI.writeProduct)
+export const getProduct = createAction(GET_PRODUCT, ProductAPI.getProduct)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -27,7 +29,7 @@ const initialState = Map({
     category: '상의',
     subCategory: '',
     targetGender: '남',
-    freeShipping: "true",
+    freeShipping: 'true',
     modelPhotoFile: null,
     productPhotoFile: null
   }),
@@ -35,6 +37,7 @@ const initialState = Map({
     modelPhotoFile: '',
     productPhotoFile: ''
   }),
+  product: null,
   result: null,
   error: null
 })
@@ -62,8 +65,15 @@ export default handleActions({
     onFailure: (state, action) => {
       const { status } = action.payload.response
 
-      if (status === 400) return state.get('error', '잘못된 입력 값입니다.')
-      else if (status === 500) return state.get('error', '서버 오류!')
+      if (status === 400) return state.set('error', '잘못된 입력 값입니다.')
+      else if (status === 500) return state.set('error', '서버 오류!')
+    }
+  }),
+  ...pender({
+    type: GET_PRODUCT,
+    onSuccess: (state, action) => {
+      const { data: product } = action.payload
+      return state.set('product', Map(product))
     }
   })
 }, initialState)
