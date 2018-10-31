@@ -43,6 +43,10 @@
     color: white;
   }
 
+  &.white {
+    background: white;
+  }
+
   & + & {
     margin-left: 0.5rem;
   }

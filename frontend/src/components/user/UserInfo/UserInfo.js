@@ -74,7 +74,7 @@ const UserInfo = ({
             }
           </div>
           <div className={cx('user-photo-upload', '_input-file')}>
-            <label htmlFor="_file">얼굴 사진 업로드</label>
+            <label htmlFor="_file"><Button theme="white">피팅 얼굴 업로드</Button></label>
             <input
               type="file"
               id="_file"
@@ -113,10 +113,10 @@ const UserInfo = ({
               !showEdit && <Button onClick={onShowEdit}>수정</Button>
             }
             {
-              showEdit && <Button onClick={onPatchUserInfo}>완료</Button>
+              showEdit && <Button theme="gray" onClick={onPatchUserInfo}>완료</Button>
             }
             {
-              showEdit && <Button onClick={onShowEdit}>취소</Button>
+              showEdit && <Button theme="gray" onClick={onShowEdit}>취소</Button>
             }
           </div>
           <div className={cx('_text-padding')}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainWrapper from 'components/common/MainWrapper'
-import Category from 'components/common/Category'
+import CategoryContainer from 'containers/common/CategoryContainer'
 import ContentWrapper from 'components/common/ContentWrapper'
 import ProductContainer from 'containers/product/ProductContainer'
 import Base from 'containers/common/Base'
@@ -12,7 +12,7 @@ const ProductPage = ({ match }) => {
   return (
     <PageTemplate>
       <MainWrapper>
-        <Category />
+        <CategoryContainer />
         <ContentWrapper>
           <ProductContainer
             id={id}

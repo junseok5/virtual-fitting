@@ -42,7 +42,7 @@ const Product = ({ product }) => {
         
         <div className={cx('product-price')}>{ price }원</div>
         <div className={cx('product-link-btn')}>
-          <a href={salesLink}>
+          <a href={salesLink} target="_blank">
             <div className={cx('product-link')}>구매하러 가기</div>
           </a>
         </div>

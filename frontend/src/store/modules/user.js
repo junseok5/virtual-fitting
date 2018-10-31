@@ -49,7 +49,9 @@ export default handleActions({
     type: GET_USER_INFO,
     onSuccess: (state, action) => {
       const { data: user } = action.payload
+      const { displayName } = user
       return state.set('meta', Map(user))
+                  .setIn(['user', 'displayName'], displayName)
     }
   }),
   ...pender({
