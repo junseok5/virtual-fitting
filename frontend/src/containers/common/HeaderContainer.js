@@ -3,23 +3,24 @@ import Header from 'components/common/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from 'store/modules/base'
+import * as categoryActions from 'store/modules/category'
 
 import { withRouter } from 'react-router'
 
 class HeaderContainer extends Component {
   handleOpenSide = () => {
-    const { BaseActions } = this.props
-    BaseActions.showSidebar()
+    const { CategoryActions } = this.props
+    CategoryActions.showSidebar()
   }
 
   handleCloseSide = () => {
-    const { BaseActions } = this.props
-    BaseActions.hideSidebar()
+    const { CategoryActions } = this.props
+    CategoryActions.hideSidebar()
   }
 
   handleToggleSide = () => {
     const { visibleSidebar } = this.props
-    const { handleOpenSide, handleCloseSide} = this
+    const { handleOpenSide, handleCloseSide } = this
     if (visibleSidebar) return handleCloseSide()
     handleOpenSide()
   }
@@ -47,10 +48,11 @@ class HeaderContainer extends Component {
   }
 
   handleSearch = () => {
-    const { searchbox, history } = this.props
+    const { BaseActions, searchbox, history } = this.props
     if (!searchbox) return
 
     history.push(`/keyword/${searchbox}`)
+    BaseActions.hideSearchbar()
   }
 
   handleKeyPress = (e) => {
@@ -68,6 +70,7 @@ class HeaderContainer extends Component {
     } = this
     const {
       visibleSearchbar,
+      visibleSidebar,
       searchbox,
       user,
       seller
@@ -84,6 +87,7 @@ class HeaderContainer extends Component {
         onChangeSearchInput={handleChangeSearchInput}
         onKeyPress={handleKeyPress}
         actionSearch={visibleSearchbar}
+        actionSidebar={visibleSidebar}
         searchbox={searchbox}
         loginType={loginType}
         user={user}
@@ -95,13 +99,14 @@ class HeaderContainer extends Component {
 
 export default connect(
   (state) => ({
-    visibleSidebar: state.base.getIn(['sidebar', 'visible']),
+    visibleSidebar: state.category.getIn(['sidebar', 'visible']),
     visibleSearchbar: state.base.getIn(['searchbar', 'visible']),
     searchbox: state.base.get('searchbox'),
     user: state.user.get('user'),
     seller: state.seller.get('seller')
   }),
   (dispatch) => ({
-    BaseActions: bindActionCreators(baseActions, dispatch)
+    BaseActions: bindActionCreators(baseActions, dispatch),
+    CategoryActions: bindActionCreators(categoryActions, dispatch)
   })
 )(withRouter(HeaderContainer))

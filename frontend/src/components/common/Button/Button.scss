@@ -21,14 +21,21 @@
 
   &.default {
     background: $oc-gray-4;
+  }
+
+  &.outline {
     &:hover {
-      @include material-shadow(2, 0.5);
+      background: $oc-gray-1;
     }
   }
 
   &.gray {
     background: $oc-gray-7;
     color: white;
+
+    &:hover {
+      background: $oc-gray-8;
+    }
   }
 
   &.blue {
@@ -38,5 +45,9 @@
 
   & + & {
     margin-left: 0.5rem;
+  }
+
+  &:hover {
+    @include material-shadow(2, 0.5);
   }
 }

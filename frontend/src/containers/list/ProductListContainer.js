@@ -30,7 +30,7 @@ class ProductListContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     const { BaseActions } = this.props
-    // BaseActions.initialize()
+    BaseActions.initialize()
     BaseActions.setProgress({
       name: 'completed',
       value: 30

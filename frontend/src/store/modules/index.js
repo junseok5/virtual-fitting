@@ -1,4 +1,5 @@
 export { default as base } from './base'
+export { default as category } from './category'
 export { default as list } from './list'
 export { default as product } from './product'
 export { default as user } from './user'

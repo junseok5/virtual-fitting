@@ -10,7 +10,7 @@ exports.getProductInfo = async (ctx) => {
   const { id } = ctx.params
 
   try {
-    const productData = Product.findById(id).exec()
+    const productData = await Product.findById(id).exec()
     if (!productData) {
       ctx.status = 404
       return
@@ -43,40 +43,6 @@ exports.getList = async (ctx) => {
     ...query,
     $text: { $search: keyword }
   } : { ...query }
-  // if (category) {
-  //   query = {
-  //     category
-  //   }
-  // }
-  // if (keyword) {
-  //   query = {
-  //     ...query,
-  //     $text: { $search: keyword }
-  //   }
-  // }
-  // if (sellerId) {
-  //   query = {
-  //     ...query,
-  //     writer: sellerId
-  //   }
-  // }
-  console.log(query)
-
-  // let query = category && {
-  //   category
-  // }
-
-  // // 키워드 검색
-  // query = keyword && {
-  //   ...query,
-  //   $text: { $search: keyword }
-  // }
-
-  // // 판매자의 상품 조회
-  // query = sellerId && {
-  //   ...query,
-  //   writer: sellerId
-  // }
 
   if (page < 1) {
     ctx.status = 400

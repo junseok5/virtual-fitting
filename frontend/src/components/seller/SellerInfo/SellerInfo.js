@@ -69,7 +69,7 @@ const SellerInfo = ({
               showEdit &&
               <input
                 type="text"
-                className={cx('_input-form')}
+                className={cx('_input-form', '_small_input')}
                 name="companyName"
                 value={editedCompanyName}
                 onChange={onChangeInput}
@@ -90,7 +90,7 @@ const SellerInfo = ({
               showEdit &&
               <input
                 type="text"
-                className={cx('_input-form')}
+                className={cx('_input-form', '_small_input')}
                 name="managerName"
                 value={editedManagerName}
                 onChange={onChangeInput}
@@ -107,7 +107,7 @@ const SellerInfo = ({
               showEdit &&
               <input
                 type="tel"
-                className={cx('_input-form')}
+                className={cx('_input-form', '_small_input')}
                 name="contact"
                 value={editedContact}
                 onChange={onChangeInput}
@@ -116,17 +116,17 @@ const SellerInfo = ({
             }
           </div>
         </div>
-        <Button onClick={onLogout}>로그아웃</Button>
-        <Button onClick={() => onShowModal('password')}>비밀번호 변경</Button>
         {
           !showEdit && <Button onClick={onShowEdit}>수정</Button>
         }
         {
-          showEdit && <Button onClick={onPatchSellerInfo}>완료</Button>
+          showEdit && <Button theme="gray" onClick={onPatchSellerInfo}>완료</Button>
         }
         {
-          showEdit && <Button onClick={onShowEdit}>취소</Button>
+          showEdit && <Button theme="gray" onClick={onShowEdit}>취소</Button>
         }
+        <Button onClick={onLogout}>로그아웃</Button>
+        <Button onClick={() => onShowModal('password')}>비밀번호 변경</Button>
       </div>
       {/* 판매자 기본정보 끝 */}
 

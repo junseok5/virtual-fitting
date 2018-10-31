@@ -1,15 +1,12 @@
 import { createAction, handleActions } from 'redux-actions'
 
 import { Map } from 'immutable'
-import { pender } from 'redux-pender'
 
 // action types
 const SHOW_MODAL = 'base/SHOW_MODAL'
 const HIDE_MODAL = 'base/HIDE_MODAL'
 const SET_MODAL_MESSAGE = 'base/SET_MODAL_MESSAGE'
 const CHANGE_INPUT_MODAL_PASSWORD = 'base/CHANGE_INPUT_MODAL_PASSWORD'
-const SHOW_SIDEBAR = 'base/SHOW_SIDEBAR'
-const HIDE_SIDEBAR = 'base/HIDE_SIDEBAR'
 const SHOW_SEARCHBAR = 'base/SHOW_SEARCHBAR'
 const HIDE_SEARCHBAR = 'base/HIDE_SEARCHBAR'
 const SET_SEARCH_INPUT = 'base/SET_SEARCH_INPUT'
@@ -21,8 +18,6 @@ export const showModal = createAction(SHOW_MODAL)
 export const hideModal = createAction(HIDE_MODAL)
 export const setModalMessage = createAction(SET_MODAL_MESSAGE)
 export const changeInputModalPassword = createAction(CHANGE_INPUT_MODAL_PASSWORD)
-export const showSidebar = createAction(SHOW_SIDEBAR)
-export const hideSidebar = createAction(HIDE_SIDEBAR)
 export const showSearchbar = createAction(SHOW_SEARCHBAR)
 export const hideSearchbar = createAction(HIDE_SEARCHBAR)
 export const setSearchInput = createAction(SET_SEARCH_INPUT)
@@ -42,9 +37,6 @@ const initialState = Map({
     passwordBefore: '',
     passwordNew1: '',
     passwordNew2: ''
-  }),
-  sidebar: Map({
-    visible: false
   }),
   searchbar: Map({
     visible: false
@@ -76,8 +68,6 @@ export default handleActions({
     const { name, value } = action.payload
     return state.setIn(['modalPasswordForm', name], value)
   },
-  [SHOW_SIDEBAR]: (state, action) => state.setIn(['sidebar', 'visible'], true),
-  [HIDE_SIDEBAR]: (state, action) => state.setIn(['sidebar', 'visible'], false),
   [SHOW_SEARCHBAR]: (state, action) => state.setIn(['searchbar', 'visible'], true),
   [HIDE_SEARCHBAR]: (state, action) => state.setIn(['searchbar', 'visible'], false),
   [SET_SEARCH_INPUT]: (state, action) => state.set('searchbox', action.payload),

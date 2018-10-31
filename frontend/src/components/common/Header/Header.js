@@ -21,6 +21,7 @@ class Header extends Component {
       onToggleSearch,
       onKeyPress,
       actionSearch,
+      actionSidebar,
       searchbox,
       user,
       seller,
@@ -50,7 +51,8 @@ class Header extends Component {
       <header className={cx('header')} style={searchbarStyle}>
         <div className={cx('header-content')}>
           <div className={cx('menu-icon')} onClick={onToggleSide}>
-            <Icon><FaBars /></Icon>
+            { !actionSidebar && <Icon><FaBars /></Icon> }
+            { actionSidebar && <Icon><FaTimes /></Icon> }
           </div>
           <div className={cx('brand')}>
             <Link to="/">onNoff</Link>
@@ -66,7 +68,7 @@ class Header extends Component {
           </div>
           <div className={cx('right')}>
             <div className={cx('icons')} onClick={onToggleSearch}>
-              <Icon><FaSearch /></Icon>
+              { !actionSearch && <Icon><FaSearch /></Icon> }
             </div>
             {
               loginType === 'user' && <div className={cx('login-info')}>
@@ -81,7 +83,7 @@ class Header extends Component {
               </div>
             }
             {
-              !loginType && <Button to="/login/user">로그인</Button>
+              !loginType && <Button to="/login/user" theme="outline">로그인</Button>
             }
           </div>
         </div>

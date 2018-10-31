@@ -60,6 +60,7 @@ class UserInfoContainer extends Component {
       name: 'completed',
       value: 100
     })
+    document.documentElement.scrollTop = 0
     setTimeout(() => {
       BaseActions.setProgress({
         name: 'visible',
