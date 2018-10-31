@@ -18,7 +18,36 @@ class UserInfoContainer extends Component {
     const { BaseActions } = this.props
 
     BaseActions.initialize()
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 20
+    })
     this.handleUserInfo()
+  }
+
+  componentWillReceiveProps () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 30
+    })
+  }
+
+  shouldComponentUpdate () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 50
+    })
+    return true
+  }
+
+  componentWillUpdate () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 80
+    })
   }
 
   componentDidUpdate (prevProps, prevState) {

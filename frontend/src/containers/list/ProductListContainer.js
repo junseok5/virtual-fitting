@@ -12,12 +12,43 @@ class ProductListContainer extends Component {
 
   getProductList = () => {
     const { page, category, keyword, sellerId, ListActions } = this.props
-    console.log(page, category, keyword, sellerId)
     ListActions.getProductList({ page, category, keyword, sellerId })
   }
 
   componentWillMount () {
+    const { BaseActions } = this.props
+
+    BaseActions.initialize()
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 20
+    })
     this.getProductList()
+  }
+
+  componentWillReceiveProps () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 30
+    })
+  }
+
+  shouldComponentUpdate () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 50
+    })
+    return true
+  }
+
+  componentWillUpdate () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 80
+    })
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -60,10 +91,11 @@ class ProductListContainer extends Component {
 
 
     if (loading) {
-      BaseActions.setProgress({
-        name: 'completed',
-        value: 30
-      })
+      // console.log('render loading')
+      // BaseActions.setProgress({
+      //   name: 'completed',
+      //   value: 70
+      // })
       return null
     }
 
