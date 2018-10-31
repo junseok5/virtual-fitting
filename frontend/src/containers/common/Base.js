@@ -9,6 +9,7 @@ import AskLeaveModalContainer from 'containers/modal/AskLeaveModalContainer'
 import AskRemoveModalContainer from 'containers/modal/AskRemoveModalContainer'
 import ErrorMessageModalContainer from 'containers/modal/ErrorMessageModalContainer'
 import PasswordEditModalContainer from 'containers/modal/PasswordEditModalContainer'
+import ProgressbarContainer from 'containers/common/ProgressbarContainer'
 
 class Base extends Component {
 
@@ -40,8 +41,11 @@ class Base extends Component {
   }
 
   render () {
+    const { completed } = this.props
+
     return (
       <div>
+        <ProgressbarContainer />
         <AskLeaveModalContainer />
         <AskRemoveModalContainer />
         <ErrorMessageModalContainer />

@@ -3,33 +3,25 @@ import ProductList from 'components/list/ProductList'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as listActions from 'store/modules/list'
+import * as baseActions from 'store/modules/base'
 
 import Pagination from 'components/list/Pagination'
 
-import Progress from 'react-progressbar'
 
 class ProductListContainer extends Component {
 
-  state = {
-    completed: 0
-  }
-
-  setCompleted = (completed) => {
-    this.setState({ completed })
-  }
-
   getProductList = () => {
-    this.setCompleted(100)
     const { page, category, keyword, sellerId, ListActions } = this.props
     console.log(page, category, keyword, sellerId)
     ListActions.getProductList({ page, category, keyword, sellerId })
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.getProductList()
   }
 
   componentDidUpdate (prevProps, prevState) {
+    this.handleCompletedLoading()
     // 페이지, 카테고리, 키워드가 바뀔 때 다시 불러온다.
     if (prevProps.page !== this.props.page ||
       prevProps.category !== this.props.category ||
@@ -40,6 +32,20 @@ class ProductListContainer extends Component {
       }
   }
 
+  handleCompletedLoading = () => {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 100
+    })
+    setTimeout(() => {
+      BaseActions.setProgress({
+        name: 'visible',
+        value: false
+      })
+    }, 200)
+  }
+
   render () {
     const {
       loading,
@@ -48,19 +54,21 @@ class ProductListContainer extends Component {
       lastPage,
       category,
       keyword,
-      sellerId
+      sellerId,
+      BaseActions
     } = this.props
-    const { completed } = this.state
 
-    if (loading) return null
+
+    if (loading) {
+      BaseActions.setProgress({
+        name: 'completed',
+        value: 30
+      })
+      return null
+    }
 
     return (
       <div>
-        <Progress
-          completed={completed}
-          color="#9253EB"
-          height="7px"
-        />
         <ProductList products={products} />
         <Pagination
           page={page}
@@ -81,6 +89,7 @@ export default connect(
     loading: state.pender.pending['list/GET_PRODUCT_LIST']
   }),
   (dispatch) => ({
-    ListActions: bindActionCreators(listActions, dispatch)
+    ListActions: bindActionCreators(listActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch)
   })
 )(ProductListContainer)

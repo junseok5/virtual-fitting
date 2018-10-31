@@ -14,16 +14,37 @@ class SellerInfoContainer extends Component {
     initEdit: true
   }
 
+  componentWillMount () {
+    const { BaseActions } = this.props
+
+    BaseActions.initialize()
+    this.handleSellerInfo()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    this.handleCompletedLoading()
+  }
+
+  handleCompletedLoading = () => {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 100
+    })
+    setTimeout(() => {
+      BaseActions.setProgress({
+        name: 'visible',
+        value: false
+      })
+    }, 200)
+  }
+
   handleSellerInfo = async () => {
     const { SellerActions } = this.props
     await SellerActions.getSellerInfo()
 
     const { meta, history } = this.props
     if (!meta) history.push('/')
-  }
-
-  componentWillMount () {
-    this.handleSellerInfo()
   }
 
   handleLogout = async () => {
@@ -109,7 +130,16 @@ class SellerInfoContainer extends Component {
   }
 
   render () {
-    const { meta, editForm } = this.props
+    const { meta, editForm, BaseActions, loading } = this.props
+    
+    if (loading) {
+      BaseActions.setProgress({
+        name: 'completed',
+        value: 30
+      })
+      return null
+    }
+    
     const { showEdit, initEdit } = this.state
     const {
       handleLogout,
@@ -142,7 +172,8 @@ export default connect(
     meta: state.seller.get('meta'),
     result: state.seller.get('result'),
     error: state.seller.get('error'),
-    editForm: state.seller.get('editForm')
+    editForm: state.seller.get('editForm'),
+    loading: state.pender.pending['seller/GET_SELLER_INFO']
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

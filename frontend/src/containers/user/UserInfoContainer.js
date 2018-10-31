@@ -14,6 +14,31 @@ class UserInfoContainer extends Component {
     initEdit: true
   }
 
+  componentWillMount () {
+    const { BaseActions } = this.props
+
+    BaseActions.initialize()
+    this.handleUserInfo()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    this.handleCompletedLoading()
+  }
+
+  handleCompletedLoading = () => {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 100
+    })
+    setTimeout(() => {
+      BaseActions.setProgress({
+        name: 'visible',
+        value: false
+      })
+    }, 200)
+  }
+
   handleUserInfo = async () => {
     const { UserActions } = this.props
     await UserActions.getUserInfo()
@@ -21,10 +46,6 @@ class UserInfoContainer extends Component {
     const { meta, history } = this.props
     // 로그인되어 있지 않으면 메인화면으로 이동
     if (!meta) history.push('/')
-  }
-
-  componentWillMount () {
-    this.handleUserInfo()
   }
 
   handleLogout = async () => {
@@ -128,7 +149,17 @@ class UserInfoContainer extends Component {
   }
 
   render () {
-    const { meta, editForm } = this.props
+
+    const { meta, editForm, BaseActions, loading } = this.props
+
+    if (loading) {
+      BaseActions.setProgress({
+        name: 'completed',
+        value: 30
+      })
+      return null
+    }
+
     const {
       showEdit,
       initEdit,
@@ -166,7 +197,8 @@ export default connect(
     meta: state.user.get('meta'),
     result: state.user.get('result'),
     error: state.user.get('error'),
-    editForm: state.user.get('editForm')
+    editForm: state.user.get('editForm'),
+    loading: state.pender.pending['user/GET_USER_INFO']
   }),
   (dispatch) => ({
     UserActions: bindActionCreators(userActions, dispatch),

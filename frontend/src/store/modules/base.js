@@ -13,6 +13,7 @@ const HIDE_SIDEBAR = 'base/HIDE_SIDEBAR'
 const SHOW_SEARCHBAR = 'base/SHOW_SEARCHBAR'
 const HIDE_SEARCHBAR = 'base/HIDE_SEARCHBAR'
 const SET_SEARCH_INPUT = 'base/SET_SEARCH_INPUT'
+const SET_PROGRESS = 'base/SET_PROGRESS'
 const INITIALIZE = 'base/INITIALIZE'
 
 // action creators
@@ -25,6 +26,7 @@ export const hideSidebar = createAction(HIDE_SIDEBAR)
 export const showSearchbar = createAction(SHOW_SEARCHBAR)
 export const hideSearchbar = createAction(HIDE_SEARCHBAR)
 export const setSearchInput = createAction(SET_SEARCH_INPUT)
+export const setProgress = createAction(SET_PROGRESS)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
@@ -47,7 +49,11 @@ const initialState = Map({
   searchbar: Map({
     visible: false
   }),
-  searchbox: ''
+  searchbox: '',
+  progress: Map({
+    completed: 0,
+    visible: true
+  })
 })
 
 // reducer
@@ -74,5 +80,9 @@ export default handleActions({
   [HIDE_SIDEBAR]: (state, action) => state.setIn(['sidebar', 'visible'], false),
   [SHOW_SEARCHBAR]: (state, action) => state.setIn(['searchbar', 'visible'], true),
   [HIDE_SEARCHBAR]: (state, action) => state.setIn(['searchbar', 'visible'], false),
-  [SET_SEARCH_INPUT]: (state, action) => state.set('searchbox', action.payload)
+  [SET_SEARCH_INPUT]: (state, action) => state.set('searchbox', action.payload),
+  [SET_PROGRESS]: (state, action) => {
+    const { name, value } = action.payload
+    return state.setIn(['progress', name], value)
+  }
 }, initialState)
