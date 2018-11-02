@@ -86,19 +86,33 @@ class ProductListContainer extends Component {
     history.push(`/product/${id}`)
   }
 
+  handlePageChange = (data) => {
+    console.log('hi')
+    const { history, category, keyword, sellerId } = this.props
+    const selectedPage = data.selected + 1
+
+    if (category) {
+      history.push(`/category/${category}/${selectedPage}`)
+    } else if (keyword) {
+      history.push(`/keyword/${keyword}/${selectedPage}`)
+    } else if (sellerId) {
+      history.push(`/manage/${sellerId}/${selectedPage}`)
+    } else {
+      history.push(`/page/${selectedPage}`)
+    }
+  }
+
   render () {
     const {
       loading,
       products,
       page,
-      lastPage,
-      category,
-      keyword,
-      sellerId,
+      lastPage
     } = this.props
     
     const {
-      handleMoveToProduct
+      handleMoveToProduct,
+      handlePageChange
     } = this
 
     if (loading) {
@@ -114,9 +128,7 @@ class ProductListContainer extends Component {
         <Pagination
           page={page}
           lastPage={lastPage}
-          category={category}
-          keyword={keyword}
-          sellerId={sellerId}
+          onPageChange={handlePageChange}
         />
       </div>
     )

@@ -51,14 +51,14 @@ exports.getList = async (ctx) => {
 
   try {
     const products = await Product.findList(query, page)
-    const productsCount = await Product.countDocuments().exec()
+    const productsCount = await Product.countDocuments(query).exec()
     const limitTitleLength = product => ({
       ...product,
       productName: product.productName.length < 42 ? product.productName : `${product.productName.slice(0, 41)}...`
     })
     ctx.body = products.map(limitTitleLength)
     // 마지막 페이지 알려주기
-    ctx.set('Last-Page', Math.ceil(productsCount / 40))
+    ctx.set('Last-Page', Math.ceil(productsCount / 20))
   } catch (e) {
     ctx.throw(500, e)
   }

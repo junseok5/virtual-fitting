@@ -25,7 +25,7 @@ const Product = new Schema({
 })
 
 // 한 페이지에 보일 상품 개수
-const numOfProduct = 40
+const numOfProduct = 20
 
 Product.statics.findList = function (query, page) {
   return this.find(query)

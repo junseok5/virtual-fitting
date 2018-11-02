@@ -6,4 +6,39 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+
+  .paginator {
+    display: flex;
+
+    a {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      margin: 0.2rem;
+
+      font-weight: bold;
+      font-size: 0.8rem;
+      user-select: none;
+
+      border: 1px solid $oc-gray-4;
+      border-radius: 2px;
+      background: white;
+
+      // transition: all .2s;
+
+      cursor: pointer;
+      
+      &:hover {
+        @include material-shadow(2, 0.5);
+      }
+    }
+
+    li.active {
+      a {
+        background: $oc-gray-7;
+        color: white;
+      }
+    }
+  }
 }

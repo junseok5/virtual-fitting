@@ -2,41 +2,27 @@ import React from 'react'
 import styles from './Pagination.scss'
 import classNames from 'classnames/bind'
 import Button from 'components/common/Button'
+import Paginator from 'react-paginate'
 
 const cx = classNames.bind(styles)
 
 
-const Pagination = ({ page, lastPage, category, keyword, sellerId }) => {
-  const createPagePath = (page) => {
-    let path = null
-    if (category) {
-      path = `/category/${category}/${page}`
-    } else if (keyword) {
-      path = `/keyword/${keyword}/${page}`
-    } else if (sellerId) {
-      path = `/manage/${sellerId}/${page}`
-    } else {
-      path = `/page/${page}`
-    }
-
-    return path
-  }
-
-  // Pagination algorithm
+const Pagination = ({ page, lastPage, onPageChange }) => {
 
   return (
     <div className={cx('pagination')}>
-      <Button theme="gray">1</Button>
-      <Button>2</Button>
-      <Button>3</Button>
-      <Button>4</Button>
-      <Button>5</Button>
-      <Button>6</Button>
-      <Button>7</Button>
-      <Button>8</Button>
-      <Button>9</Button>
-      <Button>10</Button>
-      <Button>Next</Button>
+      <Paginator
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
+        initialPage={page - 1}
+        pageCount={lastPage}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={4}
+        onPageChange={onPageChange}
+        containerClassName={"paginator"}
+        activeClassName={"active"}
+      />
     </div>
   )
 }

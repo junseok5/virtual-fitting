@@ -5,6 +5,11 @@
   flex-direction: row;
   flex-wrap: wrap;
 
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
+
   .product-item {
     width: 200px;
     margin: 1rem;

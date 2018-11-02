@@ -11,6 +11,7 @@ class CategoryContainer extends Component {
     const { CategoryActions, history } = this.props
     console.log(value, path)
     CategoryActions.setSelected(value)
+    CategoryActions.hideSidebar()
     history.push(path)
   }
 

@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 
 const ProductItem = ({
   _id,
-  modelPhotoUri,
+  productPhotoUri,
   productName,
   freeShipping,
   price,
@@ -17,7 +17,7 @@ const ProductItem = ({
   return (
     <div className={cx('product-item', 'animated', 'fadeIn')}>
       <div className={cx('product-photo')} onClick={() => onMoveToProduct(_id)}>
-        <img src={modelPhotoUri} draggable="false" />
+        <img src={productPhotoUri} draggable="false" />
       </div>
       <div className={cx('product-info')}>
         <div className={cx('product-info-title')}>{ productName }</div>
@@ -37,7 +37,7 @@ const ProductList = ({ products, onMoveToProduct }) => {
     (product, key) => {
       const {
         _id,
-        modelPhotoUri,
+        productPhotoUri,
         productName,
         freeShipping,
         price
@@ -46,7 +46,7 @@ const ProductList = ({ products, onMoveToProduct }) => {
       return (
         <ProductItem
           _id={_id}
-          modelPhotoUri={modelPhotoUri}
+          productPhotoUri={productPhotoUri}
           productName={productName}
           freeShipping={freeShipping}
           price={price}
@@ -59,6 +59,7 @@ const ProductList = ({ products, onMoveToProduct }) => {
 
   return (
     <div className={cx('product-list')}>
+      { products.size === 0 && <h2>상품이 없습니다.</h2> }
       { productList }
     </div>
   )
