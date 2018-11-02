@@ -17,6 +17,14 @@
 
   transition: all .2s;
 
+  &.gray {
+    background: $oc-gray-5;
+
+    &:hover {
+      background: $oc-gray-6;
+    }
+  }
+
   &:hover {
     background: $oc-blue-6;
   }

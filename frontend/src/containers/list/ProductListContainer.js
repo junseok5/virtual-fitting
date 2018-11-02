@@ -86,6 +86,11 @@ class ProductListContainer extends Component {
     history.push(`/product/${id}`)
   }
 
+  handleMoveToEdit = (id) => {
+    const { history } = this.props
+    history.push(`/edit/product/${id}`)
+  }
+
   handlePageChange = (data) => {
     console.log('hi')
     const { history, category, keyword, sellerId } = this.props
@@ -107,12 +112,14 @@ class ProductListContainer extends Component {
       loading,
       products,
       page,
+      sellerId,
       lastPage
     } = this.props
     
     const {
       handleMoveToProduct,
-      handlePageChange
+      handlePageChange,
+      handleMoveToEdit
     } = this
 
     if (loading) {
@@ -122,14 +129,19 @@ class ProductListContainer extends Component {
     return (
       <div>
         <ProductList
+          sellerId={sellerId}
           products={products}
           onMoveToProduct={handleMoveToProduct}
+          onMoveToEdit={handleMoveToEdit}
         />
-        <Pagination
-          page={page}
-          lastPage={lastPage}
-          onPageChange={handlePageChange}
-        />
+        {
+          products.size > 0 &&
+          <Pagination
+            page={page}
+            lastPage={lastPage}
+            onPageChange={handlePageChange}
+          />
+        }
       </div>
     )
   }

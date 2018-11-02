@@ -8,15 +8,17 @@ const cx = classNames.bind(styles)
 
 const ProductItem = ({
   _id,
+  sellerId,
   productPhotoUri,
   productName,
   freeShipping,
   price,
-  onMoveToProduct
+  onMoveToProduct,
+  onMoveToEdit
 }) => {
   return (
     <div className={cx('product-item', 'animated', 'fadeIn')}>
-      <div className={cx('product-photo')} onClick={() => onMoveToProduct(_id)}>
+      <div className={cx('product-photo')} onClick={!sellerId ? () => onMoveToProduct(_id) : () => onMoveToEdit(_id)}>
         <img src={productPhotoUri} draggable="false" />
       </div>
       <div className={cx('product-info')}>
@@ -32,7 +34,7 @@ const ProductItem = ({
   )
 }
 
-const ProductList = ({ products, onMoveToProduct }) => {
+const ProductList = ({ sellerId, products, onMoveToProduct, onMoveToEdit }) => {
   const productList = products.map(
     (product, key) => {
       const {
@@ -46,12 +48,14 @@ const ProductList = ({ products, onMoveToProduct }) => {
       return (
         <ProductItem
           _id={_id}
+          sellerId={sellerId}
           productPhotoUri={productPhotoUri}
           productName={productName}
           freeShipping={freeShipping}
           price={price}
           key={key}
           onMoveToProduct={onMoveToProduct}
+          onMoveToEdit={onMoveToEdit}
         />
       )
     }

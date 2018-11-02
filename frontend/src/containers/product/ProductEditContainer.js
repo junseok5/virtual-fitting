@@ -11,9 +11,19 @@ import regex from 'lib/regex'
 
 class ProductEditContainer extends Component {
 
+  state = {
+    initEdit: true
+  }
+
+  getProductInfo = async () => {
+    const { ProductActions, id } = this.props // product_id
+    await ProductActions.getProduct(id)
+  }
+
   componentDidMount () {
-    const { ProductActions } = this.props
+    const { ProductActions, id } = this.props
     ProductActions.initialize()
+    if (id) this.getProductInfo()
   }
 
   handleChangeInput = (e) => {
@@ -127,24 +137,41 @@ class ProductEditContainer extends Component {
     }
   }
 
+  handleInitEdit = (patch) => {
+    console.log('hi')
+    const { ProductActions } = this.props
+    const { name, value } = patch
+
+    this.setState({ initEdit: false })
+    ProductActions.changeInput({ name, value })
+  }
+
   render () {
     const {
       form,
-      previewImage
+      previewImage,
+      id: productId,
+      product: product
     } = this.props
+    const { initEdit } = this.state
     const {
       handleChangeInput,
       handleChangeInputPhoto,
-      handleSubmitProduct
+      handleSubmitProduct,
+      handleInitEdit
     } = this
 
     return (
       <ProductEdit
+        productId={productId}
         forms={form}
+        productInfo={product}
+        initEdit={initEdit}
         previewImage={previewImage}
         onChangeInput={handleChangeInput}
         onChangeInputPhoto={handleChangeInputPhoto}
         onSubmitProduct={handleSubmitProduct}
+        onInitEdit={handleInitEdit}
       />
     )
   }
@@ -156,7 +183,8 @@ export default connect(
     previewImage: state.product.get('previewImage'),
     result: state.product.get('result'),
     error: state.product.get('error'),
-    seller: state.seller.get('seller')
+    seller: state.seller.get('seller'),
+    product: state.product.get('product')
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

@@ -7,11 +7,15 @@ const cx = classNames.bind(styles)
 
 
 const ProductEdit = ({
+  productId,
   forms,
+  initEdit,
+  productInfo,
   previewImage,
   onChangeInput,
   onChangeInputPhoto,
-  onSubmitProduct
+  onSubmitProduct,
+  onInitEdit
 }) => {
   const {
     productName,
@@ -27,6 +31,26 @@ const ProductEdit = ({
     modelPhotoFile: modelUri,
     productPhotoFile: productUri
   } = previewImage.toJS()
+
+  if (productInfo && initEdit) {
+    const {
+      productName: eProductName,
+      price: ePrice,
+      salesLink: eSalesLink,
+      category: eCategory,
+      subCategory: eSubCategory,
+      targetGender: eTargetGender,
+      freeShipping: eFreeShipping
+    } = productInfo.toJS()
+
+    onInitEdit({ name: 'productName', value: eProductName })
+    onInitEdit({ name: 'price', value: ePrice })
+    onInitEdit({ name: 'salesLink', value: eSalesLink })
+    onInitEdit({ name: 'category', value: eCategory })
+    onInitEdit({ name: 'subCategory', value: eSubCategory })
+    onInitEdit({ name: 'targetGender', value: eTargetGender })
+    onInitEdit({ name: 'freeShipping', value: eFreeShipping })
+  }
 
   return (
     <div className={cx('product-edit')}>
@@ -224,9 +248,23 @@ const ProductEdit = ({
       {/* 상품 메인 끝 */}
       
       <div className={cx('product-edit-btn')}>
-        <div className={cx('_button')} onClick={onSubmitProduct}>
-          등록하기
-        </div>
+        {
+          !productId &&
+          <div className={cx('_button')} onClick={onSubmitProduct}>
+            등록하기
+          </div>
+        }
+        {
+          productId &&
+          <div>
+            <div className={cx('_button')}>
+              수정하기
+            </div>
+            <div className={cx('_button', 'gray')}>
+              삭제하기
+            </div>
+          </div>
+        }
       </div>
     </div>
   )

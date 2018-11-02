@@ -1,14 +1,18 @@
 import React from 'react'
 import PageTemplate from 'components/common/PageTemplate'
 import MainTemplate from 'components/common/MainTemplate'
-import ProductEdit from 'components/product/ProductEdit'
+import ProductEditContainer from 'containers/product/ProductEditContainer'
 import Base from 'containers/common/Base'
 
-const ProductEditPage = () => {
+const ProductEditPage = ({ match }) => {
+  const { id } = match.params
+
   return (
     <PageTemplate>
       <MainTemplate>
-        <ProductEdit />
+        <ProductEditContainer
+          id={id}
+        />
         <Base />
       </MainTemplate>
     </PageTemplate>
