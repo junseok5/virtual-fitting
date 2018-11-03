@@ -227,7 +227,7 @@ exports.deleteProduct = async (ctx) => {
       return
     }
 
-    await Product.deleteOne({ id }).exec()
+    await Product.deleteOne({ _id: id }).exec()
     ctx.status = 204
   } catch (e) {
     ctx.throw(500, e)

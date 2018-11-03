@@ -15,7 +15,9 @@ const ProductEdit = ({
   onChangeInput,
   onChangeInputPhoto,
   onSubmitProduct,
-  onInitEdit
+  onEditProduct,
+  onInitEdit,
+  onRemove
 }) => {
   const {
     productName,
@@ -24,7 +26,9 @@ const ProductEdit = ({
     category,
     subCategory,
     targetGender,
-    freeShipping
+    freeShipping,
+    modelPhotoUri,
+    productPhotoUri
   } = forms.toJS()
 
   const {
@@ -40,7 +44,9 @@ const ProductEdit = ({
       category: eCategory,
       subCategory: eSubCategory,
       targetGender: eTargetGender,
-      freeShipping: eFreeShipping
+      freeShipping: eFreeShipping,
+      modelPhotoUri: eModelPhotoUri,
+      productPhotoUri: eProductPhotoUri
     } = productInfo.toJS()
 
     onInitEdit({ name: 'productName', value: eProductName })
@@ -50,6 +56,8 @@ const ProductEdit = ({
     onInitEdit({ name: 'subCategory', value: eSubCategory })
     onInitEdit({ name: 'targetGender', value: eTargetGender })
     onInitEdit({ name: 'freeShipping', value: eFreeShipping })
+    onInitEdit({ name: 'modelPhotoUri', value: eModelPhotoUri })
+    onInitEdit({ name: 'productPhotoUri', value: eProductPhotoUri })
   }
 
   return (
@@ -207,39 +215,45 @@ const ProductEdit = ({
           <div className={cx('photo-model')}>
             <div className={cx('_subtitle')}>모델 사진</div>
             <div className={cx('photo-model-upload')}>
-              <div className={cx('_input-file')}>
-                <label htmlFor="_file_model">
-                  <Button>모델 사진 업로드</Button>
-                </label>
-                <input
-                  type="file"
-                  id="_file_model"
-                  accept="image/*"
-                  onChange={(e) => onChangeInputPhoto(e, 'modelPhotoFile')}
-                />
-              </div>
+              {
+                !productInfo &&
+                <div className={cx('_input-file')}>
+                  <label htmlFor="_file_model">
+                    <Button>모델 사진 업로드</Button>
+                  </label>
+                  <input
+                    type="file"
+                    id="_file_model"
+                    accept="image/*"
+                    onChange={(e) => onChangeInputPhoto(e, 'modelPhotoFile')}
+                  />
+                </div>   
+              }
             </div>
             <div className={cx('photo-model-view')}>
-              <img src={modelUri} draggable="false" />
+              <img src={productInfo ? modelPhotoUri : modelUri} alt="모델 이미지" draggable="false" />
             </div>
           </div>
           <div className={cx('photo-cloth')}>
             <div className={cx('_subtitle')}>상품 사진</div>
             <div className={cx('photo-cloth-upload')}>
-              <div className={cx('_input-file')}>
-                <label htmlFor="_file_product">
-                  <Button>상품 사진 업로드</Button>
-                </label>
-                <input
-                  type="file"
-                  id="_file_product"
-                  accept="image/*"
-                  onChange={(e) => onChangeInputPhoto(e, 'productPhotoFile')}
-                />
-              </div>
+              {
+                !productInfo &&
+                <div className={cx('_input-file')}>
+                  <label htmlFor="_file_product">
+                    <Button>상품 사진 업로드</Button>
+                  </label>
+                  <input
+                    type="file"
+                    id="_file_product"
+                    accept="image/*"
+                    onChange={(e) => onChangeInputPhoto(e, 'productPhotoFile')}
+                  />
+                </div>
+              }
             </div>
             <div className={cx('photo-cloth-view')}>
-              <img src={productUri} draggable="false" />
+              <img src={productInfo ? productPhotoUri : productUri} alt="상품 이미지" draggable="false" />
             </div>
           </div>
         </div>
@@ -257,10 +271,10 @@ const ProductEdit = ({
         {
           productId &&
           <div>
-            <div className={cx('_button')}>
+            <div className={cx('_button')} onClick={onEditProduct}>
               수정하기
             </div>
-            <div className={cx('_button', 'gray')}>
+            <div className={cx('_button', 'gray')} onClick={onRemove}>
               삭제하기
             </div>
           </div>

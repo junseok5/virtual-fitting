@@ -15,15 +15,18 @@ class ProductEditContainer extends Component {
     initEdit: true
   }
 
-  getProductInfo = async () => {
-    const { ProductActions, id } = this.props // product_id
-    await ProductActions.getProduct(id)
-  }
+  getProductInfo = async (id) => {
+    const { ProductActions } = this.props // product_id
+    try {
+      await ProductActions.getProduct(id)
+    } catch (e) {
 
-  componentDidMount () {
-    const { ProductActions, id } = this.props
-    ProductActions.initialize()
-    if (id) this.getProductInfo()
+    }
+  }
+  
+  componentWillMount () {
+    const { id } = this.props
+    if (id) this.getProductInfo(id)
   }
 
   handleChangeInput = (e) => {
@@ -137,8 +140,81 @@ class ProductEditContainer extends Component {
     }
   }
 
+  handleEditProduct = async () => {
+    const { ProductActions, BaseActions, form, id } = this.props
+    const {
+      productName,
+      price,
+      salesLink,
+      category,
+      subCategory,
+      targetGender,
+      freeShipping
+    } = form.toJS()
+
+    // validation
+    if (!regex.productName.test(productName)) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 상품 이름입니다.'
+      })
+      return
+    } else if (price < 0) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '상품 가격은 0원 이상이어야 합니다.'
+      })
+      return
+    } else if (!salesLink) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 판매 링크입니다.'
+      })
+      return
+    } else if (!regex.category.test(category)) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 카테고리 이름입니다.'
+      })
+      return
+    } else if (!regex.subCategory.test(subCategory)) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 하위 카테고리 이름입니다.'
+      })
+      return
+    } else if (!regex.gender.test(targetGender)) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '잘못된 유형의 성별입니다.'
+      })
+      return
+    }
+
+    try {
+      await ProductActions.editProduct(id, {
+        productName,
+        price,
+        salesLink,
+        category,
+        subCategory,
+        targetGender,
+        freeShipping
+      })
+
+      const { history, seller } = this.props
+      const { _id } = seller.toJS()
+
+      history.push(`/manage/${_id}`)
+    } catch (e) {
+      BaseActions.setModalMessage({
+        modalName: 'error',
+        modalMessage: '상품 수정에 실패하였습니다.'
+      })
+    }
+  }
+
   handleInitEdit = (patch) => {
-    console.log('hi')
     const { ProductActions } = this.props
     const { name, value } = patch
 
@@ -146,19 +222,35 @@ class ProductEditContainer extends Component {
     ProductActions.changeInput({ name, value })
   }
 
+  handleRemove = async () => {
+    const { ProductActions, id, history, seller } = this.props
+
+    try {
+      await ProductActions.removeProduct(id)
+      const { _id } = seller.toJS()
+      history.push(`/manage/${_id}/1`)
+    } catch (e) {
+
+    }
+  }
+
   render () {
+    if (this.props.loading) return null
+
     const {
       form,
       previewImage,
       id: productId,
-      product: product
+      product
     } = this.props
     const { initEdit } = this.state
     const {
       handleChangeInput,
       handleChangeInputPhoto,
       handleSubmitProduct,
-      handleInitEdit
+      handleEditProduct,
+      handleInitEdit,
+      handleRemove
     } = this
 
     return (
@@ -171,7 +263,9 @@ class ProductEditContainer extends Component {
         onChangeInput={handleChangeInput}
         onChangeInputPhoto={handleChangeInputPhoto}
         onSubmitProduct={handleSubmitProduct}
+        onEditProduct={handleEditProduct}
         onInitEdit={handleInitEdit}
+        onRemove={handleRemove}
       />
     )
   }
@@ -184,7 +278,8 @@ export default connect(
     result: state.product.get('result'),
     error: state.product.get('error'),
     seller: state.seller.get('seller'),
-    product: state.product.get('product')
+    product: state.product.get('product'),
+    loading: state.pender.pending['product/GET_PRODUCT']
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

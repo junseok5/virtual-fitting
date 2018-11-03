@@ -27,6 +27,6 @@ export const writeProduct = ({
   return axios.post(`/api/v1.0/products`, data)
 }
 
-export const editProduct = (id, patchData) => axios.patch(`/api/v1.0/products/${id}`, { patchData })
+export const editProduct = (id, patchData) => axios.patch(`/api/v1.0/products/${id}`, patchData)
 
 export const removeProduct = (id) => axios.delete(`/api/v1.0/products/${id}`)

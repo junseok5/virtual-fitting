@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ProductList from 'components/list/ProductList'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as productActions from 'store/modules/product'
 import * as listActions from 'store/modules/list'
 import * as baseActions from 'store/modules/base'
 
@@ -18,8 +19,9 @@ class ProductListContainer extends Component {
   }
 
   componentWillMount () {
-    const { BaseActions } = this.props
+    const { BaseActions, ProductActions } = this.props
 
+    ProductActions.initialize()
     BaseActions.initialize()
     BaseActions.setProgress({
       name: 'completed',
@@ -92,7 +94,6 @@ class ProductListContainer extends Component {
   }
 
   handlePageChange = (data) => {
-    console.log('hi')
     const { history, category, keyword, sellerId } = this.props
     const selectedPage = data.selected + 1
 
@@ -155,6 +156,7 @@ export default connect(
   }),
   (dispatch) => ({
     ListActions: bindActionCreators(listActions, dispatch),
-    BaseActions: bindActionCreators(baseActions, dispatch)
+    BaseActions: bindActionCreators(baseActions, dispatch),
+    ProductActions: bindActionCreators(productActions, dispatch)
   })
 )(withRouter(ProductListContainer))

@@ -10,6 +10,8 @@ const CHANGE_INPUT_PHOTO = 'product/CHANGE_INPUT_PHOTO'
 const SET_PREVIEW_IMAGE = 'product/SET_PREVIEW_IMAGE'
 const WRITE_PRODUCT = 'product/WRITE_PRODUCT'
 const GET_PRODUCT = 'product/GET_PRODUCT'
+const EDIT_PRODUCT = 'product/EDIT_PRODUCT'
+const REMOVE_PRODUCT = 'product/REMOVE_PRODUCT'
 const INITIALIZE = 'product/INITIALIZE'
 
 // action creators
@@ -18,6 +20,8 @@ export const changeInputPhoto = createAction(CHANGE_INPUT_PHOTO)
 export const setPreviewImage = createAction(SET_PREVIEW_IMAGE)
 export const writeProduct = createAction(WRITE_PRODUCT, ProductAPI.writeProduct)
 export const getProduct = createAction(GET_PRODUCT, ProductAPI.getProduct)
+export const editProduct = createAction(EDIT_PRODUCT, ProductAPI.editProduct)
+export const removeProduct = createAction(REMOVE_PRODUCT, ProductAPI.removeProduct)
 export const initialize = createAction(INITIALIZE)
 
 // initial state
