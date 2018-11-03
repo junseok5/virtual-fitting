@@ -25,8 +25,55 @@ class ProductEditContainer extends Component {
   }
   
   componentWillMount () {
-    const { id } = this.props
+    const { BaseActions, id } = this.props
+
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 20
+    })
     if (id) this.getProductInfo(id)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { BaseActions } = this.props
+    
+    BaseActions.initialize()
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 30
+    })
+  }
+
+  shouldComponentUpdate (nextProps) {
+    const { BaseActions } = this.props
+
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 50
+    })
+    return true
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 80
+    })
+  }
+
+  componentDidUpdate () {
+    const { BaseActions } = this.props
+    BaseActions.setProgress({
+      name: 'completed',
+      value: 100
+    })
+    setTimeout(() => {
+      BaseActions.setProgress({
+        name: 'visible',
+        value: false
+      })
+    }, 200)
   }
 
   handleChangeInput = (e) => {

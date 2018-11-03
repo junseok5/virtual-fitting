@@ -22,7 +22,7 @@ class ProductListContainer extends Component {
     const { BaseActions, ProductActions } = this.props
 
     ProductActions.initialize()
-    BaseActions.initialize()
+    // BaseActions.initialize()
     BaseActions.setProgress({
       name: 'completed',
       value: 20
