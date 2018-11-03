@@ -9,5 +9,13 @@
   
     display: flex;
     justify-content: center;
+
+    ._modal-button:hover {
+      transition: all .2s;
+      
+      &:hover {
+        background: $oc-gray-1;
+      }
+    }
   }
 }
