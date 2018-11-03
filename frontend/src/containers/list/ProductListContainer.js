@@ -19,8 +19,11 @@ class ProductListContainer extends Component {
   }
 
   componentWillMount () {
-    const { BaseActions, ProductActions } = this.props
+    const { sellerId, seller, BaseActions, ProductActions } = this.props
 
+    if (sellerId && !seller) {
+      return
+    } 
     ProductActions.initialize()
     // BaseActions.initialize()
     BaseActions.setProgress({
@@ -114,7 +117,8 @@ class ProductListContainer extends Component {
       products,
       page,
       sellerId,
-      lastPage
+      lastPage,
+      seller
     } = this.props
     
     const {
@@ -122,7 +126,8 @@ class ProductListContainer extends Component {
       handlePageChange,
       handleMoveToEdit
     } = this
-
+    
+    if (sellerId && !seller) return (<h1>권한이 없습니다.</h1>)
     if (loading) {
       return null
     }
@@ -152,7 +157,8 @@ export default connect(
   (state) => ({
     products: state.list.get('products'),
     lastPage: state.list.get('lastPage'),
-    loading: state.pender.pending['list/GET_PRODUCT_LIST']
+    loading: state.pender.pending['list/GET_PRODUCT_LIST'],
+    seller: state.seller.get('seller')
   }),
   (dispatch) => ({
     ListActions: bindActionCreators(listActions, dispatch),

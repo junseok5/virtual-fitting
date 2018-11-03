@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 class CategoryContainer extends Component {
   handleSelected = (value, path) => {
     const { CategoryActions, history } = this.props
-    console.log(value, path)
+
     CategoryActions.setSelected(value)
     CategoryActions.hideSidebar()
     history.push(path)

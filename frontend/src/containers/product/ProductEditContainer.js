@@ -25,55 +25,8 @@ class ProductEditContainer extends Component {
   }
   
   componentWillMount () {
-    const { BaseActions, id } = this.props
-
-    BaseActions.setProgress({
-      name: 'completed',
-      value: 20
-    })
+    const { id } = this.props
     if (id) this.getProductInfo(id)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { BaseActions } = this.props
-    
-    BaseActions.initialize()
-    BaseActions.setProgress({
-      name: 'completed',
-      value: 30
-    })
-  }
-
-  shouldComponentUpdate (nextProps) {
-    const { BaseActions } = this.props
-
-    BaseActions.setProgress({
-      name: 'completed',
-      value: 50
-    })
-    return true
-  }
-
-  componentWillUpdate (nextProps, nextState) {
-    const { BaseActions } = this.props
-    BaseActions.setProgress({
-      name: 'completed',
-      value: 80
-    })
-  }
-
-  componentDidUpdate () {
-    const { BaseActions } = this.props
-    BaseActions.setProgress({
-      name: 'completed',
-      value: 100
-    })
-    setTimeout(() => {
-      BaseActions.setProgress({
-        name: 'visible',
-        value: false
-      })
-    }, 200)
   }
 
   handleChangeInput = (e) => {
@@ -252,7 +205,7 @@ class ProductEditContainer extends Component {
       const { history, seller } = this.props
       const { _id } = seller.toJS()
 
-      history.push(`/manage/${_id}`)
+      history.push(`/manage/${_id}/1`)
     } catch (e) {
       BaseActions.setModalMessage({
         modalName: 'error',
@@ -288,7 +241,8 @@ class ProductEditContainer extends Component {
       form,
       previewImage,
       id: productId,
-      product
+      product,
+      seller
     } = this.props
     const { initEdit } = this.state
     const {
@@ -299,6 +253,8 @@ class ProductEditContainer extends Component {
       handleInitEdit,
       handleRemove
     } = this
+
+    if (!seller) return (<h1>권한이 없습니다.</h1>)
 
     return (
       <ProductEdit

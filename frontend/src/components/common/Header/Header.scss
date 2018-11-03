@@ -57,10 +57,15 @@
 
         color: $oc-blue-6;
         cursor: pointer;
+        transition: all .2s;
         
         span {
           color: black;
           cursor: default;
+        }
+
+        &:hover {
+          color: $oc-blue-4;
         }
       }
 
