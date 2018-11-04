@@ -1,6 +1,6 @@
 Virtual-fitting
 ===============
-> Virtual fitting is develope mode...
+> Completed.
 
 ## About
 The project is virtual fitting open market relevant graduation project.
