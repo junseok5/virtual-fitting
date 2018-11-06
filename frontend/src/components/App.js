@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { LoginPage, AdminPage, NotFoundPage, ProductEditPage, ProductListPage,
 ProductPage, RegPage, RegUserPage, RegSellerPage, RegAddedPage, ManagePage,
-UserPage, SellerPage, ProductWritePage } from 'pages'
+UserPage, SellerPage, ProductWritePage, ProductProtoPage } from 'pages'
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/register/seller" component={RegSellerPage} />
         <Route path="/register/added" component={RegAddedPage} />
         <Route path="/register" component={RegPage} />
+        <Route path="/product/prototype/:id" component={ProductProtoPage} />
         <Route path="/product/:id" component={ProductPage} />
         <Route path="/user" component={UserPage} />
         <Route path="/seller" component={SellerPage} />

@@ -25,7 +25,7 @@ const Product = ({ product }) => {
         </div>
         <div className={cx('view-control')}>
           <div className={cx('change-button')}>
-            원본 모델 보기
+            가상피팅 해보기
           </div>
         </div>
       </div>
