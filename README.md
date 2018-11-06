@@ -41,6 +41,9 @@ $ yarn
 ### Rename .env.bak file
 You have to rename **.env.bak** file to **.env** in backend directory. This file contains environment variable for the server.
 
+### Move prototype_images
+If you would like to see prototype products, you have to move image files in prototype_images to **backend/public/images/sample_images** path. Actually, public folder was not created. You have to create folders that was not exist.
+
 ### Running Backend Development Server
 To run the development server, execute following command inside backend directory:
 <pre>
